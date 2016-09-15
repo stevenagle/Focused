@@ -68,4 +68,10 @@ public class FeatureReview {
 	public void setReviewer(Reviewer reviewer) {
 		this.reviewer = reviewer;
 	}
+
+	@Override
+	public String toString() {
+		return "FeatureReview [id=" + id + ", comment=" + comment + ", rating=" + rating + ", feature=" + feature
+				+ ", reviewer=" + reviewer + "]";
+	}
 }

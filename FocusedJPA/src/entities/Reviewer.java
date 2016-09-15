@@ -88,4 +88,10 @@ public class Reviewer {
 
 		return featureReview;
 	}
+
+	@Override
+	public String toString() {
+		return "Reviewer [id=" + id + ", age=" + age + ", gender=" + gender + ", password=" + password + ", username="
+				+ username + ", featureReviews=" + featureReviews + "]";
+	}
 }
