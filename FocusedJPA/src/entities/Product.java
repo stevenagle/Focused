@@ -4,34 +4,33 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Product {
-	
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private String description;
-
 	private String name;
-
-	@Column(name="photo_url")
+	@Column(name = "photo_url")
 	private String photoUrl;
-
 	private double price;
 
-	//bi-directional many-to-one association to Feature
-	@OneToMany(mappedBy="product")
+	// bi-directional many-to-one association to Feature
+	@OneToMany(mappedBy = "product")
 	private List<Feature> features;
 
-	//bi-directional many-to-one association to FocusDetail
-	@OneToMany(mappedBy="product")
+	// bi-directional many-to-one association to FocusDetail
+	@OneToMany(mappedBy = "product")
 	private List<FocusDetail> focusDetails;
 
-	//bi-directional many-to-one association to Company
+	// bi-directional many-to-one association to Company
 	@ManyToOne
 	private Company company;
 

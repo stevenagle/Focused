@@ -1,29 +1,28 @@
 package entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="feature_review")
+@Table(name = "feature_review")
 public class FeatureReview {
-	
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private String comment;
-
 	private int rating;
-
-	//bi-directional many-to-one association to Feature
+	// bi-directional many-to-one association to Feature
 	@ManyToOne
 	private Feature feature;
-
-	//bi-directional many-to-one association to Reviewer
+	// bi-directional many-to-one association to Reviewer
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private Reviewer reviewer;
 
 	public FeatureReview() {

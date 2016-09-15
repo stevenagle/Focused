@@ -3,6 +3,8 @@ package entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -10,14 +12,12 @@ import javax.persistence.OneToMany;
 @Entity
 public class Feature {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private String details;
-
 	// bi-directional many-to-one association to Product
 	@ManyToOne
 	private Product product;
-
 	// bi-directional many-to-one association to FeatureReview
 	@OneToMany(mappedBy = "feature")
 	private List<FeatureReview> featureReviews;
