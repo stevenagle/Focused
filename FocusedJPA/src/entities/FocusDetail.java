@@ -57,4 +57,10 @@ public class FocusDetail {
 		this.product = product;
 	}
 
+	@Override
+	public String toString() {
+		return "FocusDetail [id=" + id + ", details=" + details + ", reviewerCount=" + reviewerCount + ", product="
+				+ product + "]";
+	}
+
 }

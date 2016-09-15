@@ -129,4 +129,11 @@ public class Product {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", description=" + description + ", name=" + name + ", photoUrl=" + photoUrl
+				+ ", price=" + price + ", features=" + features + ", focusDetails=" + focusDetails + ", company="
+				+ company + "]";
+	}
 }
