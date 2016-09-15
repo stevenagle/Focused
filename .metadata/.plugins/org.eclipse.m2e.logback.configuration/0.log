@@ -1,0 +1,34 @@
+2016-09-15 13:39:09,231 [Worker-6] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: FocusedJPA:FocusedJPA:0.0.1-SNAPSHOT @ /Users/SN-Home/SD/Java/Focused/FocusedJPA/pom.xml.
+2016-09-15 13:39:10,126 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:39:10,148 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-15 13:39:10,159 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:39:10,159 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/SN-Home/SD/Java/Focused/FocusedJPA/src/test/resources
+2016-09-15 13:39:10,180 [Worker-6] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /FocusedJPA/src
+2016-09-15 13:39:10,181 [Worker-6] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Resources folder /FocusedJPA/src overlaps with sources folder /FocusedJPA/src
+2016-09-15 13:39:10,181 [Worker-6] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /FocusedJPA/src/test/java because it overlaps with /FocusedJPA/src
+2016-09-15 13:39:10,270 [Worker-6] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2016-09-15 13:39:10,676 [Worker-6] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: FocusedJPA:FocusedJPA:0.0.1-SNAPSHOT @ /Users/SN-Home/SD/Java/Focused/FocusedJPA/pom.xml.
+2016-09-15 13:39:10,926 [Worker-6] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /FocusedJPA/src
+2016-09-15 13:39:10,926 [Worker-6] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Resources folder /FocusedJPA/src overlaps with sources folder /FocusedJPA/src
+2016-09-15 13:39:10,933 [Worker-6] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /FocusedJPA/src/test/java because it overlaps with /FocusedJPA/src
+2016-09-15 13:39:11,087 [Worker-6] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 0 sec
+2016-09-15 13:39:11,252 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:39:11,255 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-15 13:39:11,266 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:39:11,267 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/SN-Home/SD/Java/Focused/FocusedJPA/src/test/resources
+2016-09-15 13:39:47,352 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: FocusedMVC:FocusedMVC:0.0.1-SNAPSHOT @ /Users/SN-Home/SD/Java/Focused/FocusedMVC/pom.xml.
+2016-09-15 13:39:48,559 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /FocusedMVC/src
+2016-09-15 13:39:48,560 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /FocusedMVC/src/test/java because it overlaps with /FocusedMVC/src
+2016-09-15 13:39:48,755 [Worker-2] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2016-09-15 13:39:48,799 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: FocusedMVC:FocusedMVC:0.0.1-SNAPSHOT @ /Users/SN-Home/SD/Java/Focused/FocusedMVC/pom.xml.
+2016-09-15 13:39:49,650 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /FocusedMVC/src
+2016-09-15 13:39:49,651 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /FocusedMVC/src/test/java because it overlaps with /FocusedMVC/src
+2016-09-15 13:39:49,756 [Worker-2] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Cleaning filtered folder for FocusedMVC
+2016-09-15 13:39:49,765 [Worker-2] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2016-09-15 13:39:49,879 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:39:49,879 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/SN-Home/SD/Java/Focused/FocusedMVC/src/main/resources
+2016-09-15 13:39:49,881 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:39:49,882 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/SN-Home/SD/Java/Focused/FocusedMVC/src/test/resources
+2016-09-15 13:39:49,883 [Worker-20] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Changed resources require a complete clean of filtered resources of FocusedMVC
+2016-09-15 13:39:49,884 [Worker-20] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Executing resource filtering for FocusedMVC
+2016-09-15 13:39:49,900 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
