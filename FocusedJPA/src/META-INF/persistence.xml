@@ -4,10 +4,16 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="FocusedJPA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>entities.Company</class>
+        <class>entities.Feature</class>
+        <class>entities.FeatureReview</class>
+        <class>entities.FocusDetail</class>
+        <class>entities.Product</class>
+        <class>entities.Reviewer</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sdvid" />
-			<property name="javax.persistence.jdbc.user" value="student" />
-			<property name="javax.persistence.jdbc.password" value="student" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/focuseddb" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="root" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />

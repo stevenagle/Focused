@@ -92,12 +92,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `focuseddb`.`feature_review` ;
 
 CREATE TABLE IF NOT EXISTS `focuseddb`.`feature_review` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `feature_id` INT NOT NULL,
   `rating` INT(10) NULL,
   `comment` VARCHAR(500) NULL,
-  PRIMARY KEY (`user_id`, `feature_id`),
   INDEX `fk_feature_review_feature_feature_id_idx` (`feature_id` ASC),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_feature_review_feature_feature_id`
     FOREIGN KEY (`feature_id`)
     REFERENCES `focuseddb`.`feature` (`id`)
@@ -190,10 +191,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `focuseddb`;
-INSERT INTO `focuseddb`.`feature_review` (`user_id`, `feature_id`, `rating`, `comment`) VALUES (1, 1, 5, 'Awesome');
-INSERT INTO `focuseddb`.`feature_review` (`user_id`, `feature_id`, `rating`, `comment`) VALUES (1, 2, 3, 'Sick');
-INSERT INTO `focuseddb`.`feature_review` (`user_id`, `feature_id`, `rating`, `comment`) VALUES (2, 3, 1, 'Terrible');
-INSERT INTO `focuseddb`.`feature_review` (`user_id`, `feature_id`, `rating`, `comment`) VALUES (2, 4, 3, 'OK');
+INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (DEFAULT, 1, 1, 5, 'Awesome');
+INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (DEFAULT, 1, 2, 3, 'Sick');
+INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (DEFAULT, 2, 3, 1, 'Terrible');
+INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (DEFAULT, 2, 4, 3, 'OK');
 
 COMMIT;
 
