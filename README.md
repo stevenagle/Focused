@@ -15,7 +15,7 @@ Java/JDBC/JPA/SQL/Hibernate Group Project
 * Elijah Ginter
 
 ### Overview
-This application circumvents the expensive process of formally assembling a focus group and connect businesses directly with it's target demographic.
+This application circumvents the expensive process of formally assembling a focus group and connects businesses directly with it's target demographic.
 
 
 ### Requirements
