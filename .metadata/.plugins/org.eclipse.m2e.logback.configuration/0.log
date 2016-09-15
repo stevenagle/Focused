@@ -32,3 +32,36 @@
 2016-09-15 13:39:49,883 [Worker-20] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Changed resources require a complete clean of filtered resources of FocusedMVC
 2016-09-15 13:39:49,884 [Worker-20] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Executing resource filtering for FocusedMVC
 2016-09-15 13:39:49,900 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:53:58,372 [Worker-30] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: FocusedJPA:FocusedJPA:0.0.1-SNAPSHOT @ /Users/SN-Home/SD/Java/Focused/FocusedJPA/pom.xml.
+2016-09-15 13:53:59,050 [Worker-30] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/hibernate/hibernate-core/${hibernate.version}/hibernate-core-${hibernate.version}.pom
+2016-09-15 13:53:59,052 [Worker-30] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.hibernate:hibernate-core:jar:${hibernate.version} is missing, no dependency information available
+2016-09-15 13:53:59,221 [Worker-30] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/hibernate/hibernate-c3p0/${hibernate.version}/hibernate-c3p0-${hibernate.version}.pom
+2016-09-15 13:53:59,222 [Worker-30] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.hibernate:hibernate-c3p0:jar:${hibernate.version} is missing, no dependency information available
+2016-09-15 13:53:59,403 [Worker-30] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/hibernate/hibernate-core/${hibernate.version}/hibernate-core-${hibernate.version}.jar
+2016-09-15 13:53:59,567 [Worker-30] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/hibernate/hibernate-c3p0/${hibernate.version}/hibernate-c3p0-${hibernate.version}.jar
+2016-09-15 13:53:59,605 [Worker-30] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:53:59,607 [Worker-30] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-09-15 13:53:59,608 [Worker-30] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:53:59,609 [Worker-30] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/SN-Home/SD/Java/Focused/FocusedJPA/src/test/resources
+2016-09-15 13:55:04,116 [Worker-31] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: FocusedMVC:FocusedMVC:0.0.1-SNAPSHOT @ /Users/SN-Home/SD/Java/Focused/FocusedMVC/pom.xml.
+2016-09-15 13:55:04,820 [Worker-31] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:55:04,821 [Worker-31] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/SN-Home/SD/Java/Focused/FocusedMVC/src/main/resources
+2016-09-15 13:55:04,823 [Worker-31] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:55:04,825 [Worker-31] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/SN-Home/SD/Java/Focused/FocusedMVC/src/test/resources
+2016-09-15 13:55:04,826 [Worker-31] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Changed resources require a complete clean of filtered resources of FocusedMVC
+2016-09-15 13:55:04,826 [Worker-31] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Executing resource filtering for FocusedMVC
+2016-09-15 13:55:04,830 [Worker-31] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:55:31,260 [Worker-30] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: FocusedJPA:FocusedJPA:0.0.1-SNAPSHOT @ /Users/SN-Home/SD/Java/Focused/FocusedJPA/pom.xml.
+2016-09-15 13:55:31,423 [Worker-30] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:55:31,424 [Worker-30] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-09-15 13:55:31,426 [Worker-30] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:55:31,427 [Worker-30] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/SN-Home/SD/Java/Focused/FocusedJPA/src/test/resources
+2016-09-15 13:55:32,801 [Worker-34] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:55:32,809 [Worker-34] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-15 13:55:32,811 [Worker-34] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:55:32,812 [Worker-34] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/SN-Home/SD/Java/Focused/FocusedJPA/src/test/resources
+2016-09-15 13:55:36,027 [Worker-32] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: FocusedJPA:FocusedJPA:0.0.1-SNAPSHOT @ /Users/SN-Home/SD/Java/Focused/FocusedJPA/pom.xml.
+2016-09-15 13:55:36,115 [Worker-32] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:55:36,116 [Worker-32] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-09-15 13:55:36,123 [Worker-32] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-15 13:55:36,124 [Worker-32] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/SN-Home/SD/Java/Focused/FocusedJPA/src/test/resources
