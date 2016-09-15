@@ -70,4 +70,10 @@ public class Feature {
 
 		return featureReview;
 	}
+
+	@Override
+	public String toString() {
+		return "Feature [id=" + id + ", details=" + details + ", product=" + product + ", featureReviews="
+				+ featureReviews + "]";
+	}
 }
