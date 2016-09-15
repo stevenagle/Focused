@@ -1,1 +1,0 @@
-INDEX VERSION 1.129+/Users/SN-Home/SD/Java/Focused/.metadata/.plugins/org.eclipse.jdt.core

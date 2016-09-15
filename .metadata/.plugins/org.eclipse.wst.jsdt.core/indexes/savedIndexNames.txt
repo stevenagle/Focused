@@ -1,7 +1,0 @@
-INDEX VERSION 1.3+/Users/SN-Home/SD/Java/Focused/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-1809890750.index
-35849575.index
-1462167336.index
-1699798714.index
-2650781910.index
-447536093.index
