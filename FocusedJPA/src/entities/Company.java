@@ -93,8 +93,5 @@ public class Company {
 		return "Company [id=" + id + ", description=" + description + ", name=" + name + ", password=" + password
 				+ ", username=" + username + ", products=" + products + "]";
 	}
-	
-	
-	
-	
+
 }
