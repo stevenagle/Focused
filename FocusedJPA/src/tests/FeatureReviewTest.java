@@ -14,6 +14,8 @@ import org.junit.Test;
 
 import entities.Feature;
 import entities.FeatureReview;
+import entities.Product;
+import entities.Reviewer;
 
 public class FeatureReviewTest {
 
@@ -34,7 +36,11 @@ public class FeatureReviewTest {
         
         Feature f = fr.getFeature();
         assertEquals("plastic container", f.getDetails());
-        assertEquals("test", f.getProduct());
+        assertEquals("water bottle", f.getProduct().getName());
+        
+        Reviewer r = fr.getReviewer();
+        assertEquals("M", r.getGender());
+        
         
         
     }
