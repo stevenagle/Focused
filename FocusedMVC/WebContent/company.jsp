@@ -12,5 +12,10 @@ ${company.name}
 ${company.description}
 ${company.username}
 ${company.password}
+
+<form action="EditCompany.jsp">
+<input type="hidden" name="id" value="${company.id}">
+<input type="submit" value="Edit Company">
+</form>
 </body>
 </html>

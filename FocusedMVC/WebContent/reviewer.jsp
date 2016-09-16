@@ -12,5 +12,11 @@ ${reviewer.username}
 ${reviewer.password}
 ${reviewer.age}
 ${reviewer.gender}
+
+<form action="EditReviewer">
+<input type="hidden" name="id" value="${reviewer.id}">
+<input type="submit" value="Edit Company">
+</form>
+
 </body>
 </html>
