@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.FocusedDbDao;
 import entities.Company;
+import entities.Reviewer;
 
 @Controller
 public class FocusedController {
@@ -21,5 +22,11 @@ public class FocusedController {
     public ModelAndView createCompany(String name, String username, String password, String description) {
         Company c = dao.createCompany(name, username, password, description); // insert parameter fields from parameters
         return new ModelAndView("company.jsp", "company", c);
+    }
+    
+    @RequestMapping(path="CreateReviewer.do")
+    public ModelAndView createReviewer(String username, String password, int age, String gender) {
+    	Reviewer r = dao.createReviewer(username, password, age, gender); 
+    	return new ModelAndView("reviewer.jsp", "reviewer", r);
     }
 }
