@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+  <!-- Have Spring look for our @Controller in the controllers package -->
+  <context:component-scan base-package="controllers"/>
+  <!-- Declare DAO bean so it can use Spring annotations and be injected in
+       our controller -->
+  <bean id="dao" class="dao.FocusedDaoImpl" />
+  <!-- Declare EntityManagerFactory so we can inject an Entity Manager into
+       our DAO -->
+  <bean id="myEntityManagerFactory"
+  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+      <property name="persistenceUnitName" value="FocusedJPA" />
+  </bean>
+  <!-- Declare a TransactionManager so we can have Spring automate
+       transactions on our behalf -->
+  <bean id="myTransactionManager"
+        class="org.springframework.orm.jpa.JpaTransactionManager">
+      <property name="entityManagerFactory" ref="myEntityManagerFactory" />
+  </bean>
+  <!-- Enable the @Transactional annotation -->
+<tx:annotation-driven transaction-manager="myTransactionManager" /> </beans>

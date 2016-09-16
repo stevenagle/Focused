@@ -3,6 +3,7 @@
 	<name>FocusedMVC</name>
 	<comment></comment>
 	<projects>
+		<project>FocusedJPA</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
