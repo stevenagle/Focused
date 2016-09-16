@@ -13,9 +13,9 @@ ${reviewer.password}
 ${reviewer.age}
 ${reviewer.gender}
 
-<form action="EditReviewer">
+<form action="UpdateReviewerMenu.do">
 <input type="hidden" name="id" value="${reviewer.id}">
-<input type="submit" value="Edit Company">
+<input type="submit" value="Edit Reviewer">
 </form>
 
 </body>

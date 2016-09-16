@@ -13,7 +13,7 @@ ${company.description}
 ${company.username}
 ${company.password}
 
-<form action="EditCompany.jsp">
+<form action="UpdateCompanyMenu.do">
 <input type="hidden" name="id" value="${company.id}">
 <input type="submit" value="Edit Company">
 </form>

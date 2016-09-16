@@ -44,6 +44,11 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		
 		return c;
 	}
+	
+	@Override
+	public Company getCompanyById(int id) {
+		return em.find(Company.class, id);
+	}
 
 	// Reviewer methods
 
@@ -72,4 +77,11 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		
 		return r;
 	}
+
+	@Override
+	public Reviewer getReviewerById(int id) {
+		return em.find(Reviewer.class, id);
+	}
+
+
 }

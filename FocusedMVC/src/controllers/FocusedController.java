@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.FocusedDbDao;
@@ -29,6 +30,11 @@ public class FocusedController {
 		Company c = dao.updateCompany(id, name, description, username, password);
 		return new ModelAndView("company.jsp", "company", c);
 	}
+	
+	@RequestMapping(path = "UpdateCompanyMenu.do", method = RequestMethod.GET)
+	public ModelAndView updateCompanyMenu(int id) {
+		return new ModelAndView("EditCompany.jsp", "company", dao.getCompanyById(id));
+	}
 
 	
 	// Reviewer methods
@@ -43,4 +49,10 @@ public class FocusedController {
 		Reviewer r = dao.updateReviewer(id, username, password, age, gender);
 		return new ModelAndView("reviewer.jsp", "reviewer", r);
 	}
+	
+	@RequestMapping(path = "UpdateReviewerMenu.do", method = RequestMethod.GET)
+	public ModelAndView updateReviewerMenu(int id) {
+		return new ModelAndView("reviewer.jsp", "reviewer", dao.getReviewerById(id));
+	}
+	
 }
