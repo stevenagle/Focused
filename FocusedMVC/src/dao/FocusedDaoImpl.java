@@ -24,9 +24,9 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		Company c = new Company();
 
 		c.setName(name);
-		c.setDescription(description);
 		c.setUsername(username);
 		c.setPassword(password);
+		c.setDescription(description);
 
 		em.persist(c);
 
