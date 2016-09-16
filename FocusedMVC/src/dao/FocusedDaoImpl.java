@@ -19,7 +19,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	// Company methods
 
 	@Override
-	public Company createCompany(String name, String description, String username, String password) {
+	public Company createCompany(String name, String username, String password, String description) {
 
 		Company c = new Company();
 
@@ -34,13 +34,13 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	}
 
 	@Override
-	public Company updateCompany(int id, String name, String description, String username, String password) {
+	public Company updateCompany(int id, String name, String username, String password, String description) {
 		
 		Company c = em.find(Company.class, id);
 		c.setName(name);
-		c.setDescription(name);
-		c.setUsername(name);
-		c.setPassword(name);
+		c.setDescription(username);
+		c.setUsername(password);
+		c.setPassword(description);
 		
 		return c;
 	}

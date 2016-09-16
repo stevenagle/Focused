@@ -9,7 +9,8 @@
 </head>
 <body>
 
-<form action="UpdateCompany.do">
+<form action="UpdateCompany.do" method="POST">
+	<input type="hidden" name="id" value="${company.id}">
 	<input type="text" name="name" value="${company.name}" required>
 	<input type="text" name="username" value="${company.username}" required>
 	<input type="password" name="password" value="${company.password}" required>

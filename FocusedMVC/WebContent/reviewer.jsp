@@ -13,7 +13,7 @@ ${reviewer.password}
 ${reviewer.age}
 ${reviewer.gender}
 
-<form action="UpdateReviewerMenu.do">
+<form action="UpdateReviewerMenu.do" method="POST">
 <input type="hidden" name="id" value="${reviewer.id}">
 <input type="submit" value="Edit Reviewer">
 </form>

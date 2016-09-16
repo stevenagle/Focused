@@ -26,12 +26,12 @@ public class FocusedController {
 	}
 
 	@RequestMapping(path = "UpdateCompany.do", method = RequestMethod.POST)
-	public ModelAndView updateCompany(int id, String name, String description, String username, String password) {
-		Company c = dao.updateCompany(id, name, description, username, password);
+	public ModelAndView updateCompany(int id, String name, String username, String password,  String description) {
+		Company c = dao.updateCompany(id, name, username, password, description);
 		return new ModelAndView("company.jsp", "company", c);
 	}
 	
-	@RequestMapping(path = "UpdateCompanyMenu.do", method = RequestMethod.GET)
+	@RequestMapping(path = "UpdateCompanyMenu.do", method = RequestMethod.POST)
 	public ModelAndView updateCompanyMenu(int id) {
 		return new ModelAndView("EditCompany.jsp", "company", dao.getCompanyById(id));
 	}
@@ -50,9 +50,9 @@ public class FocusedController {
 		return new ModelAndView("reviewer.jsp", "reviewer", r);
 	}
 	
-	@RequestMapping(path = "UpdateReviewerMenu.do", method = RequestMethod.GET)
+	@RequestMapping(path = "UpdateReviewerMenu.do", method = RequestMethod.POST)
 	public ModelAndView updateReviewerMenu(int id) {
-		return new ModelAndView("reviewer.jsp", "reviewer", dao.getReviewerById(id));
+		return new ModelAndView("EditReviewer.jsp", "reviewer", dao.getReviewerById(id));
 	}
 	
 }

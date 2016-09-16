@@ -9,11 +9,12 @@
 </head>
 <body>
 
-<form action="UpdateReviewer.do">
+<form action="UpdateReviewer.do" method="POST">
+	<input type="hidden" name="id" value="${reviewer.id}">
 	<input type="text" name="username" value="${reviewer.username}" required>
 	<input type="password" name="password" value="${reviewer.password}" required>
 	<input type="text" name="age" value="${reviewer.age}" required>
-	<select name="gender" selected="${reviewer.gender}">
+	<select name="gender">
  	 <option value="female">Female</option>
  	 <option value="male">Male</option>
  	 <option value="sjw">SJW</option>

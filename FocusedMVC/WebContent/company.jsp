@@ -8,12 +8,11 @@
 <title>Company landing page</title>
 </head>
 <body>
-${company.name}
 ${company.description}
 ${company.username}
 ${company.password}
 
-<form action="UpdateCompanyMenu.do">
+<form action="UpdateCompanyMenu.do" method="POST">
 <input type="hidden" name="id" value="${company.id}">
 <input type="submit" value="Edit Company">
 </form>
