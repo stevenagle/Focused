@@ -1,13 +1,12 @@
 package dao;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import entities.Company;
+import entities.Product;
 import entities.Reviewer;
 
 @Transactional
@@ -81,6 +80,25 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	@Override
 	public Reviewer getReviewerById(int id) {
 		return em.find(Reviewer.class, id);
+	}
+	
+	
+	// Product Methods
+	@Override
+	public Product createProduct(int id, String name, double price, String photoUrl, String description) {
+		
+		Product p = new Product();
+		
+		Company c = getCompanyById(id);
+		p.setCompany(c);
+		
+		p.setName(name);
+		p.setPrice(price);
+		p.setPhotoUrl(photoUrl);
+		p.setDescription(description);
+//		p.setFeatures(features);
+		
+		return p;
 	}
 
 

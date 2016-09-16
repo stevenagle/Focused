@@ -8,13 +8,31 @@
 <title>Company landing page</title>
 </head>
 <body>
-${company.description}
+${company}
+<%-- ${company.description} --%>
 ${company.username}
 ${company.password}
 
+<table>
+<th>Products</th>
+	<tr>
+		<td>${product.name}</td>
+		<td>Product 2</td>
+		<td>Product 3</td>
+	</tr>
+</table>
+
+
+<!-- Update Company Button -->
 <form action="UpdateCompanyMenu.do" method="POST">
 <input type="hidden" name="id" value="${company.id}">
 <input type="submit" value="Edit Company">
+</form>
+
+<!-- Add Product Button -->
+<form action="NewProductMenu.do" method="POST">
+<input type="hidden" name="id" value="${company.id}">
+<input type="submit" value="Add Product">
 </form>
 </body>
 </html>

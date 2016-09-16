@@ -1,6 +1,7 @@
 package dao;
 
 import entities.Company;
+import entities.Product;
 import entities.Reviewer;
 
 public interface FocusedDbDao {
@@ -14,5 +15,6 @@ public interface FocusedDbDao {
 	Reviewer createReviewer(String username, String password, int age, String gender);
 	Reviewer updateReviewer(int id, String username, String password, int age, String gender);
 	Reviewer getReviewerById(int id);
+	Product createProduct(int id, String name, double price, String photoUrl, String description);
 	
 }

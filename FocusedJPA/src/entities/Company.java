@@ -3,6 +3,7 @@ package entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ public class Company {
 	private String username;
 
 	//bi-directional many-to-one association to Product
-	@OneToMany(mappedBy="company")
+	@OneToMany(mappedBy="company", fetch=FetchType.EAGER)
 	private List<Product> products;
 
 	public Company() {
