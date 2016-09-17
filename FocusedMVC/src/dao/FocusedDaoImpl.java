@@ -50,6 +50,23 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	public Company getCompanyById(int id) {
 		return em.find(Company.class, id);
 	}
+	
+	@Override
+	public Company MatchCompany(String username, String password) {
+
+		String queryString = "SELECT c FROM Company c";
+
+		List<Company> results = em.createQuery(queryString, Company.class).getResultList();
+		Company match = new Company();
+
+		for (Company result : results) {
+			if (result.getUsername().equals(username)) {
+				match = result;
+			}
+		}
+		
+		return match;
+	}
 
 	// Reviewer methods
 
@@ -95,10 +112,11 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		for (Reviewer result : results) {
 			if (result.getUsername().equals(username)) {
 				match = result;
+				return match;
 			}
 		}
+		return em.find(Reviewer.class, 1);
 		
-		return match;
 	}
 
 	// Product Methods

@@ -37,6 +37,16 @@ public class FocusedController {
 	public ModelAndView updateCompanyMenu(int id) {
 		return new ModelAndView("EditCompany.jsp", "company", dao.getCompanyById(id));
 	}
+	
+	@RequestMapping(path = "ExistingLoginCompany.do", method = RequestMethod.POST)
+	public ModelAndView logInCompany(String username, String password) {
+		Company match = dao.MatchCompany(username, password);
+		if (match.getPassword().equals(password)) {
+			return new ModelAndView("company.jsp", "company", dao.getCompanyById(match.getId()));
+		} else {
+			return new ModelAndView("CompanyLoginWrongPass.html");
+		}
+	}
 
 	// Reviewer methods
 	@RequestMapping(path = "CreateReviewer.do", method = RequestMethod.POST)
@@ -59,11 +69,16 @@ public class FocusedController {
 	@RequestMapping(path = "ExistingLogin.do", method = RequestMethod.POST)
 	public ModelAndView logInReviewer(String username, String password) {
 		Reviewer match = dao.MatchReviewer(username, password);
-		if (match.getPassword().equals(password)) {
+		
+		if (match.equals(null)){
+			return new ModelAndView("ReviewerLoginWrongPass.html");
+		}
+		else if (match.getPassword().equals(password)) {
 			return new ModelAndView("reviewer.jsp", "reviewer", dao.getReviewerById(match.getId()));
 		} else {
 			return new ModelAndView("ReviewerLoginWrongPass.html");
 		}
+		
 	}
 
 	// Product Methods

@@ -19,5 +19,6 @@ public interface FocusedDbDao {
 	Reviewer getReviewerById(int id);
 	Product createProduct(int id, String name, double price, String photoUrl, String description);
 	Reviewer MatchReviewer(String username, String password);
+	Company MatchCompany(String username, String password);
 	
 }
