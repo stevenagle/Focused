@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import entities.Company;
 import entities.Product;
 import entities.Reviewer;
@@ -16,5 +18,6 @@ public interface FocusedDbDao {
 	Reviewer updateReviewer(int id, String username, String password, int age, String gender);
 	Reviewer getReviewerById(int id);
 	Product createProduct(int id, String name, double price, String photoUrl, String description);
+	Reviewer MatchReviewer(String username, String password);
 	
 }
