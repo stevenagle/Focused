@@ -8,18 +8,21 @@
 <title>Company landing page</title>
 </head>
 <body>
-${company}
-<%-- ${company.description} --%>
-${company.username}
-${company.password}
+
+<h1>Company Name: ${company.name}</h1>
+<br>
+<h2>Company Description: ${company.description}</h2>
+
 
 <table>
-<th>Products</th>
-	<tr>
-		<td>${product.name}</td>
-		<td>Product 2</td>
-		<td>Product 3</td>
-	</tr>
+<th>Products:</th>
+<c:forEach var="product" items="${company.products}">
+    <tr>
+    	<td>
+    <c:out value="${product.name}"/> 
+    	</td>
+    </tr>
+</c:forEach>
 </table>
 
 

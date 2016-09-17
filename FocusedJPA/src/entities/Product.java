@@ -1,9 +1,11 @@
 package entities;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,18 +25,19 @@ public class Product {
 	private double price;
 
 	// bi-directional many-to-one association to Feature
-	@OneToMany(mappedBy = "product")
-	private List<Feature> features;
+	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Feature> features;
 
 	// bi-directional many-to-one association to FocusDetail
-	@OneToMany(mappedBy = "product")
-	private List<FocusDetail> focusDetails;
+	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<FocusDetail> focusDetails;
 
 	// bi-directional many-to-one association to Company
 	@ManyToOne
 	private Company company;
 
 	public Product() {
+		this.features = null;
 	}
 
 	public int getId() {
@@ -77,11 +80,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public List<Feature> getFeatures() {
+	public Set<Feature> getFeatures() {
 		return this.features;
 	}
 
-	public void setFeatures(List<Feature> features) {
+	public void setFeatures(Set<Feature> features) {
 		this.features = features;
 	}
 
@@ -99,11 +102,11 @@ public class Product {
 		return feature;
 	}
 
-	public List<FocusDetail> getFocusDetails() {
+	public Set<FocusDetail> getFocusDetails() {
 		return this.focusDetails;
 	}
 
-	public void setFocusDetails(List<FocusDetail> focusDetails) {
+	public void setFocusDetails(Set<FocusDetail> focusDetails) {
 		this.focusDetails = focusDetails;
 	}
 

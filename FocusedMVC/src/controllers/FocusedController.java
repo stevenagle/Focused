@@ -1,6 +1,6 @@
 package controllers;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,7 +91,7 @@ public class FocusedController {
 	@RequestMapping(path = "NewProduct.do", method = RequestMethod.POST)
 	public ModelAndView newProduct(int companyId, String name, double price, String photoUrl, String description) {
 		System.out.println("in NewProduct.do" + companyId + description + "");
-		Product p = dao.createProduct(companyId, name, price, photoUrl, description);
+		Product p = dao.createProduct(companyId, name, price, photoUrl, description);			
 		ModelAndView mv = new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
 		mv.addObject("product", p);
 		return mv;

@@ -1,7 +1,9 @@
 package entities;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,8 +22,8 @@ public class Company {
 	private String username;
 
 	//bi-directional many-to-one association to Product
-	@OneToMany(mappedBy="company", fetch=FetchType.EAGER)
-	private List<Product> products;
+	@OneToMany(mappedBy="company", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private Set<Product> products;
 
 	public Company() {
 	}
@@ -66,16 +68,16 @@ public class Company {
 		this.username = username;
 	}
 
-	public List<Product> getProducts() {
+	public Set<Product> getProducts() {
 		return this.products;
 	}
 
-	public void setProducts(List<Product> products) {
+	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
 
 	public Product addProduct(Product product) {
-		getProducts().add(product);
+		this.products.add(product);
 		product.setCompany(this);
 
 		return product;

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -124,16 +125,20 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	public Product createProduct(int id, String name, double price, String photoUrl, String description) {
 
 		Product p = new Product();
-
 		Company c = getCompanyById(id);
+		
 		p.setCompany(c);
-
 		p.setName(name);
 		p.setPrice(price);
 		p.setPhotoUrl(photoUrl);
 		p.setDescription(description);
-		// p.setFeatures(features);
-
+		p.setFeatures(null);
+		
+		// New way to get Company to know it's products
+		Set<Product> products = c.getProducts();
+		products.add(p);
+		c.setProducts(products);
+		
 		return p;
 	}
 
