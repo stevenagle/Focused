@@ -1,8 +1,10 @@
 package entities;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,8 +21,8 @@ public class Reviewer {
 	private String password;
 	private String username;
 	// bi-directional many-to-one association to FeatureReview
-	@OneToMany(mappedBy = "reviewer")
-	private List<FeatureReview> featureReviews;
+	@OneToMany(mappedBy = "reviewer", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private Set<FeatureReview> featureReviews;
 
 	public Reviewer() {
 	}
@@ -65,11 +67,11 @@ public class Reviewer {
 		this.username = username;
 	}
 
-	public List<FeatureReview> getFeatureReviews() {
+	public Set<FeatureReview> getFeatureReviews() {
 		return this.featureReviews;
 	}
 
-	public void setFeatureReviews(List<FeatureReview> featureReviews) {
+	public void setFeatureReviews(Set<FeatureReview> featureReviews) {
 		this.featureReviews = featureReviews;
 	}
 
