@@ -22,7 +22,7 @@ public class Company {
 	private String username;
 
 	//bi-directional many-to-one association to Product
-	@OneToMany(mappedBy="company", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy="company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Product> products;
 
 	public Company() {

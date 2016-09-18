@@ -27,7 +27,7 @@ public interface FocusedDbDao {
 	Product createProduct(int id, String name, double price, String photoUrl, String description);
 	Product getProductById(int id);
 	Product updateProduct(int id, String name, double price, String photoUrl, String description);
-	// TODO removeProduct
+	void removeProduct(int id);
 	
 	// Feature methods
 	Feature createFeature(int id, String details);

@@ -37,5 +37,12 @@
 <input type="hidden" name="productId" value="${product.id}">
 <input type="submit" value="Add Feature">
 </form>
+
+<!-- Remove Product Button -->
+<form action="RemoveProduct.do" method="POST">
+<input type="hidden" name="id" value="${product.id}">
+<input type="hidden" name="companyId" value="${product.company.id}">
+<input style="color:red" type="submit" value="Remove Product">
+</form>
 </body>
 </html>
