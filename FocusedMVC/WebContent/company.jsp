@@ -19,7 +19,9 @@
 <c:forEach var="product" items="${company.products}">
     <tr>
     	<td>
-    <c:out value="${product.name}"/> 
+    	<form action="ProductFeaturesMenu.do" method="POST">
+   			 <c:out value="${product.name}"/> <input type="submit" name="id" value="${product.id}">
+    	</form>
     	</td>
     </tr>
 </c:forEach>

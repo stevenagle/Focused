@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import entities.Company;
+import entities.Feature;
 import entities.Product;
 import entities.Reviewer;
 
@@ -140,6 +141,30 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		c.setProducts(products);
 		
 		return p;
+	}
+
+	@Override
+	public Product getProductById(int id) {
+		return em.find(Product.class, id);
+	}
+	
+	// Feature methods
+	
+	@Override
+	public Feature createFeature(int id, String details) {
+
+		Feature f = new Feature();
+		Product p = getProductById(id);
+		
+		f.setProduct(p);
+		f.setDetails(details);
+		
+		// New way to get Company to know it's products
+		Set<Feature> features = p.getFeatures();
+		features.add(f);
+		p.setFeatures(features);
+		
+		return f;
 	}
 
 }

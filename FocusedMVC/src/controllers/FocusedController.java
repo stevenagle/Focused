@@ -1,7 +1,5 @@
 package controllers;
 
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.FocusedDbDao;
 import entities.Company;
+import entities.Feature;
 import entities.Product;
 import entities.Reviewer;
 
@@ -97,4 +96,22 @@ public class FocusedController {
 		return mv;
 
 	}
+	
+	// Feature methods
+	@RequestMapping(path = "NewFeature.do", method = RequestMethod.POST)
+	public ModelAndView newFeature(int productId, String details) {
+		Feature f = dao.createFeature(productId, details);
+		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(productId));
+	}
+	@RequestMapping(path = "NewFeatureMenu.do", method = RequestMethod.POST)
+	public ModelAndView productFeatureMenu(int productId, String details) {
+		return new ModelAndView("NewFeature.jsp", "product", dao.getProductById(productId));
+	}
+	
+	@RequestMapping(path = "ProductFeaturesMenu.do", method = RequestMethod.POST)
+	public ModelAndView productFeaturesMenu(int id) {
+		System.out.println("ProductFeaturesMenu & id equals " + id);
+		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(id));
+	}
+	
 }
