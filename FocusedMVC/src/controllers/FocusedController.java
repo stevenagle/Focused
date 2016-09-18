@@ -94,7 +94,16 @@ public class FocusedController {
 		ModelAndView mv = new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
 		mv.addObject("product", p);
 		return mv;
-
+	}
+	
+	@RequestMapping(path = "UpdateProduct.do", method = RequestMethod.POST)
+	public ModelAndView updateProduct(int id, String name, double price, String photoUrl, String description) {
+		Product p = dao.updateProduct(id, name, price, photoUrl, description);
+		return new ModelAndView("ProductFeaturesMenu.jsp", "product", p);
+	}
+	@RequestMapping(path = "UpdateProductMenu.do", method = RequestMethod.POST)
+	public ModelAndView updateProductMenu(int id) {
+		return new ModelAndView("EditProduct.jsp", "product", dao.getProductById(id));
 	}
 	
 	// Feature methods

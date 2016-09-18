@@ -148,6 +148,16 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		return em.find(Product.class, id);
 	}
 	
+	@Override
+	public Product updateProduct(int id, String name, double price, String photoUrl, String description) {
+		Product p = getProductById(id);
+		p.setName(name);
+		p.setPrice(price);
+		p.setPhotoUrl(photoUrl);
+		p.setDescription(description);
+		return p;
+	}
+	
 	// Feature methods
 	
 	@Override
@@ -166,5 +176,6 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		
 		return f;
 	}
+
 
 }
