@@ -195,6 +195,14 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		f.setDetails(details);
 		return f;
 	}
+
+	@Override
+	public void removeFeature(int id) {
+		Feature f = getFeatureById(id);
+		Product p = f.getProduct();
+		p.removeFeature(f);
+		em.remove(f);	
+	}
 	
 	
 

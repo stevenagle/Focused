@@ -24,6 +24,11 @@
    			 <input type="hidden" name="id" value="${feature.id}">
    			 <c:out value="${feature.details}"/> <input type="submit" value="Edit">
     		</form>
+    	    <form action="RemoveFeature.do" method="POST">
+    	     <input type="hidden" name="productId" value="${product.id}">
+   			 <input type="hidden" name="id" value="${feature.id}">
+   			 <input style="color:red" type="submit" value="Remove Feature">
+    		</form>
     	</td>
     </tr>
 </c:forEach>

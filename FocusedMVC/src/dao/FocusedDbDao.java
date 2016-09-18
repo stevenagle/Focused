@@ -33,5 +33,5 @@ public interface FocusedDbDao {
 	Feature createFeature(int id, String details);
 	Feature updateFeature(int id, String details);
 	Feature getFeatureById(int id);
-	// TODO removeFeature
+	void removeFeature(int id);
 }

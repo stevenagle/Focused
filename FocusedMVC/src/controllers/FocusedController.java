@@ -134,6 +134,12 @@ public class FocusedController {
 		return new ModelAndView("ProductFeaturesMenu.jsp","product", dao.getProductById(productId));
 	}
 	
+	@RequestMapping(path = "RemoveFeature.do", method = RequestMethod.POST)
+	public ModelAndView removeFeature(int id, int productId) {
+		dao.removeFeature(id);
+		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(productId));
+	}
+	
 	
 	@RequestMapping(path = "ProductFeaturesMenu.do", method = RequestMethod.POST)
 	public ModelAndView productFeaturesMenu(int id) {
