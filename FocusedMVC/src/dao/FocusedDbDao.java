@@ -12,14 +12,14 @@ public interface FocusedDbDao {
 	// Company methods
 	Company createCompany(String name, String description, String username, String password);
 	Company updateCompany(int id, String name, String description, String username, String password);
-	// TODO removeCompany
+	// TODO removeCompany-- Possibly something only an admin should be able to do?
 	Company MatchCompany(String username, String password);
 	Company getCompanyById(int id);
 	
 	// Reviewer methods
 	Reviewer createReviewer(String username, String password, int age, String gender);
 	Reviewer updateReviewer(int id, String username, String password, int age, String gender);
-	// TODO removeReviewer
+	// TODO removeReviewer-- Possibly something only an admin should be able to do?
 	Reviewer getReviewerById(int id);
 	Reviewer MatchReviewer(String username, String password);
 	
@@ -31,6 +31,7 @@ public interface FocusedDbDao {
 	
 	// Feature methods
 	Feature createFeature(int id, String details);
-	// TODO updateFeature
+	Feature updateFeature(int id, String details);
+	Feature getFeatureById(int id);
 	// TODO removeFeature
 }

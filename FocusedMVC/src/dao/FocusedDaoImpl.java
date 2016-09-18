@@ -165,9 +165,6 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		Company c = p.getCompany();
 		c.removeProduct(p);
 		em.remove(getProductById(id));
-//		Set<Product> products = c.getProducts();
-//		products.remove(p);
-//		c.setProducts(products);
 	}
 	
 	// Feature methods
@@ -186,6 +183,20 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		
 		return f;
 	}
+
+	@Override
+	public Feature getFeatureById(int id) {
+		return em.find(Feature.class, id);
+	}
+
+	@Override
+	public Feature updateFeature(int id, String details) {
+		Feature f = getFeatureById(id);
+		f.setDetails(details);
+		return f;
+	}
+	
+	
 
 
 
