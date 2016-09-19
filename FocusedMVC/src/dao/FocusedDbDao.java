@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import data.ReviewData;
 import entities.Company;
 import entities.Feature;
 import entities.Product;
@@ -38,4 +39,8 @@ public interface FocusedDbDao {
 	void removeFeature(int id);
 	boolean isDuplicateReviewer(String username);
 	boolean isDuplicateCompany(String username);
+	
+	// ReviewData methods
+	List<ReviewData> getReviewData(int companyId);
+	
 }
