@@ -2,6 +2,9 @@ package controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -155,6 +158,13 @@ public class FocusedController {
 	public ModelAndView productFeaturesMenu(int id) {
 		System.out.println("ProductFeaturesMenu & id equals " + id);
 		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(id));
+	}
+
+	@RequestMapping(path = "Logout.do", method = RequestMethod.GET)
+	public ModelAndView logout(HttpServletRequest request) {
+		HttpSession httpSession = request.getSession();
+		httpSession.invalidate();
+		return new ModelAndView("logout.html");
 	}
 
 }
