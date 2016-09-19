@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.hibernate.Session;
 import org.springframework.transaction.annotation.Transactional;
 
 import entities.Company;
@@ -20,7 +21,6 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	private EntityManager em;
 
 	// Company methods
-
 	@Override
 	public Company createCompany(String name, String username, String password, String description) {
 
