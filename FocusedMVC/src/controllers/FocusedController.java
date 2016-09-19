@@ -3,7 +3,6 @@ package controllers;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.FocusedDbDao;
@@ -167,6 +167,19 @@ public class FocusedController {
 		HttpSession httpSession = request.getSession();
 		httpSession.invalidate();
 		return new ModelAndView("logout.html");
+	}
+	
+	@RequestMapping(path = "reviewProduct.do", method = RequestMethod.POST)
+	public ModelAndView reviewProduct(@RequestParam("featureIds") int[] featureIds,
+									  @RequestParam("rating") int[] ratings,
+									  int reviewerId) {
+		System.out.println("in reviewProduct");
+		int rateCount = 0;
+		for (int id : featureIds) {
+			dao.reviewProduct(id, reviewerId, ratings[rateCount++]);
+		}
+		System.out.println("After making all reviews");
+		return new ModelAndView("reviewer.jsp", "reviewer", dao.getReviewerById(reviewerId));
 	}
 
 
