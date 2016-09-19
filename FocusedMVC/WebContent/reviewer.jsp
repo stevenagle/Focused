@@ -44,5 +44,9 @@ Gender: ${reviewer.gender} <br>
 <input type="submit" value="Edit Reviewer">
 </form>
 
+<form action="Logout.do" method="GET">
+<input type="submit" value="Log Out">
+</form>
+
 </body>
 </html>
