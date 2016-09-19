@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[[{"location":"/Users/Pat-Levi-Gaston/SD/Java/Focused/FocusedJPA","type":"PROJECT","hints":{"PROJECT_NAME":"FocusedJPA"}},"FocusedJPA:FocusedJPA:0.0.1"],[{"location":"/Users/Pat-Levi-Gaston/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar","type":"JAR","hints":{}},"org.hibernate.javax:org.hibernate.javax.persistence.hibernate-jpa-2.1-api:1.0.0"]]
-=======
-[[{"location":"/Users/eginter/SD/Java/Focused/FocusedJPA","type":"PROJECT","hints":{"PROJECT_NAME":"FocusedJPA"}},"FocusedJPA:FocusedJPA:0.0.1"],[{"location":"/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home","type":"JRE","hints":{"EXECUTION_ENVIRONMENT":"JavaSE-1.8"}},"jre:jre:1.8.0"]]
->>>>>>> d58a5cece4701d91c2f76fc32fe49480153acda8
+{}

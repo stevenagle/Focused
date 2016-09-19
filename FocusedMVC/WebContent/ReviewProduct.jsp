@@ -11,17 +11,31 @@
 
 <table>
 <th>Products:</th>
+<form action="" method="">
 <c:forEach var="product" items="${products}">
-    <tr>
+    <tr width="2px">
     	<td>
    			 <c:out value="${product.name}"/>
    			  <c:forEach var="feature" items="${product.features}"> <br>
    			 	<c:out value="${feature.details}"/>
+    	 	<select id="mySelect" onchange="myFunction()">
+    	 		<option name="rating" value="1">1</option>
+  				<option name="rating" value="2">2</option>
+  				<option name="rating" value="3">3</option>
+  				<option name="rating" value="4">4</option>
+  				<option name="rating" value="5">5</option>
+    	 	</select>
+    	 	
+    	 	<input type="Submit" value="Submit Ratings">
    			 </c:forEach>
     	</td>
     </tr>
 </c:forEach>
 </table>
+</form>
+
+
+
 
 </form>
 </body>
