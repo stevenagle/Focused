@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import entities.Company;
 import entities.Feature;
+import entities.FeatureReview;
 import entities.Product;
 import entities.Reviewer;
 
@@ -121,6 +123,33 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		
 	}
 
+	@Override
+	public List<Product> getUnratedProducts(int reviewerId) {
+		String queryString = "SELECT DISTINCT p FROM Product p ";
+		List<Product> products = new ArrayList<>();
+		List<Product> tempProducts = em.createQuery(queryString, Product.class).getResultList();
+		for (Product product : tempProducts) {
+			System.out.println(product.getName());
+			for (Feature feature : product.getFeatures()) {
+					if (feature.getFeatureReviews().size() == 0) {
+						products.add(product);
+						break;
+					} 
+					for (FeatureReview fr : feature.getFeatureReviews()) {
+						if (fr.getReviewer().getId() != reviewerId && (!products.contains(product))){
+							products.add(product);
+						}
+					}
+			}
+		}
+		System.out.println("Final products list: ");
+		for (Product product : products) {
+			System.out.println(product.getName());
+		}
+		return products;
+	}
+	
+	
 	// Product Methods
 	@Override
 	public Product createProduct(int id, String name, double price, String photoUrl, String description) {
@@ -203,6 +232,8 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		p.removeFeature(f);
 		em.remove(f);	
 	}
+
+
 	
 	
 

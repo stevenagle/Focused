@@ -44,5 +44,10 @@ Gender: ${reviewer.gender} <br>
 <input type="submit" value="Edit Reviewer">
 </form>
 
+<form action="ReviewProductMenu.do" method="POST">
+<input type="hidden" name="reviewerId" value="${reviewer.id}">
+<input type="submit" value="Rate More Products">
+</form>
+
 </body>
 </html>
