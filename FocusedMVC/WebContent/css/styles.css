@@ -1,0 +1,9 @@
+#logo-navbar {
+	height: 50px;
+	width: 50px;
+}
+
+.navbar-inverse {
+    background-color: #0A122A;
+    border-color: #080808;
+}
