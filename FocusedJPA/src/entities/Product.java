@@ -37,7 +37,7 @@ public class Product {
 	private Company company;
 
 	public Product() {
-		this.features = null;
+
 	}
 
 	public int getId() {

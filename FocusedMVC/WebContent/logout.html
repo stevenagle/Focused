@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Focused: Logout</title>
+</head>
+<body>
+<h1>You have been successfully logged out.</h1>
+<h1>You will automatically be redirected to the home page.</h1>
+
+<div id="counter">5</div>
+    <script>
+        setInterval(function() {
+            var div = document.querySelector("#counter");
+            var count = div.textContent * 1 - 1;
+            div.textContent = count;
+            if (count <= 0) {
+                location.href="index.html";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -22,6 +22,7 @@ public interface FocusedDbDao {
 	// TODO removeReviewer-- Possibly something only an admin should be able to do?
 	Reviewer getReviewerById(int id);
 	Reviewer MatchReviewer(String username, String password);
+	List<Product> getUnratedProducts(int reviewerId);
 	
 	// Product methods 
 	Product createProduct(int id, String name, double price, String photoUrl, String description);

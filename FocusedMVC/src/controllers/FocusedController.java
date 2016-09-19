@@ -1,5 +1,9 @@
 package controllers;
 
+
+import java.util.List;
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -38,7 +42,7 @@ public class FocusedController {
 	public ModelAndView updateCompanyMenu(int id) {
 		return new ModelAndView("EditCompany.jsp", "company", dao.getCompanyById(id));
 	}
-	
+
 	@RequestMapping(path = "ExistingLoginCompany.do", method = RequestMethod.POST)
 	public ModelAndView logInCompany(String username, String password) {
 		Company match = dao.MatchCompany(username, password);
@@ -67,19 +71,27 @@ public class FocusedController {
 		return new ModelAndView("EditReviewer.jsp", "reviewer", dao.getReviewerById(id));
 	}
 
+	@RequestMapping(path = "ReviewProductMenu.do", method = RequestMethod.POST)
+	public ModelAndView reviewProductMenu(int reviewerId) {
+		List<Product> products = dao.getUnratedProducts(reviewerId);
+		ModelAndView mv = new ModelAndView("ReviewProduct.jsp");
+		mv.addObject("products", products);
+		mv.addObject("reviewer", dao.getReviewerById(reviewerId));
+		return mv;
+	}
+
 	@RequestMapping(path = "ExistingLogin.do", method = RequestMethod.POST)
 	public ModelAndView logInReviewer(String username, String password) {
 		Reviewer match = dao.MatchReviewer(username, password);
-		
-		if (match.equals(null)){
+
+		if (match.equals(null)) {
 			return new ModelAndView("ReviewerLoginWrongPass.html");
-		}
-		else if (match.getPassword().equals(password)) {
+		} else if (match.getPassword().equals(password)) {
 			return new ModelAndView("reviewer.jsp", "reviewer", dao.getReviewerById(match.getId()));
 		} else {
 			return new ModelAndView("ReviewerLoginWrongPass.html");
 		}
-		
+
 	}
 
 	// Product Methods
@@ -92,71 +104,70 @@ public class FocusedController {
 	@RequestMapping(path = "NewProduct.do", method = RequestMethod.POST)
 	public ModelAndView newProduct(int companyId, String name, double price, String photoUrl, String description) {
 		System.out.println("in NewProduct.do" + companyId + description + "");
-		Product p = dao.createProduct(companyId, name, price, photoUrl, description);			
+		Product p = dao.createProduct(companyId, name, price, photoUrl, description);
 		ModelAndView mv = new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
 		mv.addObject("product", p);
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "UpdateProduct.do", method = RequestMethod.POST)
 	public ModelAndView updateProduct(int id, String name, double price, String photoUrl, String description) {
 		Product p = dao.updateProduct(id, name, price, photoUrl, description);
 		return new ModelAndView("ProductFeaturesMenu.jsp", "product", p);
 	}
-	
+
 	@RequestMapping(path = "UpdateProductMenu.do", method = RequestMethod.POST)
 	public ModelAndView updateProductMenu(int id) {
 		return new ModelAndView("EditProduct.jsp", "product", dao.getProductById(id));
 	}
-	
+
 	@RequestMapping(path = "RemoveProduct.do", method = RequestMethod.POST)
 	public ModelAndView removeProduct(int id, int companyId) {
 		dao.removeProduct(id);
 		return new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
 	}
-	
+
 	// Feature methods
 	@RequestMapping(path = "NewFeature.do", method = RequestMethod.POST)
 	public ModelAndView newFeature(int productId, String details) {
 		dao.createFeature(productId, details);
 		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(productId));
 	}
+
 	@RequestMapping(path = "NewFeatureMenu.do", method = RequestMethod.POST)
 	public ModelAndView productFeatureMenu(int productId, String details) {
 		return new ModelAndView("NewFeature.jsp", "product", dao.getProductById(productId));
 	}
-	
+
 	@RequestMapping(path = "UpdateFeatureMenu.do", method = RequestMethod.POST)
 	public ModelAndView updateFeatureMenu(int id) {
 		return new ModelAndView("EditFeature.jsp", "feature", dao.getFeatureById(id));
 	}
+
 	@RequestMapping(path = "UpdateFeature.do", method = RequestMethod.POST)
 	public ModelAndView updateFeature(int id, int productId, String details) {
 		dao.updateFeature(id, details);
-		return new ModelAndView("ProductFeaturesMenu.jsp","product", dao.getProductById(productId));
+		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(productId));
 	}
-	
+
 	@RequestMapping(path = "RemoveFeature.do", method = RequestMethod.POST)
 	public ModelAndView removeFeature(int id, int productId) {
 		dao.removeFeature(id);
 		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(productId));
 	}
-	
-	
+
 	@RequestMapping(path = "ProductFeaturesMenu.do", method = RequestMethod.POST)
 	public ModelAndView productFeaturesMenu(int id) {
 		System.out.println("ProductFeaturesMenu & id equals " + id);
 		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(id));
 	}
-	
 
-    @RequestMapping(path = "Logout.do", method = RequestMethod.GET)
-    public ModelAndView logout(HttpServletRequest request){
-            HttpSession httpSession = request.getSession();
-            httpSession.invalidate();
-            return new ModelAndView("index.html");
-        
+	@RequestMapping(path = "Logout.do", method = RequestMethod.GET)
+	public ModelAndView logout(HttpServletRequest request) {
+		HttpSession httpSession = request.getSession();
+		httpSession.invalidate();
+		return new ModelAndView("logout.html");
+	}
 
-    }
-	
+
 }
