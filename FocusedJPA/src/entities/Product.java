@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,11 +24,11 @@ public class Product {
 	private double price;
 
 	// bi-directional many-to-one association to Feature
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", fetch=FetchType.EAGER)
 	private List<Feature> features;
 
 	// bi-directional many-to-one association to FocusDetail
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", fetch=FetchType.EAGER)
 	private List<FocusDetail> focusDetails;
 
 	// bi-directional many-to-one association to Company
@@ -135,4 +136,5 @@ public class Product {
 				+ ", price=" + price + ", features=" + features + ", focusDetails=" + focusDetails + ", company="
 				+ company + "]";
 	}
+
 }

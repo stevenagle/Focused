@@ -3,6 +3,7 @@ package entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ public class Reviewer {
 	private String password;
 	private String username;
 	// bi-directional many-to-one association to FeatureReview
-	@OneToMany(mappedBy = "reviewer")
+	@OneToMany(mappedBy = "reviewer", fetch=FetchType.EAGER)
 	private List<FeatureReview> featureReviews;
 
 	public Reviewer() {
