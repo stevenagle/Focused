@@ -3,7 +3,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,7 +33,7 @@ public class CompanyTest {
 		assertEquals("csshub", company.getUsername());
 		assertEquals("front end devs", company.getDescription());
 
-		List<Product> products = company.getProducts();
+		Set<Product> products = company.getProducts();
 		assertEquals(1, products.size());
 	}
 

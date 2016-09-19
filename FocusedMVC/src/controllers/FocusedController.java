@@ -1,7 +1,5 @@
 package controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.FocusedDbDao;
 import entities.Company;
+import entities.Feature;
 import entities.Product;
 import entities.Reviewer;
 
@@ -91,10 +90,61 @@ public class FocusedController {
 	@RequestMapping(path = "NewProduct.do", method = RequestMethod.POST)
 	public ModelAndView newProduct(int companyId, String name, double price, String photoUrl, String description) {
 		System.out.println("in NewProduct.do" + companyId + description + "");
-		Product p = dao.createProduct(companyId, name, price, photoUrl, description);
+		Product p = dao.createProduct(companyId, name, price, photoUrl, description);			
 		ModelAndView mv = new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
 		mv.addObject("product", p);
 		return mv;
-
 	}
+	
+	@RequestMapping(path = "UpdateProduct.do", method = RequestMethod.POST)
+	public ModelAndView updateProduct(int id, String name, double price, String photoUrl, String description) {
+		Product p = dao.updateProduct(id, name, price, photoUrl, description);
+		return new ModelAndView("ProductFeaturesMenu.jsp", "product", p);
+	}
+	
+	@RequestMapping(path = "UpdateProductMenu.do", method = RequestMethod.POST)
+	public ModelAndView updateProductMenu(int id) {
+		return new ModelAndView("EditProduct.jsp", "product", dao.getProductById(id));
+	}
+	
+	@RequestMapping(path = "RemoveProduct.do", method = RequestMethod.POST)
+	public ModelAndView removeProduct(int id, int companyId) {
+		dao.removeProduct(id);
+		return new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
+	}
+	
+	// Feature methods
+	@RequestMapping(path = "NewFeature.do", method = RequestMethod.POST)
+	public ModelAndView newFeature(int productId, String details) {
+		dao.createFeature(productId, details);
+		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(productId));
+	}
+	@RequestMapping(path = "NewFeatureMenu.do", method = RequestMethod.POST)
+	public ModelAndView productFeatureMenu(int productId, String details) {
+		return new ModelAndView("NewFeature.jsp", "product", dao.getProductById(productId));
+	}
+	
+	@RequestMapping(path = "UpdateFeatureMenu.do", method = RequestMethod.POST)
+	public ModelAndView updateFeatureMenu(int id) {
+		return new ModelAndView("EditFeature.jsp", "feature", dao.getFeatureById(id));
+	}
+	@RequestMapping(path = "UpdateFeature.do", method = RequestMethod.POST)
+	public ModelAndView updateFeature(int id, int productId, String details) {
+		dao.updateFeature(id, details);
+		return new ModelAndView("ProductFeaturesMenu.jsp","product", dao.getProductById(productId));
+	}
+	
+	@RequestMapping(path = "RemoveFeature.do", method = RequestMethod.POST)
+	public ModelAndView removeFeature(int id, int productId) {
+		dao.removeFeature(id);
+		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(productId));
+	}
+	
+	
+	@RequestMapping(path = "ProductFeaturesMenu.do", method = RequestMethod.POST)
+	public ModelAndView productFeaturesMenu(int id) {
+		System.out.println("ProductFeaturesMenu & id equals " + id);
+		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(id));
+	}
+	
 }

@@ -8,10 +8,36 @@
 <title>Company landing page</title>
 </head>
 <body>
-${reviewer.username}
-${reviewer.password}
-${reviewer.age}
-${reviewer.gender}
+Username: ${reviewer.username} <br>
+Password: ${reviewer.password} <br>
+Age: ${reviewer.age} <br> 
+Gender: ${reviewer.gender} <br>
+<br>
+
+
+<table>
+<th>Product:</th>
+<th>Feature:</th>
+<th>Your rating:</th>
+<th>Details:</th>
+<c:forEach var="review" items="${reviewer.featureReviews}">
+    <tr>
+    	<td>
+    <c:out value="${review.feature.product.name}"/> <br/>
+    	</td>
+    	<td>
+    <c:out value="${review.feature.details}"/> 
+    	</td>
+    	<td>
+    <c:out value="${review.rating}"/> 
+    	</td>
+    	<td>
+    <c:out value="${review.comment}"/> 
+    	</td>
+    </tr>
+</c:forEach>
+</table>
+
 
 <form action="UpdateReviewerMenu.do" method="POST">
 <input type="hidden" name="id" value="${reviewer.id}">
