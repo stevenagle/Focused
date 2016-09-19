@@ -54,7 +54,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	public Company getCompanyById(int id) {
 		return em.find(Company.class, id);
 	}
-	
+
 	@Override
 	public Company MatchCompany(String username, String password) {
 
@@ -68,7 +68,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 				match = result;
 			}
 		}
-		
+
 		return match;
 	}
 
@@ -120,55 +120,46 @@ public class FocusedDaoImpl implements FocusedDbDao {
 			}
 		}
 		return em.find(Reviewer.class, 1);
-		
+
 	}
 
 	@Override
 	public List<Product> getUnratedProducts(int reviewerId) {
 		String queryString = "SELECT DISTINCT p FROM Product p ";
-		List<Product> products = new ArrayList<>();
 		List<Product> tempProducts = em.createQuery(queryString, Product.class).getResultList();
+		List<Product> products = new ArrayList<>(tempProducts);
+		
 		for (Product product : tempProducts) {
-			System.out.println(product.getName());
 			for (Feature feature : product.getFeatures()) {
-					if (feature.getFeatureReviews().size() == 0) {
-						products.add(product);
-						break;
-					} 
-					for (FeatureReview fr : feature.getFeatureReviews()) {
-						if (fr.getReviewer().getId() != reviewerId && (!products.contains(product))){
-							products.add(product);
-						}
+				for (FeatureReview fr : feature.getFeatureReviews()) {
+					if(fr.getReviewer().getId() == reviewerId) {
+						products.remove(product);
 					}
+				}
 			}
-		}
-		System.out.println("Final products list: ");
-		for (Product product : products) {
-			System.out.println(product.getName());
 		}
 		return products;
 	}
-	
-	
+
 	// Product Methods
 	@Override
 	public Product createProduct(int id, String name, double price, String photoUrl, String description) {
 
 		Product p = new Product();
 		Company c = getCompanyById(id);
-		
+
 		p.setCompany(c);
 		p.setName(name);
 		p.setPrice(price);
 		p.setPhotoUrl(photoUrl);
 		p.setDescription(description);
 		p.setFeatures(null);
-		
+
 		// New way to get Company to know it's products
 		Set<Product> products = c.getProducts();
 		products.add(p);
 		c.setProducts(products);
-		
+
 		return p;
 	}
 
@@ -176,7 +167,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	public Product getProductById(int id) {
 		return em.find(Product.class, id);
 	}
-	
+
 	@Override
 	public Product updateProduct(int id, String name, double price, String photoUrl, String description) {
 		Product p = getProductById(id);
@@ -186,7 +177,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		p.setDescription(description);
 		return p;
 	}
-	
+
 	@Override
 	public void removeProduct(int id) {
 		System.out.println("In remove product dao");
@@ -195,21 +186,21 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		c.removeProduct(p);
 		em.remove(getProductById(id));
 	}
-	
+
 	// Feature methods
 	@Override
 	public Feature createFeature(int id, String details) {
 
 		Feature f = new Feature();
 		Product p = getProductById(id);
-		
+
 		f.setProduct(p);
 		f.setDetails(details);
-		
+
 		Set<Feature> features = p.getFeatures();
 		features.add(f);
 		p.setFeatures(features);
-		
+
 		return f;
 	}
 
@@ -230,13 +221,37 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		Feature f = getFeatureById(id);
 		Product p = f.getProduct();
 		p.removeFeature(f);
-		em.remove(f);	
+		em.remove(f);
 	}
 
+	public void reviewProduct(int featureId, int reviewerId, int rating) {
+		System.out.println("in reviewProduct dao");
+		String queryString = "SELECT fr FROM FeatureReview fr";
+		List<FeatureReview> reviews = em.createQuery(queryString, FeatureReview.class).getResultList();
+		System.out.println(reviews.size());
+		for (FeatureReview featureReview : reviews) {
+			// Check for duplicate entries
+			System.out.println(
+					"Existing feature id: " + featureReview.getFeature().getId() + "Current feature id:" + featureId);
+			System.out.println("Existing reviewer id: " + featureReview.getReviewer().getId() + "Current reviewer id:"
+					+ reviewerId);
+			if (featureReview.getFeature().getId() == featureId && featureReview.getReviewer().getId() == reviewerId) {
+				System.out.println("updating exisiting review");
+				featureReview.setRating(rating);
+				// featureReview.setComment(comment);
+				break;
+			}
+		}
+		// Else create new entry
+		System.out.println("Making new Review");
+		FeatureReview fr = new FeatureReview();
+		fr.setFeature(getFeatureById(featureId));
+		fr.setReviewer(getReviewerById(reviewerId));
+		fr.setRating(rating);
+		// fr.setComment(comment);
 
-	
-	
+		em.persist(fr);
 
-
+	}
 
 }

@@ -23,6 +23,7 @@ public interface FocusedDbDao {
 	Reviewer getReviewerById(int id);
 	Reviewer MatchReviewer(String username, String password);
 	List<Product> getUnratedProducts(int reviewerId);
+	void reviewProduct(int featureId, int reviewerId, int rating);
 	
 	// Product methods 
 	Product createProduct(int id, String name, double price, String photoUrl, String description);
