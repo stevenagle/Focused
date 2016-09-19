@@ -27,9 +27,13 @@ public class FocusedController {
 	// Company methods
 	@RequestMapping(path = "CreateCompany.do", method = RequestMethod.POST)
 	public ModelAndView createCompany(String name, String username, String password, String description) {
+		if (dao.isDuplicateCompany(username)) {
+			return new ModelAndView("DuplicateCompany.html");
+		}
+		
 		Company c = dao.createCompany(name, username, password, description);
+		return new ModelAndView("company.jsp", "company", c);	
 
-		return new ModelAndView("company.jsp", "company", c);
 	}
 
 	@RequestMapping(path = "UpdateCompany.do", method = RequestMethod.POST)
@@ -56,6 +60,9 @@ public class FocusedController {
 	// Reviewer methods
 	@RequestMapping(path = "CreateReviewer.do", method = RequestMethod.POST)
 	public ModelAndView createReviewer(String username, String password, int age, String gender) {
+		if (dao.isDuplicateReviewer(username)) {
+			return new ModelAndView("DuplicateReviewer.html");
+		}
 		Reviewer r = dao.createReviewer(username, password, age, gender);
 		return new ModelAndView("reviewer.jsp", "reviewer", r);
 	}
@@ -97,13 +104,11 @@ public class FocusedController {
 	// Product Methods
 	@RequestMapping(path = "NewProductMenu.do", method = RequestMethod.POST)
 	public ModelAndView newProductMenu(int id) {
-		System.out.println("NewProductMenu & id equals " + id);
 		return new ModelAndView("NewProduct.jsp", "company", dao.getCompanyById(id));
 	}
 
 	@RequestMapping(path = "NewProduct.do", method = RequestMethod.POST)
 	public ModelAndView newProduct(int companyId, String name, double price, String photoUrl, String description) {
-		System.out.println("in NewProduct.do" + companyId + description + "");
 		Product p = dao.createProduct(companyId, name, price, photoUrl, description);
 		ModelAndView mv = new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
 		mv.addObject("product", p);

@@ -55,6 +55,29 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		return em.find(Company.class, id);
 	}
 
+	
+	@Override
+	public boolean isDuplicateCompany(String username) {
+		boolean duplicate = false;
+		
+		String queryString = "SELECT c FROM Company c";
+		
+		List<Company> results = em.createQuery(queryString, Company.class).getResultList();
+		
+		for (Company result : results) {
+			if (result.getUsername().equals(username)) {
+				duplicate = true;
+				break;
+			}
+			else {
+				duplicate = false;
+			}
+		}
+		return duplicate;
+	}
+	
+
+	
 	@Override
 	public Company MatchCompany(String username, String password) {
 
@@ -121,6 +144,28 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		}
 		return em.find(Reviewer.class, 1);
 
+	}
+	
+	
+	@Override
+	public boolean isDuplicateReviewer(String username) {
+		boolean duplicate = false;
+		
+		String queryString = "SELECT r FROM Reviewer r";
+		
+		List<Reviewer> results = em.createQuery(queryString, Reviewer.class).getResultList();
+		Reviewer match = new Reviewer();
+		
+		for (Reviewer result : results) {
+			if (result.getUsername().equals(username)) {
+				duplicate = true;
+				break;
+			}
+			else {
+				duplicate = false;
+			}
+		}
+		return duplicate;
 	}
 
 	@Override
