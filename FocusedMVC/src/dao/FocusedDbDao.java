@@ -36,4 +36,6 @@ public interface FocusedDbDao {
 	Feature updateFeature(int id, String details);
 	Feature getFeatureById(int id);
 	void removeFeature(int id);
+	boolean isDuplicateReviewer(String username);
+	boolean isDuplicateCompany(String username);
 }

@@ -20,7 +20,7 @@ public class Reviewer {
 	private String gender;
 	private String password;
 	private String username;
-	// bi-directional many-to-one association to FeatureReview
+
 	@OneToMany(mappedBy = "reviewer", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Set<FeatureReview> featureReviews;
 
