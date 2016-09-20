@@ -124,6 +124,14 @@
 							<p>
 								<c:out value="${product.description}"/>
 							</p>
+								<c:forEach var="review" items="${ReviewData}">
+    								<c:if test="${review.itemId == product.id}">
+    									Number of Ratings:
+    			 						<p><c:out value="${review.ratingCount}"/></p>
+    									Average Rating:
+    			 						<p><c:out value="${review.averageRating}"/></p>
+   									</c:if>
+   			 					</c:forEach>
 								<br>
 							<ul class="list-inline">
 								<li><form action="UpdateProductMenu.do" method="POST">
