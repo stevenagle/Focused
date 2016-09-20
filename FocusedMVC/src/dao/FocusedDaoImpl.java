@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.hibernate.Session;
 import org.springframework.transaction.annotation.Transactional;
 
 import data.ReviewData;
@@ -25,7 +24,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 
 	// Company methods
 	@Override
-	public Company createCompany(String name, String username, String password, String description) {
+	public Company createCompany(String name, String username, String password, String description, String photoUrl) {
 
 		Company c = new Company();
 
@@ -33,6 +32,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		c.setUsername(username);
 		c.setPassword(password);
 		c.setDescription(description);
+		c.setPhotoUrl(photoUrl);
 
 		em.persist(c);
 
@@ -40,13 +40,14 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	}
 
 	@Override
-	public Company updateCompany(int id, String name, String username, String password, String description) {
+	public Company updateCompany(int id, String name, String username, String password, String description, String photoUrl) {
 
 		Company c = em.find(Company.class, id);
 		c.setName(name);
 		c.setDescription(username);
 		c.setUsername(password);
 		c.setPassword(description);
+		c.setPhotoUrl(photoUrl);
 
 		return c;
 	}
@@ -95,27 +96,29 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	// Reviewer methods
 
 	@Override
-	public Reviewer createReviewer(String username, String password, int age, String gender) {
+	public Reviewer createReviewer(String username, String password, int age, String gender, String photoUrl) {
 
 		Reviewer r = new Reviewer();
 		r.setUsername(username);
 		r.setPassword(password);
 		r.setAge(age);
 		r.setGender(gender);
-
+		r.setPhotoUrl(photoUrl);
+		
 		em.persist(r);
 
 		return r;
 	}
 
 	@Override
-	public Reviewer updateReviewer(int id, String username, String password, int age, String gender) {
+	public Reviewer updateReviewer(int id, String username, String password, int age, String gender, String photoUrl) {
 
 		Reviewer r = em.find(Reviewer.class, id);
 		r.setUsername(username);
 		r.setPassword(password);
 		r.setAge(age);
 		r.setGender(gender);
+		r.setPhotoUrl(photoUrl);
 
 		return r;
 	}

@@ -11,15 +11,15 @@ import entities.Reviewer;
 public interface FocusedDbDao {
 
 	// Company methods
-	Company createCompany(String name, String description, String username, String password);
-	Company updateCompany(int id, String name, String description, String username, String password);
+	Company createCompany(String name, String username, String password, String description, String photoUrl);
+	Company updateCompany(int id, String name, String username, String password, String description, String photoUrl);
 	// TODO removeCompany-- Possibly something only an admin should be able to do?
 	Company MatchCompany(String username, String password);
 	Company getCompanyById(int id);
 	
 	// Reviewer methods
-	Reviewer createReviewer(String username, String password, int age, String gender);
-	Reviewer updateReviewer(int id, String username, String password, int age, String gender);
+	Reviewer createReviewer(String username, String password, int age, String gender, String photoUrl);
+	Reviewer updateReviewer(int id, String username, String password, int age, String gender, String photoUrl);
 	// TODO removeReviewer-- Possibly something only an admin should be able to do?
 	Reviewer getReviewerById(int id);
 	Reviewer MatchReviewer(String username, String password);

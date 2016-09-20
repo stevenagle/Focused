@@ -27,19 +27,19 @@ public class FocusedController {
 
 	// Company methods
 	@RequestMapping(path = "CreateCompany.do", method = RequestMethod.POST)
-	public ModelAndView createCompany(String name, String username, String password, String description) {
+	public ModelAndView createCompany(String name, String username, String password, String description, String photoUrl) {
 		if (dao.isDuplicateCompany(username)) {
 			return new ModelAndView("DuplicateCompany.html");
 		}
 		
-		Company c = dao.createCompany(name, username, password, description);
+		Company c = dao.createCompany(name, username, password, description, photoUrl);
 		return new ModelAndView("company.jsp", "company", c);	
 
 	}
 
 	@RequestMapping(path = "UpdateCompany.do", method = RequestMethod.POST)
-	public ModelAndView updateCompany(int id, String name, String username, String password, String description) {
-		Company c = dao.updateCompany(id, name, username, password, description);
+	public ModelAndView updateCompany(int id, String name, String username, String password, String description, String photoUrl) {
+		Company c = dao.updateCompany(id, name, username, password, description, photoUrl);
 		ModelAndView mv = new ModelAndView("company.jsp");
 		mv.addObject("company", c);
 		List<ReviewData> rd = dao.getReviewData(c.getId());
@@ -68,17 +68,17 @@ public class FocusedController {
 
 	// Reviewer methods
 	@RequestMapping(path = "CreateReviewer.do", method = RequestMethod.POST)
-	public ModelAndView createReviewer(String username, String password, int age, String gender) {
+	public ModelAndView createReviewer(String username, String password, int age, String gender, String photoUrl) {
 		if (dao.isDuplicateReviewer(username)) {
 			return new ModelAndView("DuplicateReviewer.html");
 		}
-		Reviewer r = dao.createReviewer(username, password, age, gender);
+		Reviewer r = dao.createReviewer(username, password, age, gender, photoUrl);
 		return new ModelAndView("reviewer.jsp", "reviewer", r);
 	}
 
 	@RequestMapping(path = "UpdateReviewer.do", method = RequestMethod.POST)
-	public ModelAndView updateReviewer(int id, String username, String password, int age, String gender) {
-		Reviewer r = dao.updateReviewer(id, username, password, age, gender);
+	public ModelAndView updateReviewer(int id, String username, String password, int age, String gender, String photoUrl) {
+		Reviewer r = dao.updateReviewer(id, username, password, age, gender, photoUrl);
 		return new ModelAndView("reviewer.jsp", "reviewer", r);
 	}
 
