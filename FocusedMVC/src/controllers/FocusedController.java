@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.FocusedDbDao;
+import data.ReviewData;
 import entities.Company;
 import entities.Product;
 import entities.Reviewer;
@@ -26,20 +27,24 @@ public class FocusedController {
 
 	// Company methods
 	@RequestMapping(path = "CreateCompany.do", method = RequestMethod.POST)
-	public ModelAndView createCompany(String name, String username, String password, String description) {
+	public ModelAndView createCompany(String name, String username, String password, String description, String photoUrl) {
 		if (dao.isDuplicateCompany(username)) {
 			return new ModelAndView("DuplicateCompany.html");
 		}
 		
-		Company c = dao.createCompany(name, username, password, description);
+		Company c = dao.createCompany(name, username, password, description, photoUrl);
 		return new ModelAndView("company.jsp", "company", c);	
 
 	}
 
 	@RequestMapping(path = "UpdateCompany.do", method = RequestMethod.POST)
-	public ModelAndView updateCompany(int id, String name, String username, String password, String description) {
-		Company c = dao.updateCompany(id, name, username, password, description);
-		return new ModelAndView("company.jsp", "company", c);
+	public ModelAndView updateCompany(int id, String name, String username, String password, String description, String photoUrl) {
+		Company c = dao.updateCompany(id, name, username, password, description, photoUrl);
+		ModelAndView mv = new ModelAndView("company.jsp");
+		mv.addObject("company", c);
+		List<ReviewData> rd = dao.getReviewData(c.getId());
+		mv.addObject("ReviewData", rd);
+		return mv;
 	}
 
 	@RequestMapping(path = "UpdateCompanyMenu.do", method = RequestMethod.POST)
@@ -50,14 +55,14 @@ public class FocusedController {
 	@RequestMapping(path = "ExistingLoginCompany.do", method = RequestMethod.POST)
 	public ModelAndView logInCompany(String username, String password) {
 		Company match = dao.MatchCompany(username, password);
-		
-		if (match.equals(null)) {
-			return new ModelAndView("CompanyLoginWrongPass.html");
-		} 
-		else if (match.getPassword().equals(password)) {
-			return new ModelAndView("company.jsp", "company", dao.getCompanyById(match.getId()));
-		} 
-		else {
+
+		if (match.getPassword().equals(password)) {
+			ModelAndView mv = new ModelAndView("company.jsp");
+			mv.addObject("company", dao.getCompanyById(match.getId()));
+			List<ReviewData> rd = dao.getReviewData(match.getId());
+			mv.addObject("ReviewData", rd);
+			return mv;
+		} else {
 			return new ModelAndView("CompanyLoginWrongPass.html");
 		}
 
@@ -65,17 +70,17 @@ public class FocusedController {
 
 	// Reviewer methods
 	@RequestMapping(path = "CreateReviewer.do", method = RequestMethod.POST)
-	public ModelAndView createReviewer(String username, String password, int age, String gender) {
+	public ModelAndView createReviewer(String username, String password, int age, String gender, String photoUrl) {
 		if (dao.isDuplicateReviewer(username)) {
 			return new ModelAndView("DuplicateReviewer.html");
 		}
-		Reviewer r = dao.createReviewer(username, password, age, gender);
+		Reviewer r = dao.createReviewer(username, password, age, gender, photoUrl);
 		return new ModelAndView("reviewer.jsp", "reviewer", r);
 	}
 
 	@RequestMapping(path = "UpdateReviewer.do", method = RequestMethod.POST)
-	public ModelAndView updateReviewer(int id, String username, String password, int age, String gender) {
-		Reviewer r = dao.updateReviewer(id, username, password, age, gender);
+	public ModelAndView updateReviewer(int id, String username, String password, int age, String gender, String photoUrl) {
+		Reviewer r = dao.updateReviewer(id, username, password, age, gender, photoUrl);
 		return new ModelAndView("reviewer.jsp", "reviewer", r);
 	}
 
@@ -116,7 +121,10 @@ public class FocusedController {
 	@RequestMapping(path = "NewProduct.do", method = RequestMethod.POST)
 	public ModelAndView newProduct(int companyId, String name, double price, String photoUrl, String description) {
 		Product p = dao.createProduct(companyId, name, price, photoUrl, description);
-		ModelAndView mv = new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
+		ModelAndView mv = new ModelAndView("company.jsp");
+		mv.addObject("company", dao.getCompanyById(companyId));
+		List<ReviewData> rd = dao.getReviewData(companyId);
+		mv.addObject("ReviewData", rd);
 		mv.addObject("product", p);
 		return mv;
 	}
@@ -135,7 +143,11 @@ public class FocusedController {
 	@RequestMapping(path = "RemoveProduct.do", method = RequestMethod.POST)
 	public ModelAndView removeProduct(int id, int companyId) {
 		dao.removeProduct(id);
-		return new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
+		ModelAndView mv = new ModelAndView("company.jsp");
+		mv.addObject("company", dao.getCompanyById(companyId));
+		List<ReviewData> rd = dao.getReviewData(companyId);
+		mv.addObject("ReviewData", rd);
+		return mv;
 	}
 
 	// Feature methods

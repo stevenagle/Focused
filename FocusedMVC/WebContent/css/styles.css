@@ -21,8 +21,9 @@ body {
 	font-weight: bold;
 }
 
-#sdlogo {
-	padding-left: 50%;
+.img-responsive {
+	height: 300px;
+	weight: 225px;
 }
 
 

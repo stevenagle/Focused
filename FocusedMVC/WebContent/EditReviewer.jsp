@@ -19,6 +19,7 @@
  	 <option value="male">Male</option>
  	 <option value="sjw">SJW</option>
 	</select>
+	<input type="text" name="photoUrl" value="${reviewer.photoUrl}"/>	
 	<input type="reset" value="reset">
 	<input type="submit" value="submit">
 </form>

@@ -15,6 +15,7 @@
 	<input type="text" name="username" value="${company.username}" required>
 	<input type="password" name="password" value="${company.password}" required>
 	<textarea rows="4" cols="50" name="description">${company.description}</textarea>
+	<input type="text" name="photoUrl" value="${company.photoUrl}"/>
 	<input type="reset" value="reset">
 	<input type="submit" value="submit">
 </form>
