@@ -150,7 +150,30 @@
 		</div>
 		<!-- /.row -->
 
+
 		<hr>
+
+<table>
+<th>Products:</th>
+<c:forEach var="product" items="${company.products}">
+    <tr>
+    	<td>
+    	<form action="ProductFeaturesMenu.do" method="POST">
+   				 <c:out value="${product.name}"/> <input type="submit" name="id" value="${product.id}">
+    		<c:forEach var="review" items="${ReviewData}">
+    			<c:if test="${review.itemId == product.id}">
+    			Number of Ratings:
+    			 <c:out value="${review.ratingCount}"/>
+    			Average Rating:
+    			 <c:out value="${review.averageRating}"/>
+   				</c:if>
+   			 </c:forEach>
+    	</form>
+    	</td>
+    </tr>
+</c:forEach>
+</table>
+
 
 		<!-- Footer -->
 		<footer>

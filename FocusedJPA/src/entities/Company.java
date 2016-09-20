@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,8 @@ public class Company {
 	private String name;
 	private String password;
 	private String username;
+	@Column(name = "photo_url")
+	private String photoUrl;
 
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
@@ -88,6 +91,14 @@ public class Company {
 		product.setCompany(null);
 
 		return product;
+	}
+
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package entities;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,8 @@ public class Reviewer {
 	private String gender;
 	private String password;
 	private String username;
+	@Column(name = "photo_url")
+	private String photoUrl;
 
 	@OneToMany(mappedBy = "reviewer", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Set<FeatureReview> featureReviews;
@@ -87,6 +90,14 @@ public class Reviewer {
 		featureReview.setReviewer(null);
 
 		return featureReview;
+	}
+
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
 
 	@Override
