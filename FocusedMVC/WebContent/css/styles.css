@@ -11,3 +11,27 @@
 body {
 	background-color: #EBEBEB;
 }
+
+.btn-group-lg>.btn, .btn-lg {
+	padding: 30px 16px;
+}
+
+.navbar-brand {
+	font-size: 36px;
+	font-weight: bold;
+}
+
+
+/* div.transbox {
+  margin: 25px;
+  background-color: #ffffff;
+  
+  opacity: 0.6;
+  filter: alpha(opacity=60); For IE8 and earlier
+}
+
+div.transbox h2 {
+  margin: 2%;
+  font-weight: bold;
+  color: #A30000;
+} */
