@@ -12,7 +12,7 @@ Username: ${reviewer.username} <br>
 Password: ${reviewer.password} <br>
 Age: ${reviewer.age} <br> 
 Gender: ${reviewer.gender} <br>
-<br>
+Review Points: ${reviewer.points}<br>
 
 
 <table>

@@ -288,6 +288,11 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		}
 		// Else create new entry
 		System.out.println("Making new Review");
+		Reviewer r = getReviewerById(reviewerId);
+		int currentPoints = r.getPoints();
+		System.out.println("Current User Points Before Adding: " + currentPoints);
+		r.setPoints(currentPoints + 10); 
+		System.out.println("Points after addition: " + r.getPoints());
 		FeatureReview fr = new FeatureReview();
 		fr.setFeature(getFeatureById(featureId));
 		fr.setReviewer(getReviewerById(reviewerId));
