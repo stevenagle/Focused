@@ -21,6 +21,10 @@ body {
 	font-weight: bold;
 }
 
+#sdlogo {
+	padding-left: 50%;
+}
+
 
 /* div.transbox {
   margin: 25px;

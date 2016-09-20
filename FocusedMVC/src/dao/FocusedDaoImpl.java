@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.hibernate.Session;
 import org.springframework.transaction.annotation.Transactional;
 
 import data.ReviewData;
@@ -86,11 +85,13 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		for (Company result : results) {
 			if (result.getUsername().equals(username)) {
 				match = result;
+				return match;
 			}
 		}
 
-		return match;
+		return em.find(Company.class, 1);
 	}
+	
 
 	// Reviewer methods
 
@@ -150,7 +151,6 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		String queryString = "SELECT r FROM Reviewer r";
 
 		List<Reviewer> results = em.createQuery(queryString, Reviewer.class).getResultList();
-		Reviewer match = new Reviewer();
 
 		for (Reviewer result : results) {
 			if (result.getUsername().equals(username)) {
