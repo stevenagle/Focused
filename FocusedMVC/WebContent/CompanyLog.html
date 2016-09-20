@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Create Reviewer</title>
+    <title>Company Login</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -68,7 +68,7 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Create Reviewer
+                <h1 class="page-header">Company Login
                 </h1>
             </div>
         </div>
@@ -79,37 +79,26 @@
         <!-- This is where its is connected to controller -->
         <div class="row">
             <div class="col-md-8">
-            	<form action="CreateReviewer.do" method="POST">
-            	<font color="red"><h4>That Username already exists! Enter a different username!</h4></font>
-						<div class="form-group">
-							<label>Name:</label><br>
-							<input type="text" class="form-control" name="username" placeholder="username" required> <br>
-						</div>
-						<div class="form-group">
-							<label>Password:</label><br>
-							<input type="password" class="form-control" name="password" placeholder="password" required> <br>
-						</div>
-						<div class="form-group">
-							<label>Age:</label><br>
-							<input type="text" class="form-control" name="age" placeholder="age" required>  <br>
-						</div>
-						<div class="form-group">
-						<label>Gender:</label><br>
-								<select name="gender">
-									<option value="female">Female</option> 
-									<option value="male">Male</option>
-								</select> 
-						</div>
-						<div class="form-group">
-							<label>Photo:</label><br>
-							<input type="text" class="form-control" name="photoUrl" placeholder="photo URL"> <br>
-						</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">Sign Up</button>
-					</div>
-					</form>
-					
+                <form action="ExistingLoginCompany.do" method="POST">
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Username:</label>
+                            <input type="text" class="form-control" id="name" name="username" required data-validation-required-message="Please enter your name.">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Password:</label>
+                            <input type=password" class="form-control" id="phone" name="password" required data-validation-required-message="Please enter your phone number.">
+                        </div>
+                    </div>
+                    <div id="success"></div>
+                    <!-- For success/fail messages -->
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
             </div>
+
         </div>
         <!-- /.row -->
 

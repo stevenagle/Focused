@@ -58,10 +58,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="CompanyLogin.html">Company</a>
+                                <a href="CompanyLog.html">Company</a>
                             </li>
                             <li>
-                                <a href="ReviewerLogin.html">Reviewer</a>
+                                <a href="ReviewerLog.html">Reviewer</a>
                             </li>
                         </ul>
                     </li> -->
