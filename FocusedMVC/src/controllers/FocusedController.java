@@ -55,6 +55,7 @@ public class FocusedController {
 	@RequestMapping(path = "ExistingLoginCompany.do", method = RequestMethod.POST)
 	public ModelAndView logInCompany(String username, String password) {
 		Company match = dao.MatchCompany(username, password);
+
 		if (match.getPassword().equals(password)) {
 			ModelAndView mv = new ModelAndView("company.jsp");
 			mv.addObject("company", dao.getCompanyById(match.getId()));
@@ -64,6 +65,7 @@ public class FocusedController {
 		} else {
 			return new ModelAndView("CompanyLoginWrongPass.html");
 		}
+
 	}
 
 	// Reviewer methods
