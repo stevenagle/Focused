@@ -23,6 +23,8 @@ public class Reviewer {
 	private String username;
 	@Column(name = "photo_url")
 	private String photoUrl;
+	@Column(name = "points")
+	private int points;
 
 	@OneToMany(mappedBy = "reviewer", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Set<FeatureReview> featureReviews;
@@ -98,6 +100,14 @@ public class Reviewer {
 
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
 
 	@Override
