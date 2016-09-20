@@ -298,12 +298,24 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	@Override
 	public List<ReviewData> getReviewData(int companyId) {
 		List<ReviewData> reviewData = new ArrayList<>();
+		double reviewAverage;
 		Company c = getCompanyById(companyId);
 		Set<Product> products = c.getProducts();
 		for (Product product : products) {
 			System.out.println("#### Review Count" + getReviewCount(product));
-			System.out.println("#### Review Average" + getReviewAverage(product));
-			reviewData.add(new ReviewData(product.getId(),getReviewCount(product),getReviewAverage(product)));
+			Set<Feature> features = product.getFeatures();
+			for (Feature feature : features) {
+				if (feature.getFeatureReviews() == null || feature.getFeatureReviews().size() == 0){
+					reviewAverage = 0;
+					reviewData.add(new ReviewData(product.getId(), getReviewCount(product), reviewAverage));
+					break;
+				} else {
+					reviewAverage =  getReviewAverage(product);
+					reviewData.add(new ReviewData(product.getId(), getReviewCount(product), reviewAverage));
+					break;
+				}
+					
+			}
 		}
 		for (ReviewData rd : reviewData) {
 			System.out.println(rd.toString());
@@ -312,16 +324,23 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	}
 
 	public long getReviewCount(Product p) {
-		String queryString = "SELECT COUNT(fr.rating) FROM FeatureReview fr JOIN fr.feature f JOIN f.product p WHERE p.id = 2";
-		//String queryString = "SELECT COUNT(fr.rating) FROM Product p JOIN p.features f JOIN f.featureReviews fr WHERE p.id = ?1";
-		Long count = em.createQuery(queryString, Long.class).getSingleResult();
-		return count;
+		if (p.getFeatures().size() == 0) {
+			return 0;
+		} else {
+			String queryString = "SELECT COUNT(fr.rating) FROM FeatureReview fr JOIN fr.feature f JOIN f.product p WHERE p.id = ?1";
+			Long count = em.createQuery(queryString, Long.class).setParameter(1, p.getId()).getSingleResult();
+			return count;
+		}
 	}
-	
+
 	public double getReviewAverage(Product p) {
-		String queryString = "SELECT AVG(fr.rating) FROM Product p JOIN p.features f JOIN f.featureReviews fr WHERE p.id = ?1";
-		double average = em.createQuery(queryString, Double.class).setParameter(1, p.getId()).getSingleResult();
-		return average;
+		if (p.getFeatures().size() == 0)  {
+			return 0;
+		} else {
+			String queryString = "SELECT AVG(fr.rating) FROM Product p JOIN p.features f JOIN f.featureReviews fr WHERE p.id = ?1";
+			double average = em.createQuery(queryString, Double.class).setParameter(1, p.getId()).getSingleResult();
+			return average;
+		}
 	}
 
 }

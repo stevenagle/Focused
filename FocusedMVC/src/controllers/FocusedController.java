@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.FocusedDbDao;
+import data.ReviewData;
 import entities.Company;
 import entities.Product;
 import entities.Reviewer;
@@ -39,7 +40,11 @@ public class FocusedController {
 	@RequestMapping(path = "UpdateCompany.do", method = RequestMethod.POST)
 	public ModelAndView updateCompany(int id, String name, String username, String password, String description) {
 		Company c = dao.updateCompany(id, name, username, password, description);
-		return new ModelAndView("company.jsp", "company", c);
+		ModelAndView mv = new ModelAndView("company.jsp");
+		mv.addObject("company", c);
+		List<ReviewData> rd = dao.getReviewData(c.getId());
+		mv.addObject("ReviewData", rd);
+		return mv;
 	}
 
 	@RequestMapping(path = "UpdateCompanyMenu.do", method = RequestMethod.POST)
@@ -51,7 +56,11 @@ public class FocusedController {
 	public ModelAndView logInCompany(String username, String password) {
 		Company match = dao.MatchCompany(username, password);
 		if (match.getPassword().equals(password)) {
-			return new ModelAndView("company.jsp", "company", dao.getCompanyById(match.getId()));
+			ModelAndView mv = new ModelAndView("company.jsp");
+			mv.addObject("company", dao.getCompanyById(match.getId()));
+			List<ReviewData> rd = dao.getReviewData(match.getId());
+			mv.addObject("ReviewData", rd);
+			return mv;
 		} else {
 			return new ModelAndView("CompanyLoginWrongPass.html");
 		}
@@ -110,7 +119,10 @@ public class FocusedController {
 	@RequestMapping(path = "NewProduct.do", method = RequestMethod.POST)
 	public ModelAndView newProduct(int companyId, String name, double price, String photoUrl, String description) {
 		Product p = dao.createProduct(companyId, name, price, photoUrl, description);
-		ModelAndView mv = new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
+		ModelAndView mv = new ModelAndView("company.jsp");
+		mv.addObject("company", dao.getCompanyById(companyId));
+		List<ReviewData> rd = dao.getReviewData(companyId);
+		mv.addObject("ReviewData", rd);
 		mv.addObject("product", p);
 		return mv;
 	}
@@ -129,7 +141,11 @@ public class FocusedController {
 	@RequestMapping(path = "RemoveProduct.do", method = RequestMethod.POST)
 	public ModelAndView removeProduct(int id, int companyId) {
 		dao.removeProduct(id);
-		return new ModelAndView("company.jsp", "company", dao.getCompanyById(companyId));
+		ModelAndView mv = new ModelAndView("company.jsp");
+		mv.addObject("company", dao.getCompanyById(companyId));
+		List<ReviewData> rd = dao.getReviewData(companyId);
+		mv.addObject("ReviewData", rd);
+		return mv;
 	}
 
 	// Feature methods
