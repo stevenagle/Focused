@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Session;
 import org.springframework.transaction.annotation.Transactional;
 
+import data.ReviewData;
 import entities.Company;
 import entities.Feature;
 import entities.FeatureReview;
@@ -55,29 +56,25 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		return em.find(Company.class, id);
 	}
 
-	
 	@Override
 	public boolean isDuplicateCompany(String username) {
 		boolean duplicate = false;
-		
+
 		String queryString = "SELECT c FROM Company c";
-		
+
 		List<Company> results = em.createQuery(queryString, Company.class).getResultList();
-		
+
 		for (Company result : results) {
 			if (result.getUsername().equals(username)) {
 				duplicate = true;
 				break;
-			}
-			else {
+			} else {
 				duplicate = false;
 			}
 		}
 		return duplicate;
 	}
-	
 
-	
 	@Override
 	public Company MatchCompany(String username, String password) {
 
@@ -145,23 +142,21 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		return em.find(Reviewer.class, 1);
 
 	}
-	
-	
+
 	@Override
 	public boolean isDuplicateReviewer(String username) {
 		boolean duplicate = false;
-		
+
 		String queryString = "SELECT r FROM Reviewer r";
-		
+
 		List<Reviewer> results = em.createQuery(queryString, Reviewer.class).getResultList();
 		Reviewer match = new Reviewer();
-		
+
 		for (Reviewer result : results) {
 			if (result.getUsername().equals(username)) {
 				duplicate = true;
 				break;
-			}
-			else {
+			} else {
 				duplicate = false;
 			}
 		}
@@ -173,11 +168,11 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		String queryString = "SELECT DISTINCT p FROM Product p ";
 		List<Product> tempProducts = em.createQuery(queryString, Product.class).getResultList();
 		List<Product> products = new ArrayList<>(tempProducts);
-		
+
 		for (Product product : tempProducts) {
 			for (Feature feature : product.getFeatures()) {
 				for (FeatureReview fr : feature.getFeatureReviews()) {
-					if(fr.getReviewer().getId() == reviewerId) {
+					if (fr.getReviewer().getId() == reviewerId) {
 						products.remove(product);
 					}
 				}
@@ -297,6 +292,36 @@ public class FocusedDaoImpl implements FocusedDbDao {
 
 		em.persist(fr);
 
+	}
+
+	// ReviewData methods
+	@Override
+	public List<ReviewData> getReviewData(int companyId) {
+		List<ReviewData> reviewData = new ArrayList<>();
+		Company c = getCompanyById(companyId);
+		Set<Product> products = c.getProducts();
+		for (Product product : products) {
+			System.out.println("#### Review Count" + getReviewCount(product));
+			System.out.println("#### Review Average" + getReviewAverage(product));
+			reviewData.add(new ReviewData(product.getId(),getReviewCount(product),getReviewAverage(product)));
+		}
+		for (ReviewData rd : reviewData) {
+			System.out.println(rd.toString());
+		}
+		return reviewData;
+	}
+
+	public long getReviewCount(Product p) {
+		String queryString = "SELECT COUNT(fr.rating) FROM FeatureReview fr JOIN fr.feature f JOIN f.product p WHERE p.id = 2";
+		//String queryString = "SELECT COUNT(fr.rating) FROM Product p JOIN p.features f JOIN f.featureReviews fr WHERE p.id = ?1";
+		Long count = em.createQuery(queryString, Long.class).getSingleResult();
+		return count;
+	}
+	
+	public double getReviewAverage(Product p) {
+		String queryString = "SELECT AVG(fr.rating) FROM Product p JOIN p.features f JOIN f.featureReviews fr WHERE p.id = ?1";
+		double average = em.createQuery(queryString, Double.class).setParameter(1, p.getId()).getSingleResult();
+		return average;
 	}
 
 }
