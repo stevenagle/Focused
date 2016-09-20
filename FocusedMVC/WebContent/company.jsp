@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC>
 <html>
 <head>
 <meta charset="utf-8">
@@ -131,14 +131,15 @@
     									Average Rating:
     			 						<p><c:out value="${review.averageRating}"/></p>
    									</c:if>
-   			 					</c:forEach>
+   								</c:forEach>
 								<br>
 							<ul class="list-inline">
 								<li><form action="UpdateProductMenu.do" method="POST">
 										<input type="hidden" name="id"
 											value="<c:out value="${product.id}"/>"> 
 											<input type="submit" value="Edit Product">
-									</form></li>
+									</form>
+								</li>
 								<li><form action="ProductFeaturesMenu.do" method="POST">
 										<input type="hidden" name="id"
 											value="<c:out value="${product.id}"/>"> 
@@ -147,6 +148,7 @@
 								<li><form action="RemoveProduct.do" method="POST">
 										<input type="hidden" name="id"
 											value="<c:out value="${product.id}"/>"> 
+										<input type="hidden" name="companyId" value="<c:out value="${company.id}"/>">
 										<input type="submit" value="Remove Product">
 									</form></li>
 							</ul>
@@ -161,27 +163,41 @@
 
 		<hr>
 
-<table>
-<th>Products:</th>
-<c:forEach var="product" items="${company.products}">
-    <tr>
-    	<td>
-    	<form action="ProductFeaturesMenu.do" method="POST">
-   				 <c:out value="${product.name}"/> <input type="submit" name="id" value="${product.id}">
-    		<c:forEach var="review" items="${ReviewData}">
-    			<c:if test="${review.itemId == product.id}">
-    			Number of Ratings:
-    			 <c:out value="${review.ratingCount}"/>
-    			Average Rating:
-    			 <c:out value="${review.averageRating}"/>
-   				</c:if>
-   			 </c:forEach>
-    	</form>
-    	</td>
-    </tr>
-</c:forEach>
-</table>
+<%-- <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editProduct">
+  Edit Product
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Edit Product</h4>
+      </div>
+      <div class="modal-body">
+        	<form action="UpdateProduct.do" method="POST">
+			<input type="hidden" name="id" value="${product.id}">
+			<input type="text" name="name" value="${product.name}" required>
+			<input type="text" name="price" value="${product.price}" required>
+			<input type="text" name="photoUrl" value="${product.photoUrl}" required>
+			<textarea rows="4" cols="50" name="description">${product.description}</textarea>
+			<input type="reset" value="reset">
+			<input type="submit" value="submit">
+			
+			<%@include file="EditProduct.jsp" %>
+			
+      <!-- <div class="modal-footer"> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Save changes</button></form>
+      </div>
+      <!-- </div> -->
+    </div>
+  </div>
+</div> --%>
 
 		<!-- Footer -->
 		<footer>
@@ -202,7 +218,7 @@
 	<script src="js/bootstrap.min.js"></script>
 
 
-	<%-- <!-- Update Company Button -->
+	<%-- Update Company Button
 <form action="UpdateCompanyMenu.do" method="POST">
 <input type="hidden" name="id" value="${company.id}">
 <input type="submit" value="Edit Company">
