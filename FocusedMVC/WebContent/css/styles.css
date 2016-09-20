@@ -21,6 +21,11 @@ body {
 	font-weight: bold;
 }
 
+.img-responsive {
+	height: 300px;
+	weight: 225px;
+}
+
 
 /* div.transbox {
   margin: 25px;
