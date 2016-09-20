@@ -95,7 +95,7 @@
 		<!-- Intro Content -->
 		<div class="row">
 			<div class="col-md-6">
-				<img class="img-responsive" src="img/blank-profile.png"
+				<img class="img-responsive" src="${company.photoUrl}"
 					alt="${company.name}">
 			</div>
 			<div class="col-md-6">
@@ -114,7 +114,7 @@
 			<c:forEach var="product" items="${company.products}">
 				<div class="col-md-4 text-center">
 					<div class="thumbnail">
-						<img class="img-responsive" src="img/blank-profile.png"
+						<img class="img-responsive" src="${product.photoUrl}"
 							alt="<c:out value="${product.name}"/>">
 						<div class="caption">
 							<h3>
