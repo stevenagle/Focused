@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -171,7 +172,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	@Override
 	public List<Product> getUnratedProducts(int reviewerId) {
 		String queryString = "SELECT DISTINCT p FROM Product p";
-		List<Product> tempProducts = em.createQuery(queryString, Product.class).setMaxResults(4).getResultList();
+		List<Product> tempProducts = em.createQuery(queryString, Product.class).setMaxResults(5).getResultList();
 		List<Product> products = new ArrayList<>(tempProducts);
 
 		for (Product product : tempProducts) {
@@ -186,28 +187,17 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		return products;
 	}
 	
-//	@Override
-//	public Set<Product> getRatedProducts(int reviewerId) {
-//		String queryString = "SELECT DISTINCT p FROM Product p";
-//		List<Product> tempProducts = em.createQuery(queryString, Product.class).setMaxResults(4).getResultList();
-//		List<Product> products = new ArrayList<>(tempProducts);
-//		Set<Product> ratedProducts = new Set();
-//
-//		for (Product product : tempProducts) {
-//			for (Feature feature : product.getFeatures()) {
-//				for (FeatureReview fr : feature.getFeatureReviews()) {
-//					if (fr.getReviewer().getId() == reviewerId) {
-//					if (product.getId())
-//					(ratedProducts.add(product);
-//					}
-//				}
-//			}
-//		}
-//		for (Product product : ratedProducts) {
-//			System.out.println(product.getName());
-//		}
-//		return ratedProducts;
-//	}
+	@Override
+
+	public List<Product> getRatedProducts(int reviewerId) {
+		System.out.println("GETTING RATED PRODUCTS");
+		String queryString = "SELECT DISTINCT p FROM Product p JOIN p.features f JOIN f.featureReviews fr WHERE fr.reviewer.id = ?1";
+		List<Product> products = em.createQuery(queryString, Product.class).setParameter(1, reviewerId).setMaxResults(4).getResultList();
+		for (Product product : products) {
+			System.out.println(product.getName());
+		}
+		return products;
+	}
 
 	// Product Methods
 	@Override

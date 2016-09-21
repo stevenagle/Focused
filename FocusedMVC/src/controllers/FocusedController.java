@@ -121,6 +121,14 @@ public class FocusedController {
 		mv.addObject("reviewer", dao.getReviewerById(reviewerId));
 		return mv;
 	}
+	
+	@RequestMapping(path = "SingleProductReview.do", method = RequestMethod.POST)
+	public ModelAndView singleProductReview(int productId) {
+		Product product = dao.getProductById(productId);
+		ModelAndView mv = new ModelAndView("ReviewProduct.jsp");
+		mv.addObject("product", product);
+		return mv;
+	}
 
 	@RequestMapping(path = "ExistingLogin.do", method = RequestMethod.POST)
 	public ModelAndView logInReviewer(String username, String password, @ModelAttribute("reviewer") Reviewer reviewer,
@@ -134,7 +142,7 @@ public class FocusedController {
 			mv.addObject("reviewer", dao.getReviewerById(match.getId()));
 			mv.addObject("authenticated", true);
 			mv.addObject("unratedProducts", dao.getUnratedProducts(match.getId()));
-			//mv.addObject("ratedProducts", dao.getRatedProducts(match.getId()));
+			mv.addObject("ratedProducts", dao.getRatedProducts(match.getId()));
 			return mv;
 		} else {
 			return new ModelAndView("ReviewerLoginWrongPass.html");
