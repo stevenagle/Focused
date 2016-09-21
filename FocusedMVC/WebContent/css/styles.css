@@ -23,7 +23,7 @@ body {
 
 .img-responsive {
 	height: 300px;
-	width: 225px;
+	width: auto;
 }
 
 .revprodlist>form>input {

@@ -24,6 +24,9 @@
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 
+<!-- Nav bar style -->	
+<link href="css/shoppingnav.css" rel="stylesheet" type="text/css">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -53,8 +56,7 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="reviewer.jsp"><img
-							class="img-responsive img-circle" src="img/user-img.jpeg"></a></li>
+					
 					<li><a href="reviewer.jsp">${reviewer.username }</a></li>
 					<li><a href="services.html">Services</a></li>
 					<li><a href="about.html">About Us</a></li>

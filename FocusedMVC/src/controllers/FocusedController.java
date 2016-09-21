@@ -235,27 +235,23 @@ public class FocusedController {
 	@RequestMapping(path = "reviewProduct.do", method = RequestMethod.POST)
 	public ModelAndView reviewProduct(/*@RequestParam("featureId") int[] featureIds,
 			@RequestParam("rating") int[] ratings, */int reviewerId, String[] features, HttpServletRequest request) {
-		System.out.println("in reviewProduct");
+//		System.out.println("in reviewProduct");
 		//int rateCount = 0;
 		for (String id : features) {
 			//for (String id : request.getParameterValues("features")) {
-			System.out.println(id);
-			System.out.println(request.getParameter("rating-" + id));
+//			System.out.println(id);
+//			System.out.println(request.getParameter("rating-" + id));
 			
 			int radioButtonSelection = Integer.parseInt(request.getParameter("rating-" + id));
 			int intId = Integer.parseInt(id);
 			dao.reviewProduct(intId, reviewerId, radioButtonSelection);
-			System.out.println("radio button selection" + radioButtonSelection);
+//			System.out.println("radio button selection" + radioButtonSelection);
 		}
 		ModelAndView mv = new ModelAndView("reviewer.jsp");
 		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewerId));
 		mv.addObject("ratedProducts", dao.getRatedProducts(reviewerId));
 		mv.addObject("reviewer", dao.getReviewerById(reviewerId));
 		return mv;	
-		
-		
-		//System.out.println("After making all reviews");
-		//return new ModelAndView("reviewer.jsp", "reviewer", dao.getReviewerById(reviewerId));
 	}
 
 	// Rewards Methods
@@ -307,6 +303,17 @@ public class FocusedController {
 		mv.addObject("cartsize", cart.size());
 		mv.addObject("lastItem", reward.getName());
 		mv.addObject("rewards", dao.getRewards());
+		return mv;
+	}
+	
+	@RequestMapping(path = "LoadRevProfile.do", method = RequestMethod.POST)
+	public ModelAndView loadRevProfile(@ModelAttribute("reviewer")Reviewer reviewer,
+										@ModelAttribute("cart") List<Reward> cart) {
+		ModelAndView mv = new ModelAndView("reviewer.jsp");
+		mv.addObject("reviewer", reviewer);
+		mv.addObject("cart", cart);
+		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewer.getId()));
+		mv.addObject("ratedProducts", dao.getRatedProducts(reviewer.getId()));
 		return mv;
 	}
 }

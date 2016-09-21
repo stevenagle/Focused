@@ -116,85 +116,24 @@
 							</span></div>
                         
                         </c:forEach><hr>
-                        	<input type="hidden" name="reviewerId" value="${reviewer.id}">
-							<input type="submit" value="submit">
+                      <p>  	<input type="hidden" name="reviewerId" value="${reviewer.id}">
+							<button type="submit" class="btn btn-primary" value="submit">Submit</button>
 					</form>
+					<form action="LoadRevProfile.do" method="POST">
+					<input type="hidden" name="reviewerId" value="${reviewer.id}">
+					<button type="submit" class="btn btn-primary" value="submit">Return to Profile</button>
+					</form></p>
                         	</li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-4">
             	<div class="panel panel-default text-center">
-            		<p><img src="${product.photoUrl}"></p>
+            		<img class="img-responsive" src="${product.photoUrl}">
             	</div>
             </div>
         </div>
         <!-- /.row -->
-   
-        
-<!-- <fieldset>
-    <span class="star-cb-group">
-      <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
-      <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
-      <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
-      <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
-      <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
-      <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
-    </span>
-</fieldset> -->
 
-        <hr>
-Product:<br>
-
-${product.name}<br>
-${product.price}<br>
-${product.description}<br>
-${product.photoUrl}<br>
-
-Features:<br>
-<c:forEach var="feature" items="${product.features}">
-${feature.details}<br>
-</c:forEach>
-
-        
-
-	<%-- <table>
-		<th>Products:</th>
-		<form action="reviewProduct.do" method="POST">
-			<c:forEach var="product" items="${products}">
-				<tr width="2px">
-					<td><c:out value="${product.name}" /> <c:forEach var="feature"
-							items="${product.features}">
-							<br>
-							<c:out value="${feature.details}" />
-							<input type="hidden" name="featureIds" value="${feature.id}">
-							<input type="text" name="rating" value="5" size="1">
-							<!--        <select>
-                 <option disabled selected name="rating" value="-">-</option>
-                 <option name="rating" value="1">1</option>
-                  <option name="rating" value="2">2</option>
-                  <option name="rating" value="3">3</option>
-                  <option name="rating" value="4">4</option>
-                  <option name="rating" value="5">5</option>
-             </select> -->
-						</c:forEach></td>
-				</tr>
-			</c:forEach>
-	</table> --%>
-	<%-- <input type="hidden" name="reviewerId" value="${reviewer.id}">
-	<input type="submit" value="submit">
-	</form>
-
-	</form> --%>
-	
-	<!-- <script>
-	var logID = 'log',
-	  log = $('<div id="'+logID+'"></div>');
-	$('body').append(log);
-	  $('[type*="radio"]').change(function () {
-	    var me = $(this);
-	    log.html(me.attr('value'));
-	  });
-	</script> -->
 </body>
 </html>
