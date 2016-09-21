@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `focuseddb`.`reviewer` (
   `age` INT NULL,
   `gender` VARCHAR(45) NULL,
   `photo_url` VARCHAR(500) NULL,
+  `points` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -131,6 +132,47 @@ CREATE TABLE IF NOT EXISTS `focuseddb`.`focus_details` (
     REFERENCES `focuseddb`.`product` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `focuseddb`.`reward`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `focuseddb`.`reward` ;
+
+CREATE TABLE IF NOT EXISTS `focuseddb`.`reward` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `cost` VARCHAR(45) NULL,
+  `photo_url` VARCHAR(500) NULL,
+  `description` VARCHAR(500) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `focuseddb`.`reviewer_reward`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `focuseddb`.`reviewer_reward` ;
+
+CREATE TABLE IF NOT EXISTS `focuseddb`.`reviewer_reward` (
+  `id` INT NOT NULL,
+  `reviewer_id` INT NULL,
+  `reward_id` INT NULL,
+  `date` DATE NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_reviewer_reviewer_reward_reviewer_id_idx` (`reviewer_id` ASC),
+  INDEX `fk_reviewer_reward_reward_reward_id_idx` (`reward_id` ASC),
+  CONSTRAINT `fk_reviewer_reviewer_reward_reviewer_id`
+    FOREIGN KEY (`reviewer_id`)
+    REFERENCES `focuseddb`.`reviewer` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reviewer_reward_reward_reward_id`
+    FOREIGN KEY (`reward_id`)
+    REFERENCES `focuseddb`.`reward` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -239,11 +281,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `focuseddb`;
-INSERT INTO `focuseddb`.`reviewer` (`id`, `username`, `password`, `age`, `gender`, `photo_url`) VALUES (1, 'user1', 'user1', 51, 'M', 'http://www.thewrap.com/wp-content/uploads/2013/10/Walter-White-funeral.jpg');
-INSERT INTO `focuseddb`.`reviewer` (`id`, `username`, `password`, `age`, `gender`, `photo_url`) VALUES (2, 'user2', 'user2', 30, 'M', 'http://skilldistillery.com/wp-content/uploads/2016/01/IMG_4471-500x310.jpg');
-INSERT INTO `focuseddb`.`reviewer` (`id`, `username`, `password`, `age`, `gender`, `photo_url`) VALUES (3, 'user3', 'user3', 21, 'F', 'http://www.billboard.com/files/styles/article_main_image/public/media/lady-gaga-golden-globes-bw-2016-billboard-650.jpg');
-INSERT INTO `focuseddb`.`reviewer` (`id`, `username`, `password`, `age`, `gender`, `photo_url`) VALUES (4, 'user4', 'user4', 45, 'M', 'http://a.abcnews.com/images/International/GTY_el_chapo_guzman_jt_150712_4x3_992.jpg');
-INSERT INTO `focuseddb`.`reviewer` (`id`, `username`, `password`, `age`, `gender`, `photo_url`) VALUES (5, 'user5', 'user5', 30, 'F', 'http://img.wennermedia.com/article-leads-vertical-300/1251312975_kim_kardashian_290x402.jpg');
+INSERT INTO `focuseddb`.`reviewer` (`id`, `username`, `password`, `age`, `gender`, `photo_url`, `points`) VALUES (1, 'user1', 'user1', 51, 'M', 'http://www.thewrap.com/wp-content/uploads/2013/10/Walter-White-funeral.jpg', 100);
+INSERT INTO `focuseddb`.`reviewer` (`id`, `username`, `password`, `age`, `gender`, `photo_url`, `points`) VALUES (2, 'user2', 'user2', 30, 'M', 'http://skilldistillery.com/wp-content/uploads/2016/01/IMG_4471-500x310.jpg', 120);
+INSERT INTO `focuseddb`.`reviewer` (`id`, `username`, `password`, `age`, `gender`, `photo_url`, `points`) VALUES (3, 'user3', 'user3', 21, 'F', 'http://www.billboard.com/files/styles/article_main_image/public/media/lady-gaga-golden-globes-bw-2016-billboard-650.jpg', 0);
+INSERT INTO `focuseddb`.`reviewer` (`id`, `username`, `password`, `age`, `gender`, `photo_url`, `points`) VALUES (4, 'user4', 'user4', 45, 'M', 'http://a.abcnews.com/images/International/GTY_el_chapo_guzman_jt_150712_4x3_992.jpg', 200);
+INSERT INTO `focuseddb`.`reviewer` (`id`, `username`, `password`, `age`, `gender`, `photo_url`, `points`) VALUES (5, 'user5', 'user5', 30, 'F', 'http://img.wennermedia.com/article-leads-vertical-300/1251312975_kim_kardashian_290x402.jpg', 110);
 
 COMMIT;
 
@@ -253,26 +295,24 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `focuseddb`;
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (1, 1, 1, 5, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (2, 1, 2, 3, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (3, 2, 3, 1, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (4, 2, 4, 3, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (5, 3, 4, 3, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (6, 3, 5, 3, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (7, 4, 8, 4, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (8, 4, 9, 2, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (9, 5, 12, 3, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (10, 5, 10, 5, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (11, 1, 13, 5, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (12, 1, 12, 2, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (13, 2, 12, 5, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (14, 2, 15, 2, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (15, 3, 16, 1, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (16, 3, 17, 5, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (17, 4, 18, 3, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (18, 4, 19, 5, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (19, 5, 20, 3, NULL);
-INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (20, 5, 21, 1, NULL);
+INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (DEFAULT, 1, 1, 5, 'Awesome');
+INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (DEFAULT, 1, 2, 3, 'Sick');
+INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (DEFAULT, 2, 3, 1, 'Terrible');
+INSERT INTO `focuseddb`.`feature_review` (`id`, `user_id`, `feature_id`, `rating`, `comment`) VALUES (DEFAULT, 2, 4, 3, 'OK');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `focuseddb`.`reward`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `focuseddb`;
+INSERT INTO `focuseddb`.`reward` (`id`, `name`, `cost`, `photo_url`, `description`) VALUES (1, '$5 Amazon Giftcard', '100', 'http://3.bp.blogspot.com/-kE3BAwYHsLI/VF8_9g190yI/AAAAAAAACzk/cg5prAMIHoQ/s1600/amazon-5-card.png', 'Mediocrity realized.');
+INSERT INTO `focuseddb`.`reward` (`id`, `name`, `cost`, `photo_url`, `description`) VALUES (2, 'Pinata', '500', 'https://ui3.assets-asda.com/g/v5/172/759/5054070172759_280_IDShot_3.jpeg', 'Beat with a stick. Enjoy.');
+INSERT INTO `focuseddb`.`reward` (`id`, `name`, `cost`, `photo_url`, `description`) VALUES (3, 'Fancy wagon', '800', 'http://cdn.grid.fotosearch.com/CSP/CSP215/k2155880.jpg', 'New handle, remodeled spokes.');
+INSERT INTO `focuseddb`.`reward` (`id`, `name`, `cost`, `photo_url`, `description`) VALUES (4, 'Unicycle', '1000', 'http://www.bikes2udirect.com/bikes_html/images/items/B3832.jpg', 'Why have two when you only need one.');
+INSERT INTO `focuseddb`.`reward` (`id`, `name`, `cost`, `photo_url`, `description`) VALUES (5, 'Live horse', '10000', 'http://67.media.tumblr.com/tumblr_mcq32qhjbj1qcdhbuo1_500.jpg', 'One living horse. Shipping not included.');
 
 COMMIT;
 
