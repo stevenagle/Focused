@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +56,8 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="reviewer.jsp"><img class="img-responsive img-circle" src="img/user-img.jpeg"></a></li>
+					<li><a href="reviewer.jsp"><img
+							class="img-responsive img-circle" src="img/user-img.jpeg"></a></li>
 					<li><a href="reviewer.jsp">${reviewer.username }</a></li>
 					<li><a href="services.html">Services</a></li>
 					<li><a href="about.html">About Us</a></li>
@@ -72,8 +73,13 @@
 		<!-- Page Heading/Breadcrumbs -->
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Rewards<h1>
-						<small>Your points:</small> ${sessionScope.reviewer.points} <button class="btn btn-primary fa fa-shopping-cart"> <span class="badge">${cart.size}</span></button>
+				<h1 class="page-header">
+					Rewards
+					<h1>
+						<small>Your points:</small> ${sessionScope.reviewer.points}
+						<button class="btn btn-primary fa fa-shopping-cart">
+							<span class="badge">${cartsize}</span>
+						</button>
 					</h1>
 				</h1>
 				<ol class="breadcrumb">
@@ -85,26 +91,33 @@
 
 
 		<!-- Project One -->
-	<c:forEach var="reward" items="${rewards}">
-		<div class="row">
-			<div class="col-md-7">
-				<img class="img-responsive" src="${reward.photoUrl}" alt="${reward.name}">
+		<c:forEach var="reward" items="${rewards}">
+			<div class="row">
+				<div class="col-md-7">
+					<img class="img-responsive" src="${reward.photoUrl}"
+						alt="${reward.name}">
+				</div>
+				<div class="col-md-5">
+					<h3>${reward.name}</h3>
+					<h4>Cost: $${reward.cost}</h4>
+					<p>${reward.description}</p>
+					<form action="addToCart.do" method="POST">
+						<input type="hidden" name="rewardId" value="${reward.id}" /> 
+						<button type="submit" class="btn btn-primary">Add to Cart</button>
+					</form>
+				</div>
 			</div>
-			<div class="col-md-5">
-				<h3>${reward.name}</h3>
-				<h4>Cost: $${reward.cost}</h4>
-				<p>${reward.description}</p>
-				<button type="button" class="btn btn-primary" href="portfolio-item.html">Add to Cart</button>
-			</div>
-		</div>
-		<!-- /.row -->
+			<!-- /.row -->
 
+			<hr>
+		</c:forEach>
+
+		<form action="showCart.do" method="POST">
+			<input type="submit" value="View Cart" />
+		</form>
 		<hr>
-	</c:forEach>
-
-
-		<hr>
-
+		
+		
 		<!-- Footer -->
 		<footer>
 			<div class="row">
