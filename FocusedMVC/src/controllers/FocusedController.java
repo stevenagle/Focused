@@ -141,7 +141,7 @@ public class FocusedController {
 			mv.addObject("reviewer", dao.getReviewerById(match.getId()));
 			mv.addObject("authenticated", true);
 			mv.addObject("unratedProducts", dao.getUnratedProducts(match.getId()));
-			//mv.addObject("ratedProducts", dao.getRatedProducts(match.getId()));
+			mv.addObject("ratedProducts", dao.getRatedProducts(match.getId()));
 			return mv;
 		} else {
 			return new ModelAndView("ReviewerLoginWrongPass.html");
@@ -245,8 +245,12 @@ public class FocusedController {
 
 	// Rewards Methods
 	@RequestMapping(path = "RewardsList.do", method = RequestMethod.POST)
-	public ModelAndView rewardsList(@ModelAttribute("reviewer") Reviewer reviewer) {
-		return new ModelAndView("rewards.jsp", "rewards", dao.getRewards());
+	public ModelAndView rewardsList(@ModelAttribute("reviewer") Reviewer reviewer,
+									@ModelAttribute("cart") List<Reward> cart) {
+		ModelAndView mv = new ModelAndView("rewards.jsp");
+		mv.addObject("rewards", dao.getRewards());
+		mv.addObject("cartsize", cart.size());
+		return mv;
 	}
 
 	@RequestMapping(path = "showCart.do", method = RequestMethod.POST)

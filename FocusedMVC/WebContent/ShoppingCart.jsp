@@ -16,7 +16,7 @@
 	
 	<form action="removeFromCart.do" method="POST">
 		<input type="hidden" name="rewardId" value="${item.id}"/>
-		<input type="submit" value="submit"/>
+		<input type="submit" value="Remove"/>
 	</form>
 	
 </c:forEach>
