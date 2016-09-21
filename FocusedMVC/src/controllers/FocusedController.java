@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,43 +20,47 @@ import data.ReviewData;
 import entities.Company;
 import entities.Product;
 import entities.Reviewer;
+import entities.Reward;
 
 @Controller
-@SessionAttributes({"reviewer","authenticated"}) //,"cart"
+@SessionAttributes({ "reviewer", "authenticated", "cart" })
 public class FocusedController {
 
 	@Autowired
 	private FocusedDbDao dao;
-	
+
 	// Session Attributes
 	@ModelAttribute("reviewer")
 	public Reviewer initReviewer() {
 		return new Reviewer();
 	}
+
 	@ModelAttribute("authenticated")
 	public boolean authenticated() {
 		return false;
 	}
-//	@ModelAttribute("cart")
-//	public List<RewardItem> initUserName() {
-//		return "";
-//	}
-	
+
+	@ModelAttribute("cart")
+	public List<Reward> initCart() {
+		return new ArrayList<>();
+	}
 
 	// Company methods
 	@RequestMapping(path = "CreateCompany.do", method = RequestMethod.POST)
-	public ModelAndView createCompany(String name, String username, String password, String description, String photoUrl) {
+	public ModelAndView createCompany(String name, String username, String password, String description,
+			String photoUrl) {
 		if (dao.isDuplicateCompany(username)) {
 			return new ModelAndView("DuplicateCompany.html");
 		}
-		
+
 		Company c = dao.createCompany(name, username, password, description, photoUrl);
-		return new ModelAndView("company.jsp", "company", c);	
+		return new ModelAndView("company.jsp", "company", c);
 
 	}
 
 	@RequestMapping(path = "UpdateCompany.do", method = RequestMethod.POST)
-	public ModelAndView updateCompany(int id, String name, String username, String password, String description, String photoUrl) {
+	public ModelAndView updateCompany(int id, String name, String username, String password, String description,
+			String photoUrl) {
 		Company c = dao.updateCompany(id, name, username, password, description, photoUrl);
 		ModelAndView mv = new ModelAndView("company.jsp");
 		mv.addObject("company", c);
@@ -96,7 +101,8 @@ public class FocusedController {
 	}
 
 	@RequestMapping(path = "UpdateReviewer.do", method = RequestMethod.POST)
-	public ModelAndView updateReviewer(int id, String username, String password, int age, String gender, String photoUrl) {
+	public ModelAndView updateReviewer(int id, String username, String password, int age, String gender,
+			String photoUrl) {
 		Reviewer r = dao.updateReviewer(id, username, password, age, gender, photoUrl);
 		return new ModelAndView("reviewer.jsp", "reviewer", r);
 	}
@@ -117,7 +123,7 @@ public class FocusedController {
 
 	@RequestMapping(path = "ExistingLogin.do", method = RequestMethod.POST)
 	public ModelAndView logInReviewer(String username, String password, @ModelAttribute("reviewer") Reviewer reviewer,
-									  @ModelAttribute("authenticated") boolean auth) {
+			@ModelAttribute("authenticated") boolean auth) {
 		Reviewer match = dao.MatchReviewer(username, password);
 
 		if (match.equals(null)) {
@@ -216,11 +222,10 @@ public class FocusedController {
 		mv.addObject("authenticated", false);
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "reviewProduct.do", method = RequestMethod.POST)
 	public ModelAndView reviewProduct(@RequestParam("featureIds") int[] featureIds,
-									  @RequestParam("rating") int[] ratings,
-									  int reviewerId) {
+			@RequestParam("rating") int[] ratings, int reviewerId) {
 		System.out.println("in reviewProduct");
 		int rateCount = 0;
 		for (int id : featureIds) {
@@ -230,10 +235,46 @@ public class FocusedController {
 		return new ModelAndView("reviewer.jsp", "reviewer", dao.getReviewerById(reviewerId));
 	}
 
-	
 	// Rewards Methods
 	@RequestMapping(path = "RewardsList.do", method = RequestMethod.POST)
 	public ModelAndView rewardsList(@ModelAttribute("reviewer") Reviewer reviewer) {
 		return new ModelAndView("rewards.jsp", "rewards", dao.getRewards());
 	}
+
+	@RequestMapping(path = "showCart.do", method = RequestMethod.POST)
+	public ModelAndView showCart(@ModelAttribute("reviewer") Reviewer reviewer,
+								 @ModelAttribute("cart") List<Reward> cart){
+		ModelAndView mv = new ModelAndView("ShoppingCart.jsp");
+		mv.addObject("total",dao.getRewardTotalCost(cart));
+		mv.addObject("cart", cart);
+		mv.addObject("reviewer", reviewer);
+				return mv;
+	}
+	@RequestMapping(path = "addToCart.do", method = RequestMethod.POST)
+	public ModelAndView addToCart(@ModelAttribute("reviewer") Reviewer reviewer,
+								  @ModelAttribute("cart") List<Reward> cart,
+								  @RequestParam("rewardId") int id){
+		ModelAndView mv = new ModelAndView("rewards.jsp");
+		Reward reward = new Reward();
+		reward = dao.getRewardById(id);
+		cart.add(reward);
+		mv.addObject("cart", cart);
+		mv.addObject("lastItem", reward.getName());
+		mv.addObject("rewards", dao.getRewards());
+		return mv;
+	}
+	
+	@RequestMapping(path = "removeFromCart.do", method = RequestMethod.POST)
+	public ModelAndView removeFromCart(@ModelAttribute("reviewer") Reviewer reviewer,
+			@ModelAttribute("cart") List<Reward> cart,
+			@RequestParam("rewardId") int id){
+		ModelAndView mv = new ModelAndView("ShoppingCart.jsp");
+		Reward reward = dao.getRewardById(id);
+		dao.removeItemfromCart(cart, reward);
+		mv.addObject("cart", cart);
+		mv.addObject("lastItem", reward.getName());
+		mv.addObject("rewards", dao.getRewards());
+		return mv;
+	}
 }
+

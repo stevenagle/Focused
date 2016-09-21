@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:if test="${lastItem != null}">
+<h2> ${lastItem} added to cart; </h2>
+</c:if>
 You have ${sessionScope.reviewer.points} points.
 
 <c:forEach var="reward" items="${rewards}">
@@ -15,6 +18,15 @@ You have ${sessionScope.reviewer.points} points.
 	<c:out value="${reward.cost}"/> 
 	<c:out value="${reward.description}"/>
 	<img src="${reward.photoUrl}"></img>
+	<form action="addToCart.do" method="POST">
+		<input type="hidden" name="rewardId" value="${reward.id}"/>
+		<input type="submit" value="submit"/>
+	</form>
 </c:forEach>
+
+<form action="showCart.do" method="POST">
+<input type="submit" value="submit"/>
+
+</form>
 </body>
 </html>

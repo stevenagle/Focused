@@ -385,5 +385,33 @@ public class FocusedDaoImpl implements FocusedDbDao {
 
 		return rewards;
 	}
+
+	@Override
+	public Reward getRewardById(int rewardId) {
+		System.out.println("fetching reward");
+		return em.find(Reward.class, rewardId);
+		
+	}
+
+	@Override
+	public int getRewardTotalCost(List<Reward> rewards) {
+		int total = 0;
+		for (Reward reward : rewards) {
+			total += Integer.parseInt(reward.getCost());
+		}
+		return total;
+	}
+	
+	@Override
+	public List<Reward> removeItemfromCart(List<Reward> rewards, Reward reward) {
+		int id = reward.getId();
+		for (Reward r : rewards) {
+			if (r.getId() == id) {
+				rewards.remove(r);
+				break;
+			}
+		}
+		return rewards;
+	}
 	
 }
