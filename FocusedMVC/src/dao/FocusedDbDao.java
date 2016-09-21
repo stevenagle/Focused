@@ -46,5 +46,8 @@ public interface FocusedDbDao {
 	
 	// Reward methods
 	List<Reward> getRewards();
+	Reward getRewardById(int rewardId);
+	int getRewardTotalCost(List<Reward> rewards);
+	List<Reward> removeItemfromCart(List<Reward> rewards, Reward reward);
 	
 }
