@@ -16,6 +16,9 @@
 <!-- Custom Fonts -->
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
+	
+<!-- <link href="css/starstyles.css" rel="stylesheet" type="text/css"> -->
+
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,7 +64,7 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Rate Products
+                <h1 class="page-header">Rate Product: ${product.name}
                     <small>${reviewer.username}</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -78,32 +81,84 @@
             <div class="col-md-4">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Basic</h3>
+                        <h3 class="panel-title">${product.name}</h3>
                     </div>
                     <div class="panel-body">
-                        <span class="price"><sup>$</sup>19<sup>99</sup></span>
-                        <span class="period">per month</span>
+                    	<p>${product.description}</p>
+                    </div>
+                    <div class="panel-body">
+                        <span class="price"><sup>$</sup>${product.price}<sup></sup></span>
+                        <span class="period">price</span>
                     </div>
                     <ul class="list-group">
-                        <li class="list-group-item"><strong>1</strong> User</li>
-                        <li class="list-group-item"><strong>5</strong> Projects</li>
-                        <li class="list-group-item"><strong>Unlimited</strong> Email Accounts</li>
-                        <li class="list-group-item"><strong>10GB</strong> Disk Space</li>
-                        <li class="list-group-item"><strong>100GB</strong> Monthly Bandwidth</li>
-                        <li class="list-group-item"><a href="#" class="btn btn-primary">Sign Up!</a>
-                        </li>
+                    <form action="reviewProduct.do" method="POST">
+                        <c:forEach var="feature" items="${product.features}">
+                        <input type="hidden" name="features" value="${feature.id}"/>
+                        	<span>
+                        	<li class="list-group-item"><strong>Feature:  </strong>${feature.details} | ${feature.id}</li>
+                        		
+                        		<div name="ratings-${feature.id}"><span class="ratings">
+    <input type="radio" class="rating"
+        id="rating-input-1-5" name="rating-${feature.id}" value="1">
+    <label for="rating-input-1-5" class="rating">1</label>
+    <input type="radio" class="rating"
+        id="rating-input-1-4" name="rating-${feature.id}" value="2">
+    <label for="rating-input-1-4" class="rating">2</label>
+    <input type="radio" class="rating"
+        id="rating-input-1-3" name="rating-${feature.id}" value="3">
+    <label for="rating-input-1-3" class="rating">3</label>
+    <input type="radio" class="rating"
+        id="rating-input-1-2" name="rating-${feature.id}" value="4">
+    <label for="rating-input-1-2" class="rating">4</label>
+    <input type="radio" class="rating"
+        id="rating-input-1-1" name="rating-${feature.id}" value="5">
+    <label for="rating-input-1-1" class="rating">5</label>
+							</span></div>
+                        
+                        </c:forEach><hr>
+                        	<input type="hidden" name="reviewerId" value="${reviewer.id}">
+							<input type="submit" value="submit">
+					</form>
+                        	</li>
                     </ul>
                 </div>
             </div>
-            
+            <div class="col-md-4">
+            	<div class="panel panel-default text-center">
+            		<p><img src="${product.photoUrl}"></p>
+            	</div>
+            </div>
         </div>
         <!-- /.row -->
+   
+        
+<!-- <fieldset>
+    <span class="star-cb-group">
+      <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+      <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
+      <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
+      <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
+      <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+      <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
+    </span>
+</fieldset> -->
 
         <hr>
+Product:<br>
+
+${product.name}<br>
+${product.price}<br>
+${product.description}<br>
+${product.photoUrl}<br>
+
+Features:<br>
+<c:forEach var="feature" items="${product.features}">
+${feature.details}<br>
+</c:forEach>
 
         
 
-	<table>
+	<%-- <table>
 		<th>Products:</th>
 		<form action="reviewProduct.do" method="POST">
 			<c:forEach var="product" items="${products}">
@@ -125,11 +180,21 @@
 						</c:forEach></td>
 				</tr>
 			</c:forEach>
-	</table>
-	<input type="hidden" name="reviewerId" value="${reviewer.id}">
+	</table> --%>
+	<%-- <input type="hidden" name="reviewerId" value="${reviewer.id}">
 	<input type="submit" value="submit">
 	</form>
 
-	</form>
+	</form> --%>
+	
+	<!-- <script>
+	var logID = 'log',
+	  log = $('<div id="'+logID+'"></div>');
+	$('body').append(log);
+	  $('[type*="radio"]').change(function () {
+	    var me = $(this);
+	    log.html(me.attr('value'));
+	  });
+	</script> -->
 </body>
 </html>

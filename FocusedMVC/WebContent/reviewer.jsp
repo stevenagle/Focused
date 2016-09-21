@@ -161,7 +161,7 @@ Authenticated?: ${sessionScope.authenticated}<br>
             <div class="col-sm-3 col-xs-6">
                 <div class="revprodlist">
                 	<form action="SingleProductReview.do" method="POST">
-                	<input type="hidden" name="reviewerId" value="${product.id}">
+                	<input type="hidden" name="productId" value="${product.id}">
                     <input type="image" class="img-responsive" src="${product.photoUrl}" alt="Submit Form" />
                     </form>
                     <%-- <img class="img-responsive img-hover img-related" src="${product.photoUrl}" alt="${product.name}"> --%>

@@ -33,6 +33,32 @@ body {
 
 
 
+/* // extra styles
+:root {
+  font-size: 2em;
+  font-family: Helvetica, arial, sans-serif;
+}
+
+fieldset {
+  border: 0;
+  background: #222;
+  width: 5em;
+  border-radius: 1px;
+  padding: 1em 1.5em 0.9em;
+  margin: 1em auto;
+}
+#log {
+  margin: 1em auto;
+  width: 5em;
+  text-align: center;
+  background: transparent;
+}
+h1 {
+  text-align: center;
+}
+ */
+
+
 
 /* div.transbox {
   margin: 25px;
