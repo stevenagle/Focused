@@ -8,9 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.FocusedDbDao;
@@ -20,10 +22,26 @@ import entities.Product;
 import entities.Reviewer;
 
 @Controller
+@SessionAttributes({"reviewer","authenticated"}) //,"cart"
 public class FocusedController {
 
 	@Autowired
 	private FocusedDbDao dao;
+	
+	// Session Attributes
+	@ModelAttribute("reviewer")
+	public Reviewer initReviewer() {
+		return new Reviewer();
+	}
+	@ModelAttribute("authenticated")
+	public boolean authenticated() {
+		return false;
+	}
+//	@ModelAttribute("cart")
+//	public List<RewardItem> initUserName() {
+//		return "";
+//	}
+	
 
 	// Company methods
 	@RequestMapping(path = "CreateCompany.do", method = RequestMethod.POST)
@@ -90,7 +108,10 @@ public class FocusedController {
 	}
 
 	@RequestMapping(path = "ReviewProductMenu.do", method = RequestMethod.POST)
-	public ModelAndView reviewProductMenu(int reviewerId) {
+	public ModelAndView reviewProductMenu(int reviewerId, @ModelAttribute("authenticated") boolean auth) {
+		if (!auth) {
+			return new ModelAndView("index.html");
+		}
 		List<Product> products = dao.getUnratedProducts(reviewerId);
 		ModelAndView mv = new ModelAndView("ReviewProduct.jsp");
 		mv.addObject("products", products);
@@ -99,13 +120,17 @@ public class FocusedController {
 	}
 
 	@RequestMapping(path = "ExistingLogin.do", method = RequestMethod.POST)
-	public ModelAndView logInReviewer(String username, String password) {
+	public ModelAndView logInReviewer(String username, String password, @ModelAttribute("reviewer") Reviewer reviewer,
+									  @ModelAttribute("authenticated") boolean auth) {
 		Reviewer match = dao.MatchReviewer(username, password);
 
 		if (match.equals(null)) {
 			return new ModelAndView("ReviewerLoginWrongPass.html");
 		} else if (match.getPassword().equals(password)) {
-			return new ModelAndView("reviewer.jsp", "reviewer", dao.getReviewerById(match.getId()));
+			ModelAndView mv = new ModelAndView("reviewer.jsp");
+			mv.addObject("reviewer", dao.getReviewerById(match.getId()));
+			mv.addObject("authenticated", true);
+			return mv;
 		} else {
 			return new ModelAndView("ReviewerLoginWrongPass.html");
 		}
@@ -186,10 +211,12 @@ public class FocusedController {
 	}
 
 	@RequestMapping(path = "Logout.do", method = RequestMethod.GET)
-	public ModelAndView logout(HttpServletRequest request) {
+	public ModelAndView logout(HttpServletRequest request, @ModelAttribute("authenticated") boolean auth) {
 		HttpSession httpSession = request.getSession();
 		httpSession.invalidate();
-		return new ModelAndView("logout.html");
+		ModelAndView mv = new ModelAndView("logout.html");
+		mv.addObject("authenticated", false);
+		return mv;
 	}
 	
 	@RequestMapping(path = "reviewProduct.do", method = RequestMethod.POST)
@@ -205,5 +232,11 @@ public class FocusedController {
 		return new ModelAndView("reviewer.jsp", "reviewer", dao.getReviewerById(reviewerId));
 	}
 
-
+	
+	// Rewards Methods
+	@RequestMapping(path = "RewardsList.do", method = RequestMethod.POST)
+	public ModelAndView rewardsList(int id) {
+		System.out.println("ProductFeaturesMenu & id equals " + id);
+		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(id));
+	}
 }
