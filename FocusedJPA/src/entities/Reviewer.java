@@ -25,7 +25,10 @@ public class Reviewer {
 	private String photoUrl;
 	@Column(name = "points")
 	private int points;
-
+	
+	@OneToMany(mappedBy = "reviewer")
+	private Set<ReviewerReward> reviewerRewards;
+	
 	@OneToMany(mappedBy = "reviewer", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Set<FeatureReview> featureReviews;
 
@@ -108,6 +111,28 @@ public class Reviewer {
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public Set<ReviewerReward> getReviewerRewards() {
+		return reviewerRewards;
+	}
+
+	public void setReviewerRewards(Set<ReviewerReward> reviewerRewards) {
+		this.reviewerRewards = reviewerRewards;
+	}
+
+	public ReviewerReward addReviewerReward(ReviewerReward reviewerReward) {
+		getReviewerRewards().add(reviewerReward);
+		reviewerReward.setReviewer(this);
+
+		return reviewerReward;
+	}
+
+	public ReviewerReward removeReviewerReward(ReviewerReward reviewerReward) {
+		getReviewerRewards().remove(reviewerReward);
+		reviewerReward.setReviewer(null);
+
+		return reviewerReward;
 	}
 
 	@Override

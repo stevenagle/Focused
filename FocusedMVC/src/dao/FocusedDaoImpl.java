@@ -15,6 +15,7 @@ import entities.Feature;
 import entities.FeatureReview;
 import entities.Product;
 import entities.Reviewer;
+import entities.Reward;
 
 @Transactional
 public class FocusedDaoImpl implements FocusedDbDao {
@@ -352,4 +353,14 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		}
 	}
 
+	// Rewards methods
+	
+	@Override
+	public List<Reward> getRewards() {
+		String queryString = "SELECT r FROM Reward r";
+		List<Reward> rewards = em.createQuery(queryString, Reward.class).getResultList();
+
+		return rewards;
+	}
+	
 }

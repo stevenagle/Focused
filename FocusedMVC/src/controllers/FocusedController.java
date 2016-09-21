@@ -1,6 +1,5 @@
 package controllers;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -235,8 +234,7 @@ public class FocusedController {
 	
 	// Rewards Methods
 	@RequestMapping(path = "RewardsList.do", method = RequestMethod.POST)
-	public ModelAndView rewardsList(int id) {
-		System.out.println("ProductFeaturesMenu & id equals " + id);
-		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(id));
+	public ModelAndView rewardsList(@ModelAttribute("reviewer") Reviewer reviewer) {
+		return new ModelAndView("rewards.jsp", "rewards", dao.getRewards());
 	}
 }

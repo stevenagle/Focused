@@ -7,6 +7,7 @@ import entities.Company;
 import entities.Feature;
 import entities.Product;
 import entities.Reviewer;
+import entities.Reward;
 
 public interface FocusedDbDao {
 
@@ -42,5 +43,8 @@ public interface FocusedDbDao {
 	
 	// ReviewData methods
 	List<ReviewData> getReviewData(int companyId);
+	
+	// Reward methods
+	List<Reward> getRewards();
 	
 }
