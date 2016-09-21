@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Set;
 
 import data.ReviewData;
 import entities.Company;
@@ -50,5 +51,6 @@ public interface FocusedDbDao {
 	Reward getRewardById(int rewardId);
 	int getRewardTotalCost(List<Reward> rewards);
 	List<Reward> removeItemfromCart(List<Reward> rewards, Reward reward);
+	Set<Product> getRatedProducts(int reviewerId);
 	
 }
