@@ -133,7 +133,7 @@ public class FocusedController {
 			mv.addObject("reviewer", dao.getReviewerById(match.getId()));
 			mv.addObject("authenticated", true);
 			mv.addObject("unratedProducts", dao.getUnratedProducts(match.getId()));
-			//mv.addObject("ratedProducts", dao.getRatedProducts(match.getId()));
+			mv.addObject("ratedProducts", dao.getRatedProducts(match.getId()));
 			return mv;
 		} else {
 			return new ModelAndView("ReviewerLoginWrongPass.html");
