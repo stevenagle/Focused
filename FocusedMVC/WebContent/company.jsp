@@ -54,17 +54,6 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<!-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="CompanyLog.html">Company</a>
-                            </li>
-                            <li>
-                                <a href="ReviewerLog.html">Reviewer</a>
-                            </li>
-                        </ul>
-                    </li> -->
 				<li><a href="services.html">Services</a></li>
 				<li><a href="about.html">About Us</a></li>
 				<li><a href="Logout.do">Sign Out</a></li>

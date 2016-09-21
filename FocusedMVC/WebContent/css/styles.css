@@ -23,8 +23,15 @@ body {
 
 .img-responsive {
 	height: 300px;
-	weight: 225px;
+	width: 225px;
 }
+
+.revprodlist>form>input {
+	height: 160px;
+	width: auto; 
+}
+
+
 
 
 /* div.transbox {
