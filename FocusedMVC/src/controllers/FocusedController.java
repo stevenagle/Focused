@@ -104,6 +104,7 @@ public class FocusedController {
 	public ModelAndView updateReviewer(int id, String username, String password, int age, String gender,
 			String photoUrl) {
 		Reviewer r = dao.updateReviewer(id, username, password, age, gender, photoUrl);
+		
 		return new ModelAndView("reviewer.jsp", "reviewer", r);
 	}
 
@@ -262,6 +263,7 @@ public class FocusedController {
 	public ModelAndView rewardsList(@ModelAttribute("reviewer") Reviewer reviewer,
 									@ModelAttribute("cart") List<Reward> cart) {
 		ModelAndView mv = new ModelAndView("rewards.jsp");
+		mv.addObject("total",dao.getRewardTotalCost(cart));
 		mv.addObject("rewards", dao.getRewards());
 		mv.addObject("cartsize", cart.size());
 		return mv;
@@ -274,6 +276,7 @@ public class FocusedController {
 		mv.addObject("total",dao.getRewardTotalCost(cart));
 		mv.addObject("cart", cart);
 		mv.addObject("reviewer", reviewer);
+		mv.addObject("cartsize", cart.size());
 				return mv;
 	}
 	@RequestMapping(path = "addToCart.do", method = RequestMethod.POST)
@@ -285,6 +288,8 @@ public class FocusedController {
 		reward = dao.getRewardById(id);
 		cart.add(reward);
 		mv.addObject("cart", cart);
+		mv.addObject("total",dao.getRewardTotalCost(cart));
+		mv.addObject("cartsize", cart.size());
 		mv.addObject("lastItem", reward.getName());
 		mv.addObject("rewards", dao.getRewards());
 		return mv;
@@ -298,6 +303,8 @@ public class FocusedController {
 		Reward reward = dao.getRewardById(id);
 		dao.removeItemfromCart(cart, reward);
 		mv.addObject("cart", cart);
+		mv.addObject("total",dao.getRewardTotalCost(cart));
+		mv.addObject("cartsize", cart.size());
 		mv.addObject("lastItem", reward.getName());
 		mv.addObject("rewards", dao.getRewards());
 		return mv;

@@ -57,7 +57,6 @@
 	</div>
 	<!-- /.container --> </nav>
 	
-Authenticated?: ${sessionScope.authenticated}<br>
 
 <!-- Page Content -->
 	<div class="container">
@@ -90,15 +89,15 @@ Authenticated?: ${sessionScope.authenticated}<br>
 				<br><p>Reviewer Points: ${sessionScope.reviewer.points}</p>
 				<form action="RewardsList.do" method="POST">
 					<input type="hidden" name="id" value="${sessionScope.reviewer.id}">
-					<button type="submit">Redeem Reviewer Points</button>
+					<button type="submit" class="btn btn-primary">Redeem Reviewer Points</button>
 				</form><br>
 				<form action="UpdateReviewerMenu.do" method="POST">
 					<input type="hidden" name="id" value="${sessionScope.reviewer.id}">
-					<input type="submit" value="Edit Reviewer">
+					<button type="submit" class="btn btn-primary">Edit Reviewer</button>
 				</form><br>
 				<form action="ReviewProductMenu.do" method="POST">
 					<input type="hidden" name="reviewerId" value="${sessionScope.reviewer.id}">
-					<input type="submit" value="Rate More Products">
+					<button type="submit" class="btn btn-primary">Rate More Products</button>
 				</form>
 				
 				

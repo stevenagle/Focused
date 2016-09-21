@@ -77,9 +77,9 @@
 					Rewards
 					<h1>
 						<small>Your points:</small> ${sessionScope.reviewer.points}
-						<button class="btn btn-primary fa fa-shopping-cart">
-							<span class="badge">${cartsize}</span>
-						</button>
+						<form action="showCart.do" method="POST">
+							<button type="submit" class="btn btn-primary fa fa-shopping-cart"><span class="badge">${cartsize}</span></button>
+						</form>
 					</h1>
 				</h1>
 				<ol class="breadcrumb">
@@ -99,11 +99,11 @@
 				</div>
 				<div class="col-md-5">
 					<h3>${reward.name}</h3>
-					<h4>Cost: $${reward.cost}</h4>
+					<h4>Cost: ${reward.cost} points</h4>
 					<p>${reward.description}</p>
 					<form action="addToCart.do" method="POST">
 						<input type="hidden" name="rewardId" value="${reward.id}" /> 
-						<button type="submit" class="btn btn-primary">Add to Cart</button>
+						<a href="#stayItem" name="stayItem" ><button type="submit" class="btn btn-primary">Add to Cart</button></a>
 					</form>
 				</div>
 			</div>
@@ -111,11 +111,13 @@
 
 			<hr>
 		</c:forEach>
-
+		
+		<div class="modal-footer">
 		<form action="showCart.do" method="POST">
-			<input type="submit" value="View Cart" />
+			<button class="btn btn-primary" type="submit">View Cart</button>
 		</form>
 		<hr>
+		</div>
 		
 		
 		<!-- Footer -->
