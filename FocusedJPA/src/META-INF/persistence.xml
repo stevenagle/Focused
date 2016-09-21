@@ -10,6 +10,7 @@
         <class>entities.FocusDetail</class>
         <class>entities.Product</class>
         <class>entities.Reviewer</class>
+        <class>entities.ReviewerReward</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/focuseddb" />
 			<property name="javax.persistence.jdbc.user" value="root" />

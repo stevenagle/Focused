@@ -8,11 +8,12 @@
 <title>Company landing page</title>
 </head>
 <body>
-Username: ${reviewer.username} <br>
-Password: ${reviewer.password} <br>
-Age: ${reviewer.age} <br> 
-Gender: ${reviewer.gender} <br>
-Review Points: ${reviewer.points}<br>
+Username: ${sessionScope.reviewer.username} <br>
+Password: ${sessionScope.reviewer.password} <br>
+Age: ${sessionScope.reviewer.age} <br> 
+Gender: ${sessionScope.reviewer.gender} <br>
+Review Points: ${sessionScope.reviewer.points}<br>
+Authenticated?: ${sessionScope.authenticated}<br>
 
 
 <table>
@@ -20,7 +21,7 @@ Review Points: ${reviewer.points}<br>
 <th>Feature:</th>
 <th>Your rating:</th>
 <th>Details:</th>
-<c:forEach var="review" items="${reviewer.featureReviews}">
+<c:forEach var="review" items="${sessionScope.reviewer.featureReviews}">
     <tr>
     	<td>
     <c:out value="${review.feature.product.name}"/> <br/>
@@ -39,13 +40,18 @@ Review Points: ${reviewer.points}<br>
 </table>
 
 
+<form action="RewardsList.do" method="POST">
+<input type="hidden" name="id" value="${sessionScope.reviewer.id}">
+<input type="submit" value="Redeem Points">
+</form>
+<br><br>
 <form action="UpdateReviewerMenu.do" method="POST">
-<input type="hidden" name="id" value="${reviewer.id}">
+<input type="hidden" name="id" value="${sessionScope.reviewer.id}">
 <input type="submit" value="Edit Reviewer">
 </form>
 <br><br>
 <form action="ReviewProductMenu.do" method="POST">
-<input type="hidden" name="reviewerId" value="${reviewer.id}">
+<input type="hidden" name="reviewerId" value="${sessionScope.reviewer.id}">
 <input type="submit" value="Rate More Products">
 </form>
 <br><br>
