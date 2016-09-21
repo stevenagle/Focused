@@ -126,19 +126,19 @@
 								<li><form action="UpdateProductMenu.do" method="POST">
 										<input type="hidden" name="id"
 											value="<c:out value="${product.id}"/>"> 
-											<input type="submit" value="Edit Product">
+											<button type="submit" class="btn btn-primary">Edit Product</button>
 									</form>
 								</li>
 								<li><form action="ProductFeaturesMenu.do" method="POST">
 										<input type="hidden" name="id"
 											value="<c:out value="${product.id}"/>"> 
-										<input type="submit" value="Edit Features">
+										<button type="submit" class="btn btn-primary">Edit Features</button>
 									</form></li><hr>
 								<li><form action="RemoveProduct.do" method="POST">
 										<input type="hidden" name="id"
 											value="<c:out value="${product.id}"/>"> 
 										<input type="hidden" name="companyId" value="<c:out value="${company.id}"/>">
-										<input type="submit" value="Remove Product">
+										<button type="submit" class="btn btn-primary">Remove Product</button>
 									</form></li>
 							</ul>
 						</div>
