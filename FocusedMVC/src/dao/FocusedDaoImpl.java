@@ -170,8 +170,8 @@ public class FocusedDaoImpl implements FocusedDbDao {
 
 	@Override
 	public List<Product> getUnratedProducts(int reviewerId) {
-		String queryString = "SELECT DISTINCT p FROM Product p ";
-		List<Product> tempProducts = em.createQuery(queryString, Product.class).getResultList();
+		String queryString = "SELECT DISTINCT p FROM Product p";
+		List<Product> tempProducts = em.createQuery(queryString, Product.class).setMaxResults(4).getResultList();
 		List<Product> products = new ArrayList<>(tempProducts);
 
 		for (Product product : tempProducts) {
@@ -185,6 +185,29 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		}
 		return products;
 	}
+	
+//	@Override
+//	public Set<Product> getRatedProducts(int reviewerId) {
+//		String queryString = "SELECT DISTINCT p FROM Product p";
+//		List<Product> tempProducts = em.createQuery(queryString, Product.class).setMaxResults(4).getResultList();
+//		List<Product> products = new ArrayList<>(tempProducts);
+//		Set<Product> ratedProducts = new Set();
+//
+//		for (Product product : tempProducts) {
+//			for (Feature feature : product.getFeatures()) {
+//				for (FeatureReview fr : feature.getFeatureReviews()) {
+//					if (fr.getReviewer().getId() == reviewerId) {
+//					if (product.getId())
+//					(ratedProducts.add(product);
+//					}
+//				}
+//			}
+//		}
+//		for (Product product : ratedProducts) {
+//			System.out.println(product.getName());
+//		}
+//		return ratedProducts;
+//	}
 
 	// Product Methods
 	@Override

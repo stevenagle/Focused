@@ -108,9 +108,6 @@ public class FocusedController {
 
 	@RequestMapping(path = "ReviewProductMenu.do", method = RequestMethod.POST)
 	public ModelAndView reviewProductMenu(int reviewerId, @ModelAttribute("authenticated") boolean auth) {
-		if (!auth) {
-			return new ModelAndView("index.html");
-		}
 		List<Product> products = dao.getUnratedProducts(reviewerId);
 		ModelAndView mv = new ModelAndView("ReviewProduct.jsp");
 		mv.addObject("products", products);
@@ -129,6 +126,8 @@ public class FocusedController {
 			ModelAndView mv = new ModelAndView("reviewer.jsp");
 			mv.addObject("reviewer", dao.getReviewerById(match.getId()));
 			mv.addObject("authenticated", true);
+			mv.addObject("unratedProducts", dao.getUnratedProducts(match.getId()));
+			//mv.addObject("ratedProducts", dao.getRatedProducts(match.getId()));
 			return mv;
 		} else {
 			return new ModelAndView("ReviewerLoginWrongPass.html");

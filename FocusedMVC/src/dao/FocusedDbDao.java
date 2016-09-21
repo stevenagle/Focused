@@ -32,6 +32,7 @@ public interface FocusedDbDao {
 	Product getProductById(int id);
 	Product updateProduct(int id, String name, double price, String photoUrl, String description);
 	void removeProduct(int id);
+	//List<Product> getRatedProducts(int reviewerId);
 	
 	// Feature methods
 	Feature createFeature(int id, String details);
