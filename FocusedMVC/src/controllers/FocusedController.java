@@ -23,7 +23,7 @@ import entities.Reviewer;
 import entities.Reward;
 
 @Controller
-@SessionAttributes({ "reviewer", "authenticated", "cart" })
+@SessionAttributes({ "reviewer", "authenticated", "cart", "company" })
 public class FocusedController {
 
 	@Autowired
@@ -43,6 +43,11 @@ public class FocusedController {
 	@ModelAttribute("cart")
 	public List<Reward> initCart() {
 		return new ArrayList<>();
+	}
+	
+	@ModelAttribute("company")
+	public Company initCompany() {
+		return new Company();
 	}
 
 	// Company methods
@@ -75,12 +80,13 @@ public class FocusedController {
 	}
 
 	@RequestMapping(path = "ExistingLoginCompany.do", method = RequestMethod.POST)
-	public ModelAndView logInCompany(String username, String password) {
+	public ModelAndView logInCompany(String username, String password, @ModelAttribute("company") Company company) {
 		Company match = dao.MatchCompany(username, password);
 
 		if (match.getPassword().equals(password)) {
 			ModelAndView mv = new ModelAndView("company.jsp");
-			mv.addObject("company", dao.getCompanyById(match.getId()));
+			company = dao.getCompanyById(match.getId());
+			mv.addObject("company", company);
 			List<ReviewData> rd = dao.getReviewData(match.getId());
 			mv.addObject("ReviewData", rd);
 			return mv;
@@ -174,8 +180,11 @@ public class FocusedController {
 	}
 
 	@RequestMapping(path = "UpdateProductMenu.do", method = RequestMethod.POST)
-	public ModelAndView updateProductMenu(int id) {
-		return new ModelAndView("EditProduct.jsp", "product", dao.getProductById(id));
+	public ModelAndView updateProductMenu(int id, int companyId) {
+		ModelAndView mv = new ModelAndView("EditProduct.jsp");
+		mv.addObject("company", dao.getCompanyById(companyId));
+		mv.addObject("product", dao.getProductById(id));
+		return mv;
 	}
 
 	@RequestMapping(path = "RemoveProduct.do", method = RequestMethod.POST)
@@ -314,6 +323,16 @@ public class FocusedController {
 		mv.addObject("cart", cart);
 		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewer.getId()));
 		mv.addObject("ratedProducts", dao.getRatedProducts(reviewer.getId()));
+		return mv;
+	}
+	
+	@RequestMapping(path = "LoadCoProfile.do", method = RequestMethod.POST)
+	public ModelAndView loadCoProfile(@ModelAttribute("company") Company company) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("company", company);
+		List<ReviewData> rd = dao.getReviewData(company.getId());
+		mv.addObject("ReviewData", rd);
+		mv.setViewName("company.jsp");
 		return mv;
 	}
 }
