@@ -176,7 +176,7 @@ public class FocusedController {
 	@RequestMapping(path = "UpdateProduct.do", method = RequestMethod.POST)
 	public ModelAndView updateProduct(int id, String name, double price, String photoUrl, String description) {
 		Product p = dao.updateProduct(id, name, price, photoUrl, description);
-		return new ModelAndView("ProductFeaturesMenu.jsp", "product", p);
+		return new ModelAndView("company.jsp", "product", p);
 	}
 
 	@RequestMapping(path = "UpdateProductMenu.do", method = RequestMethod.POST)

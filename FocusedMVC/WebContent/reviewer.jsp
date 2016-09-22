@@ -68,7 +68,6 @@
 					Your Profile: <small>${sessionScope.reviewer.username}</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="reviewer.jsp">Home</a></li>
 					<li><a href="Logout.do">Sign Out</a></li>
 					<li class="active">${sessionScope.reviewer.username}</li>
 				</ol>

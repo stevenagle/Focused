@@ -74,16 +74,19 @@
 				</div>
 				<div class="control-group form-group">
 					<div class="controls">
+					<label>Password:</label> 
 						<input type="password" class="form-control" name="password" value="${reviewer.password}" required> 
 					</div>
 				</div>
 				<div class="control-group form-group">
 					<div class="controls">
+					<label>Age:</label> 
 						<input type="text" class="form-control" name="age" value="${reviewer.age}" required> 
 					</div>
 				</div>
 				<div class="control-group form-group">
 					<div class="controls">
+					<label>Gender:</label> 
 						<select name="gender">
 							<option value="female">Female</option>
 							<option value="male">Male</option>
@@ -92,6 +95,7 @@
 				</div>
 				<div class="control-group form-group">
 					<div class="controls">
+					<label>Photo Url:</label> 
 						<input type="text" class="form-control" name="photoUrl" value="${reviewer.photoUrl}" />
 					</div>
 				</div>
