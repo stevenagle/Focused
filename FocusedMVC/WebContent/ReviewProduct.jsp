@@ -95,7 +95,7 @@
                         <c:forEach var="feature" items="${product.features}">
                         <input type="hidden" name="features" value="${feature.id}"/>
                         	<span>
-                        	<li class="list-group-item"><strong>Feature:  </strong>${feature.details} | ${feature.id}</li>
+                        	<li class="list-group-item"><strong>Feature:  </strong>${feature.details}</li>
                         		
                         		<div name="ratings-${feature.id}"><span class="ratings">
     <input type="radio" class="rating"

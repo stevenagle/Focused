@@ -172,7 +172,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	@Override
 	public List<Product> getUnratedProducts(int reviewerId) {
 		String queryString = "SELECT DISTINCT p FROM Product p";
-		List<Product> tempProducts = em.createQuery(queryString, Product.class).setMaxResults(5).getResultList();
+		List<Product> tempProducts = em.createQuery(queryString, Product.class).setMaxResults(6).getResultList();
 		List<Product> products = new ArrayList<>(tempProducts);
 
 		for (Product product : tempProducts) {
@@ -192,7 +192,8 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	public List<Product> getRatedProducts(int reviewerId) {
 		System.out.println("GETTING RATED PRODUCTS");
 		String queryString = "SELECT DISTINCT p FROM Product p JOIN p.features f JOIN f.featureReviews fr WHERE fr.reviewer.id = ?1";
-		List<Product> products = em.createQuery(queryString, Product.class).setParameter(1, reviewerId).setMaxResults(4).getResultList();
+		List<Product> products = new ArrayList<>();
+		products = em.createQuery(queryString, Product.class).setParameter(1, reviewerId).setMaxResults(4).getResultList();
 		for (Product product : products) {
 			System.out.println(product.getName());
 		}
