@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="reviewer_reward")
-public class ReviewerReward  {
-	
+@Table(name = "reviewer_reward")
+public class ReviewerReward {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	@Temporal(TemporalType.DATE)

@@ -215,22 +215,6 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
 
-
-	<%-- Update Company Button
-<form action="UpdateCompanyMenu.do" method="POST">
-<input type="hidden" name="id" value="${company.id}">
-<input type="submit" value="Edit Company">
-</form>
-<br><br>
-<!-- Add Product Button -->
-<form action="NewProductMenu.do" method="POST">
-<input type="hidden" name="id" value="${company.id}">
-<input type="submit" value="Add Product">
-</form>
-<br><br>
-<form action="Logout.do" method="GET">
-<input type="submit" value="Log Out">
-</form> --%>
 </body>
 </html>
 </html>

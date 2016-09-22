@@ -24,14 +24,12 @@ public class Product {
 	private String photoUrl;
 	private double price;
 
-
-	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Feature> features;
 
 	// bi-directional many-to-one association to FocusDetail
-	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<FocusDetail> focusDetails;
-
 
 	// bi-directional many-to-one association to Company
 	@ManyToOne

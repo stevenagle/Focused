@@ -25,11 +25,11 @@ public class Reviewer {
 	private String photoUrl;
 	@Column(name = "points")
 	private int points;
-	
+
 	@OneToMany(mappedBy = "reviewer")
 	private Set<ReviewerReward> reviewerRewards;
-	
-	@OneToMany(mappedBy = "reviewer", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+
+	@OneToMany(mappedBy = "reviewer", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Set<FeatureReview> featureReviews;
 
 	public Reviewer() {

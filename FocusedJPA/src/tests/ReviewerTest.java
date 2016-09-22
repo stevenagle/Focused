@@ -34,7 +34,6 @@ public class ReviewerTest {
 		assertEquals("user1", r.getUsername());
 		assertEquals("user1", r.getPassword());
 
-
 	}
 
 	@After
