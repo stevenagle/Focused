@@ -88,7 +88,7 @@
 					<div class="controls">
 					<label>Username:</label> 
 						<input type="hidden" name="id" value="${reviewer.id}"> 
-						<input type="text" class="form-control" name="username" value="${reviewer.username}" required>
+						<input type="text" class="form-control" name="username" value="${reviewer.username}" disabled required>
 					</div>
 				</div>
 				<div class="control-group form-group">
