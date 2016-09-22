@@ -58,9 +58,6 @@
 	</div>
 	<!-- /.container --> </nav>
 	
-	
-	
-	
 	<!-- Page Content -->
 	<div class="container">
 
@@ -77,8 +74,6 @@
 			</div>
 		</div>
 		<!-- /.row -->
-		
-		
 
 	<!-- Edit Form -->
 	<div class="row">

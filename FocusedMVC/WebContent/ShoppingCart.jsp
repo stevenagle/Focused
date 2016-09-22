@@ -111,10 +111,20 @@
 					<hr>
 				</div>
 			</c:forEach>
-			
+		
 		</div>
 		<!-- /.row -->
-
+<div class="modal-footer">
+		<ul class="list-inline">
+		<li><form action="LoadRevProfile.do" method="POST">
+				<button type="submit" class="btn btn-primary">Return to Profile</button>
+		</form></li>
+		<li><form action="RewardsList.do" method="POST">
+			<button class="btn btn-primary" type="submit">Back to Shop</button>
+		</form></li>
+		</ul>
+		<hr>
+		</div>
 		<hr>
 
 		<!-- Footer -->

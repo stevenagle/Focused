@@ -95,7 +95,9 @@
 					<input type="hidden" name="id" value="${sessionScope.reviewer.id}">
 					<button type="submit" class="btn btn-primary">Edit Reviewer</button>
 				</form><br>
+
                    <a href="#rateMore"><button type="submit" class="btn btn-primary">Rate More Products</button></a>
+
 			</div>
 		</div>
 		<!-- /.row -->
