@@ -33,7 +33,6 @@ public class ProductTest {
 		assertEquals("water bottle", product.getName());
 		assertEquals(2.0, product.getPrice(), 0.001);
 
-
 	}
 
 	@After

@@ -44,7 +44,7 @@ public class FocusedController {
 	public List<Reward> initCart() {
 		return new ArrayList<>();
 	}
-	
+
 	@ModelAttribute("company")
 	public Company initCompany() {
 		return new Company();
@@ -79,26 +79,21 @@ public class FocusedController {
 		return new ModelAndView("EditCompany.jsp", "company", dao.getCompanyById(id));
 	}
 
-	@RequestMapping(path = "ExistingLoginCompany.do", method = RequestMethod.POST)
-	public ModelAndView logInCompany(String username, String password, @ModelAttribute("company") Company company) {
-		Company match = dao.MatchCompany(username, password);
 
-		if (match.getPassword().equals(password)) {
-			ModelAndView mv = new ModelAndView("company.jsp");
-			company = dao.getCompanyById(match.getId());
-			mv.addObject("company", company);
-			List<ReviewData> rd = dao.getReviewData(match.getId());
-			mv.addObject("ReviewData", rd);
-			return mv;
-		} else {
-			return new ModelAndView("CompanyLoginWrongPass.html");
-		}
-
+	@RequestMapping(path = "LoadCoProfile.do", method = RequestMethod.POST)
+	public ModelAndView loadCoProfile(@ModelAttribute("company") Company company) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("company", company);
+		List<ReviewData> rd = dao.getReviewData(company.getId());
+		mv.addObject("ReviewData", rd);
+		mv.setViewName("company.jsp");
+		return mv;
 	}
-
+	
 	// Reviewer methods
 	@RequestMapping(path = "CreateReviewer.do", method = RequestMethod.POST)
-	public ModelAndView createReviewer(String username, String password, int age, String gender, String photoUrl, @ModelAttribute("reviewer") Reviewer reviewer) {
+	public ModelAndView createReviewer(String username, String password, int age, String gender, String photoUrl,
+			@ModelAttribute("reviewer") Reviewer reviewer) {
 		if (dao.isDuplicateReviewer(username)) {
 			return new ModelAndView("DuplicateReviewer.html");
 		}
@@ -125,41 +120,16 @@ public class FocusedController {
 		return new ModelAndView("EditReviewer.jsp", "reviewer", dao.getReviewerById(id));
 	}
 
-	@RequestMapping(path = "ReviewProductMenu.do", method = RequestMethod.POST)
-	public ModelAndView reviewProductMenu(int reviewerId, @ModelAttribute("authenticated") boolean auth) {
-		List<Product> products = dao.getUnratedProducts(reviewerId);
-		ModelAndView mv = new ModelAndView("ReviewProduct.jsp");
-		mv.addObject("products", products);
-		mv.addObject("reviewer", dao.getReviewerById(reviewerId));
-		return mv;
-	}
 	
-	@RequestMapping(path = "SingleProductReview.do", method = RequestMethod.POST)
-	public ModelAndView singleProductReview(int productId) {
-		Product product = dao.getProductById(productId);
-		ModelAndView mv = new ModelAndView("ReviewProduct.jsp");
-		mv.addObject("product", product);
+	@RequestMapping(path = "LoadRevProfile.do", method = RequestMethod.POST)
+	public ModelAndView loadRevProfile(@ModelAttribute("reviewer") Reviewer reviewer,
+			@ModelAttribute("cart") List<Reward> cart) {
+		ModelAndView mv = new ModelAndView("reviewer.jsp");
+		mv.addObject("reviewer", reviewer);
+		mv.addObject("cart", cart);
+		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewer.getId()));
+		mv.addObject("ratedProducts", dao.getRatedProducts(reviewer.getId()));
 		return mv;
-	}
-
-	@RequestMapping(path = "ExistingLogin.do", method = RequestMethod.POST)
-	public ModelAndView logInReviewer(String username, String password, @ModelAttribute("reviewer") Reviewer reviewer,
-			@ModelAttribute("authenticated") boolean auth) {
-		Reviewer match = dao.MatchReviewer(username, password);
-
-		if (match.equals(null)) {
-			return new ModelAndView("ReviewerLoginWrongPass.html");
-		} else if (match.getPassword().equals(password)) {
-			ModelAndView mv = new ModelAndView("reviewer.jsp");
-			mv.addObject("reviewer", dao.getReviewerById(match.getId()));
-			mv.addObject("authenticated", true);
-			mv.addObject("unratedProducts", dao.getUnratedProducts(match.getId()));
-			mv.addObject("ratedProducts", dao.getRatedProducts(match.getId()));
-			return mv;
-		} else {
-			return new ModelAndView("ReviewerLoginWrongPass.html");
-		}
-
 	}
 
 	// Product Methods
@@ -203,6 +173,23 @@ public class FocusedController {
 		return mv;
 	}
 
+	@RequestMapping(path = "ReviewProductMenu.do", method = RequestMethod.POST)
+	public ModelAndView reviewProductMenu(int reviewerId, @ModelAttribute("authenticated") boolean auth) {
+		List<Product> products = dao.getUnratedProducts(reviewerId);
+		ModelAndView mv = new ModelAndView("ReviewProduct.jsp");
+		mv.addObject("products", products);
+		mv.addObject("reviewer", dao.getReviewerById(reviewerId));
+		return mv;
+	}
+
+	@RequestMapping(path = "SingleProductReview.do", method = RequestMethod.POST)
+	public ModelAndView singleProductReview(int productId) {
+		Product product = dao.getProductById(productId);
+		ModelAndView mv = new ModelAndView("ReviewProduct.jsp");
+		mv.addObject("product", product);
+		return mv;
+	}
+
 	// Feature methods
 	@RequestMapping(path = "NewFeature.do", method = RequestMethod.POST)
 	public ModelAndView newFeature(int productId, String details) {
@@ -238,6 +225,110 @@ public class FocusedController {
 		return new ModelAndView("ProductFeaturesMenu.jsp", "product", dao.getProductById(id));
 	}
 
+
+	@RequestMapping(path = "reviewProduct.do", method = RequestMethod.POST)
+	public ModelAndView reviewProduct(
+			int reviewerId, String[] features, HttpServletRequest request) {
+		for (String id : features) {
+			int radioButtonSelection = Integer.parseInt(request.getParameter("rating-" + id));
+			int intId = Integer.parseInt(id);
+			dao.reviewProduct(intId, reviewerId, radioButtonSelection);
+		}
+		ModelAndView mv = new ModelAndView("reviewer.jsp");
+
+		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewerId));
+		mv.addObject("ratedProducts", dao.getRatedProducts(reviewerId));
+		mv.addObject("reviewer", dao.getReviewerById(reviewerId));
+		return mv;
+	}
+
+	// Rewards & Shopping Cart Methods
+	@RequestMapping(path = "RewardsList.do", method = RequestMethod.POST)
+	public ModelAndView rewardsList(@ModelAttribute("reviewer") Reviewer reviewer,
+			@ModelAttribute("cart") List<Reward> cart) {
+		ModelAndView mv = new ModelAndView("rewards.jsp");
+		mv.addObject("total", dao.getRewardTotalCost(cart));
+		mv.addObject("rewards", dao.getRewards());
+		mv.addObject("cartsize", cart.size());
+		return mv;
+	}
+
+	@RequestMapping(path = "showCart.do", method = RequestMethod.POST)
+	public ModelAndView showCart(@ModelAttribute("reviewer") Reviewer reviewer,
+			@ModelAttribute("cart") List<Reward> cart) {
+		ModelAndView mv = new ModelAndView("ShoppingCart.jsp");
+		mv.addObject("total", dao.getRewardTotalCost(cart));
+		mv.addObject("cart", cart);
+		mv.addObject("reviewer", reviewer);
+		mv.addObject("cartsize", cart.size());
+		return mv;
+	}
+
+	@RequestMapping(path = "addToCart.do", method = RequestMethod.POST)
+	public ModelAndView addToCart(@ModelAttribute("reviewer") Reviewer reviewer,
+			@ModelAttribute("cart") List<Reward> cart, @RequestParam("rewardId") int id) {
+		ModelAndView mv = new ModelAndView("rewards.jsp");
+		Reward reward = new Reward();
+		reward = dao.getRewardById(id);
+		cart.add(reward);
+		mv.addObject("cart", cart);
+		mv.addObject("total", dao.getRewardTotalCost(cart));
+		mv.addObject("cartsize", cart.size());
+		mv.addObject("lastItem", reward.getName());
+		mv.addObject("rewards", dao.getRewards());
+		return mv;
+	}
+
+	@RequestMapping(path = "removeFromCart.do", method = RequestMethod.POST)
+	public ModelAndView removeFromCart(@ModelAttribute("reviewer") Reviewer reviewer,
+			@ModelAttribute("cart") List<Reward> cart, @RequestParam("rewardId") int id) {
+		ModelAndView mv = new ModelAndView("ShoppingCart.jsp");
+		Reward reward = dao.getRewardById(id);
+		dao.removeItemfromCart(cart, reward);
+		mv.addObject("cart", cart);
+		mv.addObject("total", dao.getRewardTotalCost(cart));
+		mv.addObject("cartsize", cart.size());
+		mv.addObject("lastItem", reward.getName());
+		mv.addObject("rewards", dao.getRewards());
+		return mv;
+	}
+
+	// Login & Logout methods 
+	@RequestMapping(path = "ExistingLoginCompany.do", method = RequestMethod.POST)
+	public ModelAndView logInCompany(String username, String password, @ModelAttribute("company") Company company) {
+		Company match = dao.MatchCompany(username, password);
+		
+		if (match.getPassword().equals(password)) {
+			ModelAndView mv = new ModelAndView("company.jsp");
+			company = dao.getCompanyById(match.getId());
+			mv.addObject("company", company);
+			List<ReviewData> rd = dao.getReviewData(match.getId());
+			mv.addObject("ReviewData", rd);
+			return mv;
+		} else {
+			return new ModelAndView("CompanyLoginWrongPass.html");
+		}
+	}
+	
+	@RequestMapping(path = "ExistingLogin.do", method = RequestMethod.POST)
+	public ModelAndView logInReviewer(String username, String password, @ModelAttribute("reviewer") Reviewer reviewer,
+			@ModelAttribute("authenticated") boolean auth) {
+		Reviewer match = dao.MatchReviewer(username, password);
+		
+		if (match.equals(null)) {
+			return new ModelAndView("ReviewerLoginWrongPass.html");
+		} else if (match.getPassword().equals(password)) {
+			ModelAndView mv = new ModelAndView("reviewer.jsp");
+			mv.addObject("reviewer", dao.getReviewerById(match.getId()));
+			mv.addObject("authenticated", true);
+			mv.addObject("unratedProducts", dao.getUnratedProducts(match.getId()));
+			mv.addObject("ratedProducts", dao.getRatedProducts(match.getId()));
+			return mv;
+		} else {
+			return new ModelAndView("ReviewerLoginWrongPass.html");
+		}
+	}
+
 	@RequestMapping(path = "Logout.do", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, @ModelAttribute("authenticated") boolean auth) {
 		HttpSession httpSession = request.getSession();
@@ -246,101 +337,4 @@ public class FocusedController {
 		mv.addObject("authenticated", false);
 		return mv;
 	}
-
-	@RequestMapping(path = "reviewProduct.do", method = RequestMethod.POST)
-	public ModelAndView reviewProduct(/*@RequestParam("featureId") int[] featureIds,
-			@RequestParam("rating") int[] ratings, */int reviewerId, String[] features, HttpServletRequest request) {
-//		System.out.println("in reviewProduct");
-		//int rateCount = 0;
-		for (String id : features) {
-			//for (String id : request.getParameterValues("features")) {
-//			System.out.println(id);
-//			System.out.println(request.getParameter("rating-" + id));
-			
-			int radioButtonSelection = Integer.parseInt(request.getParameter("rating-" + id));
-			int intId = Integer.parseInt(id);
-			dao.reviewProduct(intId, reviewerId, radioButtonSelection);
-//			System.out.println("radio button selection" + radioButtonSelection);
-		}
-		ModelAndView mv = new ModelAndView("reviewer.jsp");
-		
-		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewerId));
-		mv.addObject("ratedProducts", dao.getRatedProducts(reviewerId));
-		mv.addObject("reviewer", dao.getReviewerById(reviewerId));
-		return mv;	
-	}
-
-	// Rewards Methods
-	@RequestMapping(path = "RewardsList.do", method = RequestMethod.POST)
-	public ModelAndView rewardsList(@ModelAttribute("reviewer") Reviewer reviewer,
-									@ModelAttribute("cart") List<Reward> cart) {
-		ModelAndView mv = new ModelAndView("rewards.jsp");
-		mv.addObject("total",dao.getRewardTotalCost(cart));
-		mv.addObject("rewards", dao.getRewards());
-		mv.addObject("cartsize", cart.size());
-		return mv;
-	}
-
-	@RequestMapping(path = "showCart.do", method = RequestMethod.POST)
-	public ModelAndView showCart(@ModelAttribute("reviewer") Reviewer reviewer,
-								 @ModelAttribute("cart") List<Reward> cart){
-		ModelAndView mv = new ModelAndView("ShoppingCart.jsp");
-		mv.addObject("total",dao.getRewardTotalCost(cart));
-		mv.addObject("cart", cart);
-		mv.addObject("reviewer", reviewer);
-		mv.addObject("cartsize", cart.size());
-				return mv;
-	}
-	@RequestMapping(path = "addToCart.do", method = RequestMethod.POST)
-	public ModelAndView addToCart(@ModelAttribute("reviewer") Reviewer reviewer,
-								  @ModelAttribute("cart") List<Reward> cart,
-								  @RequestParam("rewardId") int id){
-		ModelAndView mv = new ModelAndView("rewards.jsp");
-		Reward reward = new Reward();
-		reward = dao.getRewardById(id);
-		cart.add(reward);
-		mv.addObject("cart", cart);
-		mv.addObject("total",dao.getRewardTotalCost(cart));
-		mv.addObject("cartsize", cart.size());
-		mv.addObject("lastItem", reward.getName());
-		mv.addObject("rewards", dao.getRewards());
-		return mv;
-	}
-	
-	@RequestMapping(path = "removeFromCart.do", method = RequestMethod.POST)
-	public ModelAndView removeFromCart(@ModelAttribute("reviewer") Reviewer reviewer,
-			@ModelAttribute("cart") List<Reward> cart,
-			@RequestParam("rewardId") int id){
-		ModelAndView mv = new ModelAndView("ShoppingCart.jsp");
-		Reward reward = dao.getRewardById(id);
-		dao.removeItemfromCart(cart, reward);
-		mv.addObject("cart", cart);
-		mv.addObject("total",dao.getRewardTotalCost(cart));
-		mv.addObject("cartsize", cart.size());
-		mv.addObject("lastItem", reward.getName());
-		mv.addObject("rewards", dao.getRewards());
-		return mv;
-	}
-	
-	@RequestMapping(path = "LoadRevProfile.do", method = RequestMethod.POST)
-	public ModelAndView loadRevProfile(@ModelAttribute("reviewer")Reviewer reviewer,
-										@ModelAttribute("cart") List<Reward> cart) {
-		ModelAndView mv = new ModelAndView("reviewer.jsp");
-		mv.addObject("reviewer", reviewer);
-		mv.addObject("cart", cart);
-		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewer.getId()));
-		mv.addObject("ratedProducts", dao.getRatedProducts(reviewer.getId()));
-		return mv;
-	}
-	
-	@RequestMapping(path = "LoadCoProfile.do", method = RequestMethod.POST)
-	public ModelAndView loadCoProfile(@ModelAttribute("company") Company company) {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("company", company);
-		List<ReviewData> rd = dao.getReviewData(company.getId());
-		mv.addObject("ReviewData", rd);
-		mv.setViewName("company.jsp");
-		return mv;
-	}
 }
-

@@ -20,7 +20,7 @@ public class Feature {
 	@ManyToOne
 	private Product product;
 	// bi-directional many-to-one association to FeatureReview
-	@OneToMany(mappedBy = "feature", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "feature", fetch = FetchType.EAGER)
 	private List<FeatureReview> featureReviews;
 
 	public Feature() {
@@ -78,5 +78,4 @@ public class Feature {
 				+ featureReviews + "]";
 	}
 
-	
 }

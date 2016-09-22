@@ -24,8 +24,8 @@ public class Company {
 	@Column(name = "photo_url")
 	private String photoUrl;
 
-	//bi-directional many-to-one association to Product
-	@OneToMany(mappedBy="company", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	// bi-directional many-to-one association to Product
+	@OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Product> products;
 
 	public Company() {
