@@ -91,7 +91,7 @@
 				<div class="control-group form-group">
 					<div class="controls">
 						<label>Username:</label> 
-						<input type="text" class="form-control" name="username" value="${company.username}" required>
+						<input type="text" class="form-control" name="username" value="${company.username}" disabled required>
 					</div>
 				</div>
 				<div class="control-group form-group">
