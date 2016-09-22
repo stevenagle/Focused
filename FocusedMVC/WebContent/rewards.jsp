@@ -114,9 +114,14 @@
 		</c:forEach>
 		
 		<div class="modal-footer">
-		<form action="showCart.do" method="POST">
+		<ul class="list-inline">
+		<li><form action="LoadRevProfile.do" method="POST">
+				<button type="submit" class="btn btn-primary">Return to Profile</button>
+		</form></li>
+		<li><form action="showCart.do" method="POST">
 			<button class="btn btn-primary" type="submit">View Cart</button>
-		</form>
+		</form></li>
+		</ul>
 		<hr>
 		</div>
 		

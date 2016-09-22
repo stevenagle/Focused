@@ -98,6 +98,10 @@
 					<button type="reset" class="btn btn-primary">Reset</button>
 					<button type="submit" class="btn btn-primary">Make Changes</button>
 			</form>
+			<hr>
+			<form action="LoadRevProfile.do" method="POST">
+				<button type="submit" class="btn btn-primary">Return to Profile</button>
+			</form>
 		</div>
 	</div>
 
