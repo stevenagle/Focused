@@ -83,10 +83,11 @@
 			<div class="col-md-6">
 				<h2>${company.name}</h2>
 				<p>${company.description}</p>
-				<form action="RewardsList.do" method="POST">
-					<input type="hidden" name="id" value="${sessionScope.reviewer.id}">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProduct">Add Product</button>
+				<form action="UpdateCompanyMenu.do" method="POST">
+					<input type="hidden" name="id" value="${sessionScope.company.id}">
+					<button type="submit" class="btn btn-primary" >Edit Company</button>
 				</form>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProduct">Add Product</button>
 			</div>
 		</div>
 		<!-- /.row -->
@@ -163,7 +164,7 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title" id="myModalLabel">Reviewer Login</h4>
+						<h4 class="modal-title" id="myModalLabel">Add Product</h4>
 					</div>
 					<form action="NewProduct.do" method="POST">
 					<div class="modal-body">
