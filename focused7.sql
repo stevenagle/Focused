@@ -182,6 +182,13 @@ SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE USER 'application' IDENTIFIED BY 'application';
 
 GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `focuseddb`.* TO 'application';
+SET SQL_MODE = '';
+GRANT USAGE ON *.* TO application@localhost;
+ DROP USER application@localhost;
+SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+CREATE USER 'application'@'localhost' IDENTIFIED BY 'application';
+
+GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `focuseddb`.* TO 'application'@'localhost';
 
 -- -----------------------------------------------------
 -- Data for table `focuseddb`.`company`
