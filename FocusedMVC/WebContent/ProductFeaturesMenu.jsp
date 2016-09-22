@@ -115,11 +115,20 @@
 </c:forEach>
 <tr>
 <td>
+<div class="row">
+		<ul class="list-inline">
 	<!-- Add Feature Button -->
-	<form action="NewFeatureMenu.do" method="POST">
+	<li><form action="NewFeatureMenu.do" method="POST">
 	<input type="hidden" name="productId" value="${product.id}">
 	<button type="submit" class="btn btn-primary" >Add Feature</button>
-	</form>
+	</form></li>
+	<li><form action="LoadCoProfile.do" method="POST">
+		<button type="submit" class="btn btn-primary">Return to Profile</button>
+	</form></li>
+	</ul>
+	</div>
+</td>
+<td>
 </td>
 </tr>
 </table>
