@@ -104,8 +104,11 @@ public class FocusedController {
 	public ModelAndView updateReviewer(int id, String username, String password, int age, String gender,
 			String photoUrl) {
 		Reviewer r = dao.updateReviewer(id, username, password, age, gender, photoUrl);
-		
-		return new ModelAndView("reviewer.jsp", "reviewer", r);
+		ModelAndView mv = new ModelAndView("reviewer.jsp");
+		mv.addObject("unratedProducts", dao.getUnratedProducts(id));
+		mv.addObject("ratedProducts", dao.getRatedProducts(id));
+		mv.addObject("reviewer", r);
+		return mv;
 	}
 
 	@RequestMapping(path = "UpdateReviewerMenu.do", method = RequestMethod.POST)
@@ -248,6 +251,7 @@ public class FocusedController {
 //			System.out.println("radio button selection" + radioButtonSelection);
 		}
 		ModelAndView mv = new ModelAndView("reviewer.jsp");
+		
 		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewerId));
 		mv.addObject("ratedProducts", dao.getRatedProducts(reviewerId));
 		mv.addObject("reviewer", dao.getReviewerById(reviewerId));
