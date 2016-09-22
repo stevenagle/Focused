@@ -98,12 +98,15 @@ public class FocusedController {
 
 	// Reviewer methods
 	@RequestMapping(path = "CreateReviewer.do", method = RequestMethod.POST)
-	public ModelAndView createReviewer(String username, String password, int age, String gender, String photoUrl) {
+	public ModelAndView createReviewer(String username, String password, int age, String gender, String photoUrl, @ModelAttribute("reviewer") Reviewer reviewer) {
 		if (dao.isDuplicateReviewer(username)) {
 			return new ModelAndView("DuplicateReviewer.html");
 		}
-		Reviewer r = dao.createReviewer(username, password, age, gender, photoUrl);
-		return new ModelAndView("reviewer.jsp", "reviewer", r);
+		ModelAndView mv = new ModelAndView("reviewer.jsp");
+		reviewer = dao.createReviewer(username, password, age, gender, photoUrl);
+		mv.addObject("reviewer", reviewer);
+		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewer.getId()));
+		return mv;
 	}
 
 	@RequestMapping(path = "UpdateReviewer.do", method = RequestMethod.POST)

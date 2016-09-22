@@ -95,6 +95,7 @@
 						<input type="text" class="form-control" name="photoUrl" value="${reviewer.photoUrl}" />
 					</div>
 				</div>
+				<input class="btn btn-danger" type="reset" value="Reset">
 					<button type="reset" class="btn btn-primary">Reset</button>
 					<button type="submit" class="btn btn-primary">Make Changes</button>
 			</form>
