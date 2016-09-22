@@ -61,6 +61,25 @@
 	</nav>
 
 
+	<!-- Page Content -->
+	<div class="container">
+	
+	
+	
+		<!-- Page Heading/Breadcrumbs -->
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">
+					Edit Profile
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="Logout.do">Sign Out</a></li>
+				</ol>
+			</div>
+		</div>
+		<!-- /.row -->
+		
+		
 	<!-- Edit Form -->
 	<div class="row">
 		<div class="col-md-8">
@@ -99,7 +118,6 @@
 						<input type="text" class="form-control" name="photoUrl" value="${reviewer.photoUrl}" />
 					</div>
 				</div>
-				<input class="btn btn-danger" type="reset" value="Reset">
 					<button type="reset" class="btn btn-primary">Reset</button>
 					<button type="submit" class="btn btn-primary">Make Changes</button>
 			</form>
@@ -109,6 +127,7 @@
 			</form>
 		</div>
 	</div>
+</div>
 
 </body>
 </html>
