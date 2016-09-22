@@ -79,16 +79,7 @@
 		<!-- /.row -->
 		
 		
-		
-		<%-- <div class="control-group form-group">
-					<div class="controls">
-						<label>Company name:</label> 
-						<input type="hidden" name="id" value="${company.id}"> 
-						<input type="text" class="form-control" name="name" value="${company.name}" required> 
-					</div>
-				</div> --%>
-		
-		
+
 	<!-- Edit Form -->
 	<div class="row">
 		<div class="col-md-8">

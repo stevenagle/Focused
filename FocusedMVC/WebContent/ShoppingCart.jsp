@@ -78,7 +78,7 @@
 
 				
 				<ol class="breadcrumb">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="reviewer.jsp"">Home</a></li>
 					<li class="active">Review Your Order</li>
 				</ol>
 				<div class="well">

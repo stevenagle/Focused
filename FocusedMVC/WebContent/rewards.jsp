@@ -84,7 +84,7 @@
 					</h1>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="reviewer.jsp">Home</a></li>
 				</ol>
 			</div>
 		</div>

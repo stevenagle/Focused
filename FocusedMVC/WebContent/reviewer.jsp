@@ -68,7 +68,7 @@
 					Your Profile: <small>${sessionScope.reviewer.username}</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="reviewer.jsp">Home</a></li>
 					<li><a href="Logout.do">Sign Out</a></li>
 					<li class="active">${sessionScope.reviewer.username}</li>
 				</ol>
@@ -95,63 +95,14 @@
 					<input type="hidden" name="id" value="${sessionScope.reviewer.id}">
 					<button type="submit" class="btn btn-primary">Edit Reviewer</button>
 				</form><br>
-				<form action="ReviewProductMenu.do" method="POST">
-					<input type="hidden" name="reviewerId" value="${sessionScope.reviewer.id}">
-					<button type="submit" class="btn btn-primary">Rate More Products</button>
-				</form>
-				
-				
+                   <a href="#rateMore"><button type="submit" class="btn btn-primary">Rate More Products</button></a>
 			</div>
 		</div>
 		<!-- /.row -->
 	<br><hr><br>
-		<!-- Team Members -->
-		<div class="row">
-			<div class="col-lg-12">
-				<h2 class="page-header">Your Past Reviews:</h2>
-			</div>
-			<c:forEach var="product" items="${ratedProducts}">
-				<div class="col-md-4 text-center">
-					<div class="thumbnail">
-						<img class="img-responsive" src="${product.photoUrl}"
-							alt="<c:out value="${product.name}"/>">
-						<div class="caption">
-							<h3>
-								<c:out value="${product.company.name}"/>
-								<br>
-							</h3><small>Product:</small>
-							<p>
-								<c:out value="${product.name}"/>
-							</p><br>
-								<br>
-							<ul class="list-inline">
-								<li><form action="UpdateReviewerMenu.do" method="POST">
-										<input type="hidden" name="id" value="${sessionScope.reviewer.id}">
-										<input type="submit" value="Edit Reviewer">
-									</form>
-								</li>
-								<li><form action="ProductFeaturesMenu.do" method="POST">
-										<input type="hidden" name="id"
-											value="<c:out value=""/>"> 
-										<input type="submit" value="Edit Features">
-									</form></li><hr>
-								<li><form action="RemoveProduct.do" method="POST">
-										<input type="hidden" name="id"
-											value="<c:out value=""/>"> 
-										<input type="hidden" name="companyId" value="<c:out value="${company.id}"/>">
-										<input type="submit" value="Remove Product">
-									</form></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-
-		</div>
-		<!-- /.row -->
 		
 		<!-- Related Projects Row -->
-   <div class="row">
+   <div id="rateMore"  class="row">
             <div class="col-lg-12">
                 <h3 class="page-header">Products Awaiting Your Review</h3>
             </div>
@@ -173,6 +124,33 @@
 
 		<hr>
 		
+		<!-- Team Members -->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="page-header">Your Past Reviews:</h2>
+			</div>
+			<c:forEach var="product" items="${ratedProducts}">
+				<div class="col-md-4 text-center">
+					<div class="thumbnail">
+						<img class="img-responsive" src="${product.photoUrl}"
+							alt="<c:out value="${product.name}"/>">
+						<div class="caption">
+							<h3>
+								<c:out value="${product.company.name}"/>
+								<br>
+							</h3><small>Product:</small>
+							<p>
+								<c:out value="${product.name}"/>
+							</p><br>
+								<br>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+
+		</div>
+		<!-- /.row -->
 		<!-- Footer -->
 		<footer>
 		<div class="row">
