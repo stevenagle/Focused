@@ -126,6 +126,7 @@
 								<li><form action="UpdateProductMenu.do" method="POST">
 										<input type="hidden" name="id"
 											value="<c:out value="${product.id}"/>"> 
+										<input type="hidden" name="companyId" value="${company.id}">
 											<button type="submit" class="btn btn-primary">Edit Product</button>
 									</form>
 								</li>
