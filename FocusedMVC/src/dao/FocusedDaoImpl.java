@@ -42,13 +42,14 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	}
 
 	@Override
+
 	public Company updateCompany(int id, String name, String username, String password, String description, String photoUrl) {
 
 		Company c = em.find(Company.class, id);
 		c.setName(name);
-		c.setDescription(username);
-		c.setUsername(password);
-		c.setPassword(description);
+		c.setDescription(description);
+		c.setUsername(username);
+		c.setPassword(password);
 		c.setPhotoUrl(photoUrl);
 
 		return c;
