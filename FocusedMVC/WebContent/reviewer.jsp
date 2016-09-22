@@ -191,28 +191,5 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
 
-<table>
-<th>Product:</th>
-<th>Feature:</th>
-<th>Your rating:</th>
-<th>Details:</th>
-<c:forEach var="review" items="${sessionScope.reviewer.featureReviews}">
-    <tr>
-    	<td>
-    <c:out value="${review.feature.product.name}"/> <br/>
-    	</td>
-    	<td>
-    <c:out value="${review.feature.details}"/> 
-    	</td>
-    	<td>
-    <c:out value="${review.rating}"/> 
-    	</td>
-    	<td>
-    <c:out value="${review.comment}"/> 
-    	</td>
-    </tr>
-</c:forEach>
-</table>
-
 </body>
 </html>
