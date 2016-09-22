@@ -3,26 +3,25 @@ package entities;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
-public class Reward  {
+public class Reward {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String cost;
 
 	private String name;
 
-	@Column(name="photo_url")
+	@Column(name = "photo_url")
 	private String photoUrl;
-	
-	@Column(name="description")
+
+	@Column(name = "description")
 	private String description;
 
-	//bi-directional many-to-one association to ReviewerReward
-	@OneToMany(mappedBy="reward")
+	// bi-directional many-to-one association to ReviewerReward
+	@OneToMany(mappedBy = "reward")
 	private List<ReviewerReward> reviewerRewards;
 
 	public Reward() {

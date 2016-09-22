@@ -43,7 +43,8 @@ public class FocusedDaoImpl implements FocusedDbDao {
 
 	@Override
 
-	public Company updateCompany(int id, String name, String username, String password, String description, String photoUrl) {
+	public Company updateCompany(int id, String name, String username, String password, String description,
+			String photoUrl) {
 
 		Company c = em.find(Company.class, id);
 		c.setName(name);
@@ -96,7 +97,6 @@ public class FocusedDaoImpl implements FocusedDbDao {
 
 		return em.find(Company.class, 1);
 	}
-	
 
 	// Reviewer methods
 
@@ -109,7 +109,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		r.setAge(age);
 		r.setGender(gender);
 		r.setPhotoUrl(photoUrl);
-		
+
 		em.persist(r);
 
 		return r;
@@ -170,6 +170,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		return duplicate;
 	}
 
+	// Product Methods
 	@Override
 	public List<Product> getUnratedProducts(int reviewerId) {
 		String queryString = "SELECT DISTINCT p FROM Product p";
@@ -187,21 +188,21 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		}
 		return products;
 	}
-	
+
 	@Override
 
 	public List<Product> getRatedProducts(int reviewerId) {
 		System.out.println("GETTING RATED PRODUCTS");
 		String queryString = "SELECT DISTINCT p FROM Product p JOIN p.features f JOIN f.featureReviews fr WHERE fr.reviewer.id = ?1";
 		List<Product> products = new ArrayList<>();
-		products = em.createQuery(queryString, Product.class).setParameter(1, reviewerId).setMaxResults(4).getResultList();
+		products = em.createQuery(queryString, Product.class).setParameter(1, reviewerId).setMaxResults(4)
+				.getResultList();
 		for (Product product : products) {
 			System.out.println(product.getName());
 		}
 		return products;
 	}
 
-	// Product Methods
 	@Override
 	public Product createProduct(int id, String name, double price, String photoUrl, String description) {
 
@@ -307,7 +308,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		Reviewer r = getReviewerById(reviewerId);
 		int currentPoints = r.getPoints();
 		System.out.println("Current User Points Before Adding: " + currentPoints);
-		r.setPoints(currentPoints + 10); 
+		r.setPoints(currentPoints + 10);
 		System.out.println("Points after addition: " + r.getPoints());
 		FeatureReview fr = new FeatureReview();
 		fr.setFeature(getFeatureById(featureId));
@@ -330,16 +331,16 @@ public class FocusedDaoImpl implements FocusedDbDao {
 			System.out.println("#### Review Count" + getReviewCount(product));
 			Set<Feature> features = product.getFeatures();
 			for (Feature feature : features) {
-				if (feature.getFeatureReviews() == null || feature.getFeatureReviews().size() == 0){
+				if (feature.getFeatureReviews() == null || feature.getFeatureReviews().size() == 0) {
 					reviewAverage = 0;
 					reviewData.add(new ReviewData(product.getId(), getReviewCount(product), reviewAverage));
 					break;
 				} else {
-					reviewAverage =  getReviewAverage(product);
+					reviewAverage = getReviewAverage(product);
 					reviewData.add(new ReviewData(product.getId(), getReviewCount(product), reviewAverage));
 					break;
 				}
-					
+
 			}
 		}
 		for (ReviewData rd : reviewData) {
@@ -359,7 +360,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	}
 
 	public double getReviewAverage(Product p) {
-		if (p.getFeatures().size() == 0)  {
+		if (p.getFeatures().size() == 0) {
 			return 0;
 		} else {
 			String queryString = "SELECT AVG(fr.rating) FROM Product p JOIN p.features f JOIN f.featureReviews fr WHERE p.id = ?1";
@@ -369,7 +370,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	}
 
 	// Rewards methods
-	
+
 	@Override
 	public List<Reward> getRewards() {
 		String queryString = "SELECT r FROM Reward r";
@@ -382,7 +383,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 	public Reward getRewardById(int rewardId) {
 		System.out.println("fetching reward");
 		return em.find(Reward.class, rewardId);
-		
+
 	}
 
 	@Override
@@ -393,7 +394,7 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		}
 		return total;
 	}
-	
+
 	@Override
 	public List<Reward> removeItemfromCart(List<Reward> rewards, Reward reward) {
 		int id = reward.getId();
@@ -405,5 +406,5 @@ public class FocusedDaoImpl implements FocusedDbDao {
 		}
 		return rewards;
 	}
-	
+
 }

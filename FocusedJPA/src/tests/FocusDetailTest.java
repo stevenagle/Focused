@@ -19,29 +19,27 @@ import entities.Reviewer;
 public class FocusDetailTest {
 
 	private EntityManagerFactory emf;
-    private EntityManager em;
+	private EntityManager em;
 
-    @Before
-    public void setUp() throws Exception {
-        emf = Persistence.
-            createEntityManagerFactory("FocusedJPA");
-        em = emf.createEntityManager();
-    }
+	@Before
+	public void setUp() throws Exception {
+		emf = Persistence.createEntityManagerFactory("FocusedJPA");
+		em = emf.createEntityManager();
+	}
 
-    @Test
-    public void test() throws ParseException {
-        
-    	// TODO add info to focus_details table and test
-    	// Tests won't work until table is populated
-    	FocusDetail fd = em.find(FocusDetail.class, 1); 
-        assertEquals("Awesome", fd.getDetails()); 
-        
-    
-    }
+	@Test
+	public void test() throws ParseException {
 
-    @After
-    public void tearDown() throws Exception {
-        em.close();
-        emf.close();
-    }
+		// TODO add info to focus_details table and test
+		// Tests won't work until table is populated
+		FocusDetail fd = em.find(FocusDetail.class, 1);
+		assertEquals("Awesome", fd.getDetails());
+
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		em.close();
+		emf.close();
+	}
 }
