@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Focused: Simplifying Focus Groups</title>
+<title>Company Dashboard</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -25,14 +25,7 @@
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Company Dashboard</title>
 </head>
 <body>
 
@@ -90,7 +83,10 @@
 			<div class="col-md-6">
 				<h2>${company.name}</h2>
 				<p>${company.description}</p>
-
+				<form action="RewardsList.do" method="POST">
+					<input type="hidden" name="id" value="${sessionScope.reviewer.id}">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProduct">Add Product</button>
+				</form>
 			</div>
 		</div>
 		<!-- /.row -->
@@ -152,41 +148,52 @@
 
 		<hr>
 
-<%-- <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editProduct">
-  Edit Product
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Edit Product</h4>
-      </div>
-      <div class="modal-body">
-        	<form action="UpdateProduct.do" method="POST">
-			<input type="hidden" name="id" value="${product.id}">
-			<input type="text" name="name" value="${product.name}" required>
-			<input type="text" name="price" value="${product.price}" required>
-			<input type="text" name="photoUrl" value="${product.photoUrl}" required>
-			<textarea rows="4" cols="50" name="description">${product.description}</textarea>
-			<input type="reset" value="reset">
-			<input type="submit" value="submit">
-			
-			<%@include file="EditProduct.jsp" %>
-			
-      <!-- <div class="modal-footer"> -->
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" >Save changes</button></form>
-      </div>
-      <!-- </div> -->
-    </div>
-  </div>
-</div> --%>
+		<!-- -- MODALSSSS -- -->
+		
+		<!-- -- New Product Modal -- -->
+
+		<div class="modal fade" id="addProduct" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Reviewer Login</h4>
+					</div>
+					<form action="NewProduct.do" method="POST">
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Product Name:</label><br>
+								<input type="hidden" name="companyId" value="${company.id}">
+								<input type="text" class="form-control" name="name" placeholder="name" required>
+						</div>
+						<div class="form-group">
+							<label>Product Price:</label><br>
+							<input type="text" class="form-control" name="price" placeholder="price" required>
+						</div>
+						<div class="form-group">
+							<label>Photo Url:</label><br>
+							<input type="text" class="form-control" name="photoUrl" placeholder="photo url" required>
+						</div>
+						<div class="form-group">
+							<label>Description:</label><br>
+							<input type="text" class="form-control" name="description" placeholder="description" required>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Add Product</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+
 
 		<!-- Footer -->
 		<footer>
