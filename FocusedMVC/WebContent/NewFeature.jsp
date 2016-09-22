@@ -88,11 +88,23 @@
 					<input type="hidden" name="productId" value="${product.id}">
 					<button class="btn btn-primary" type="reset">Reset</button>
 					<button class="btn btn-primary" type="submit">Submit</button>
+					<hr>
+					<form action="LoadCoProfile.do" method="POST">
+					<button type="submit" class="btn btn-primary">Return to Profile</button>
+					</form>
 			</div>
 		</form>
 		</div>
-	</div>
+	
+	<footer>
+		<div class="row">
+			<div class="col-lg-12">
+				<p>Copyright &copy; Pat Gaston, Elijah Ginter, Steve Nagle 2016</p>
+			</div>
+		</div>
+		</footer>
 
+	</div>
 
 </body>
 </html>
