@@ -68,7 +68,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					Update Product
+					Update Product <br><small>${company.name}</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="index.html">Home</a></li>
@@ -79,7 +79,7 @@
 		<!-- /.row -->
 		
 		
-		
+
 	<!-- Edit Form -->
 	<div class="row">
 		<div class="col-md-8">
@@ -111,6 +111,9 @@
 				</div>
 					<button type="reset" class="btn btn-primary">Reset</button>
 					<button type="submit" class="btn btn-primary">Make Changes</button>
+			</form><hr>
+			<form action="LoadCoProfile.do" method="POST">
+				<button type="submit" class="btn btn-primary">Return to Profile</button>
 			</form>
 
 </body>
