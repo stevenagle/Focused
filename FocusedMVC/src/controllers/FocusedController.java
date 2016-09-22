@@ -98,20 +98,26 @@ public class FocusedController {
 
 	// Reviewer methods
 	@RequestMapping(path = "CreateReviewer.do", method = RequestMethod.POST)
-	public ModelAndView createReviewer(String username, String password, int age, String gender, String photoUrl) {
+	public ModelAndView createReviewer(String username, String password, int age, String gender, String photoUrl, @ModelAttribute("reviewer") Reviewer reviewer) {
 		if (dao.isDuplicateReviewer(username)) {
 			return new ModelAndView("DuplicateReviewer.html");
 		}
-		Reviewer r = dao.createReviewer(username, password, age, gender, photoUrl);
-		return new ModelAndView("reviewer.jsp", "reviewer", r);
+		ModelAndView mv = new ModelAndView("reviewer.jsp");
+		reviewer = dao.createReviewer(username, password, age, gender, photoUrl);
+		mv.addObject("reviewer", reviewer);
+		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewer.getId()));
+		return mv;
 	}
 
 	@RequestMapping(path = "UpdateReviewer.do", method = RequestMethod.POST)
 	public ModelAndView updateReviewer(int id, String username, String password, int age, String gender,
 			String photoUrl) {
 		Reviewer r = dao.updateReviewer(id, username, password, age, gender, photoUrl);
-		
-		return new ModelAndView("reviewer.jsp", "reviewer", r);
+		ModelAndView mv = new ModelAndView("reviewer.jsp");
+		mv.addObject("unratedProducts", dao.getUnratedProducts(id));
+		mv.addObject("ratedProducts", dao.getRatedProducts(id));
+		mv.addObject("reviewer", r);
+		return mv;
 	}
 
 	@RequestMapping(path = "UpdateReviewerMenu.do", method = RequestMethod.POST)
@@ -257,6 +263,7 @@ public class FocusedController {
 //			System.out.println("radio button selection" + radioButtonSelection);
 		}
 		ModelAndView mv = new ModelAndView("reviewer.jsp");
+		
 		mv.addObject("unratedProducts", dao.getUnratedProducts(reviewerId));
 		mv.addObject("ratedProducts", dao.getRatedProducts(reviewerId));
 		mv.addObject("reviewer", dao.getReviewerById(reviewerId));
