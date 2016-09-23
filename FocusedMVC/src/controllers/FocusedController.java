@@ -150,9 +150,14 @@ public class FocusedController {
 	}
 
 	@RequestMapping(path = "UpdateProduct.do", method = RequestMethod.POST)
-	public ModelAndView updateProduct(int id, String name, double price, String photoUrl, String description) {
+	public ModelAndView updateProduct(int companyId, int id, String name, double price, String photoUrl, String description) {
+		ModelAndView mv = new ModelAndView();
 		Product p = dao.updateProduct(id, name, price, photoUrl, description);
-		return new ModelAndView("company.jsp", "product", p);
+		mv.addObject("company", dao.getCompanyById(companyId));
+		List<ReviewData> rd = dao.getReviewData(companyId);
+		mv.addObject("ReviewData", rd);
+		mv.setViewName("company.jsp");
+		return mv;
 	}
 
 	@RequestMapping(path = "UpdateProductMenu.do", method = RequestMethod.POST)

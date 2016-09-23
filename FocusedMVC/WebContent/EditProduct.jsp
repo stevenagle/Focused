@@ -104,6 +104,7 @@
 						<textarea rows="4" cols="50" class="form-control" name="description">${product.description}</textarea>
 					</div>
 				</div>
+					<input type="hidden" name="companyId" value="${product.company.id}">
 					<button type="reset" class="btn btn-primary">Reset</button>
 					<button type="submit" class="btn btn-primary">Make Changes</button>
 			</form><hr>
